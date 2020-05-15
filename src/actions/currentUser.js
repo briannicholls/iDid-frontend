@@ -9,6 +9,28 @@ export const setCurrentUser = user => {
   }
 }
 
+//clear current user from store (front end log out)
+export const clearCurrentUser = () => {
+  return {
+    type: 'CLEAR_CURRENT_USER'
+  }
+}
+
+//async actions
+
+//logout
+export const logout = () => {
+  return function (dispatch) {
+    dispatch({type: 'LOADING'})
+    fetch('http://localhost:3001/api/v1/logout', {
+      method: 'DELETE',
+      credentials: 'include',
+    })
+      .then(dispatch(clearCurrentUser()))
+  }
+}
+
+//if a user is logged in, return user
 export const getCurrentUser = user => {
   return dispatch => {
     dispatch({type: 'LOADING'})

@@ -2,8 +2,10 @@ export default function (state = null, action) {
   switch (action.type) {
 
     case 'SET_CURRENT_USER':
-      // debugger
       return action.payload
+
+    case 'CLEAR_CURRENT_USER':
+      return null  
 
     default:
       return null

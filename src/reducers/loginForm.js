@@ -16,6 +16,6 @@ export default function (
       return {...state, error: action.payload, requesting: false}
 
     default:
-      return state
+      return {...state, requesting: false}
   }
 }

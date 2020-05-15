@@ -48,10 +48,8 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    email: state.email,
-    password: state.password,
-    requesting: state.requesting,
-    error: state.error
+    requesting: state.loginFormReducer.requesting,
+    error: state.loginFormReducer.error
   }
 }
 
