@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {submitCredentials} from '../actions/loginForm.js'
 import {setCurrentUser} from '../actions/currentUser.js'
+import {Link} from 'react-router-dom'
 
 class Login extends Component {
 
@@ -39,6 +40,9 @@ class Login extends Component {
           <br></br>
           <input type="submit" value="Log In" />
         </form>
+
+        <Link to={'/signup'}>Register</Link>
+
         {this.logInStatus()}
         {this.listErrors()}
       </div>
