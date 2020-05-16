@@ -1,13 +1,13 @@
-export default function (state = null, action) {
+export default function (state = {}, action) {
   switch (action.type) {
 
     case 'SET_CURRENT_USER':
       return action.payload
 
     case 'CLEAR_CURRENT_USER':
-      return null  
+      return {}
 
     default:
-      return null
+      return state
   }
 }

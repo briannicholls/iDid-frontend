@@ -4,8 +4,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import OfflinePinIcon from '@material-ui/icons/OfflinePin';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-
+import HistoryIcon from '@material-ui/icons/History';
 
 
 import Logout from './Logout'

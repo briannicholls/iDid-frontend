@@ -31,7 +31,7 @@ export const logout = () => {
 }
 
 //if a user is logged in, return user
-export const getCurrentUser = user => {
+export const getCurrentUser = () => {
   return dispatch => {
     dispatch({type: 'LOADING'})
     const configObject = {
@@ -40,8 +40,7 @@ export const getCurrentUser = user => {
       headers: {
         'Content-Type': 'application/json',
 
-      },
-      body: JSON.stringify(user)
+      }
     }
 
     return fetch('http://localhost:3001/api/v1/current_user', configObject)
