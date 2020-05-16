@@ -1,4 +1,7 @@
-import React, {Component} from 'react'
+import React, {Component, useState} from 'react'
+import {connect} from 'react-redux'
+
+import {createUser} from '../actions/users.js'
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -35,16 +38,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export const Signup = props => {
 
+  const classes = useStyles()
 
-export default function Signup() {
-  const classes = useStyles();
+  const [formData, setFormData] = useState({})
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
+    props.createUser(formData)
   }
 
-  return (
+  const handleOnChange = (e) => {
+    formData[e.target.name] = e.target.value 
+  }
+
+    return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -61,27 +70,31 @@ export default function Signup() {
           <Grid container spacing={2}>
 
             <Grid item xs={12} sm={6}>
-              <TextField required fullWidth variant="outlined" label="First Name" name="fname" />
+              <TextField required fullWidth variant="outlined" label="First Name" name="fname" value={props.fname} onChange={handleOnChange} />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-            <TextField required fullWidth variant="outlined" label="Last Name" name="lname" />
+            <TextField required fullWidth variant="outlined" label="Last Name" name="lname" value={props.lname} onChange={handleOnChange} />
+            </Grid>
+
+            <Grid item xs={12}>
+            <TextField required fullWidth variant="outlined" label="E-mail" name="email" value={props.email} onChange={handleOnChange} />
             </Grid>
 
 
-          <Grid item xs={12}>
-          <TextField required fullWidth variant="outlined" label="Password" name="password" />
-          </Grid>
+            <Grid item xs={12}>
+            <TextField required fullWidth variant="outlined" label="Password" name="password" type="password" value={props.password} onChange={handleOnChange} />
+            </Grid>
 
-          <Grid item xs={12}>
-          <TextField required fullWidth variant="outlined" label="Confirm Password" name="password_confirmation" />
-          </Grid>
+            <Grid item xs={12}>
+            <TextField required fullWidth variant="outlined" label="Confirm Password" name="password_confirmation" type="password" value={props.password_confirmation} onChange={handleOnChange} />
+            </Grid>
 
-          <Button type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}>Sign Up</Button>
+            <Button type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}>Sign Up</Button>
         </Grid>
 
         </form>
@@ -97,5 +110,22 @@ export default function Signup() {
     </div>
     </Container>
   )
-
 }
+
+const mapStateToProps = state => {
+  return {
+    fname: state.fname,
+    lname: state.lname,
+    email: state.email,
+    password: state.password,
+    password_confirmation: state.password_confirmation
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createUser: userData => dispatch(createUser(userData))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)
