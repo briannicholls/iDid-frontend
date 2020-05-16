@@ -8,6 +8,8 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import BottomNav from './components/BottomNav'
 
+import ActionsContainer from './components/actions/actionsContainer.js'
+
 // import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -20,18 +22,41 @@ import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
 
 class App extends Component {
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.getCurrentUser()
+  }
+
+  renderContext = () => {
+    //if logged in
+    if (Object.keys(this.props.currentUser).length > 1) {
+      return (
+        <Route path='/' component={BottomNav} />
+      )
+    } else { //if not logged in, these routes become active
+      return (
+        <>
+        <Route exact path='/' component={Login} />
+        <Route exact path='/signup' component={Signup} />
+        </>
+      )
+    }
+  }
+
+  renderMainScreen = () => {
+    return (
+      <Route exact path="/actions" component={ActionsContainer} />
+    )
   }
 
   render() {
     return (
       <Router>
         <div className="App">
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/signup' component={Signup} />
 
-          {this.props.currentUser ? <BottomNav /> : null}
+          {this.renderMainScreen()}
+
+          {this.renderContext()}
+
         </div>
       </Router>
     )
