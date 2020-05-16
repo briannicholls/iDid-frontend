@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 export const ActionsList = (props) => {
 
   const renderActions = () => {
-
+    // 
     // return props.actions.map(action => {
     //   return <li>{action.counterId}</li>
     // })

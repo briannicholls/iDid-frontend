@@ -9,7 +9,6 @@ export const changeAppState = (val) => {
       credentials: 'include',
       body: JSON.stringify({value: val})
     })
-
   }
 }
 
@@ -25,7 +24,7 @@ export const getCurrentState = () => {
     })
     .then(resp => resp.json())
     .then(json => {
-      
+
       if (json) {
         dispatch({type: 'SET_VALUE', payload: json.value})
       }
