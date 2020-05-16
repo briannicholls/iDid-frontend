@@ -17,24 +17,35 @@ const useStyles = makeStyles({
   },
 });
 
-
-
 const BottomNav = (props) => {
+
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+
+  // const handleNavClick = (e) => {
+  //   // console.log(e)
+  //   //props.history.push(valueMap(props.))
+  // }
+
+  const valueMap = [
+    '/',
+    '/routines',
+    '/actions'
+  ]
 
   return (
     <BottomNavigation
       value={value}
       onChange={(event, newValue) => {
         setValue(newValue);
+        props.history.push(valueMap[newValue])
       }}
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction label="Dashboard" icon={<DashboardIcon />}  />
-      <BottomNavigationAction label="My Routines" icon={<OfflinePinIcon />} />
-      <BottomNavigationAction label="History" icon={<LocationOnIcon />} />
+      <BottomNavigationAction name="home" label="Dashboard" icon={<DashboardIcon />}  />
+      <BottomNavigationAction name="routines" label="My Routines" icon={<OfflinePinIcon />} />
+      <BottomNavigationAction name="actions" label="History" icon={<HistoryIcon />} />
       <BottomNavigationAction label="Log Out" onClick={props.logout} />
     </BottomNavigation>
   );
