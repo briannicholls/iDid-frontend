@@ -5,10 +5,12 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import OfflinePinIcon from '@material-ui/icons/OfflinePin';
 import HistoryIcon from '@material-ui/icons/History';
+import {BrowserRouter, Route} from 'react-router-dom'
 
 
-import Logout from './Logout'
+// import Logout from './Logout'
 import {logout} from '../actions/currentUser.js'
+import {fetchUserActions} from '../actions/actions.js'
 import {connect} from 'react-redux'
 
 const useStyles = makeStyles({
@@ -22,23 +24,16 @@ const BottomNav = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  // const handleNavClick = (e) => {
-  //   // console.log(e)
-  //   //props.history.push(valueMap(props.))
-  // }
-
-  const valueMap = [
-    '/',
-    '/routines',
-    '/actions'
-  ]
+  const handleNavChange = (newValue) => {
+    props.changeAppState(newValue)
+    setValue(newValue);
+  }
 
   return (
     <BottomNavigation
-      value={value}
+      value={props.value.value}
       onChange={(event, newValue) => {
-        setValue(newValue);
-        props.history.push(valueMap[newValue])
+        handleNavChange(newValue)
       }}
       showLabels
       className={classes.root}
@@ -51,4 +46,4 @@ const BottomNav = (props) => {
   );
 }
 
-export default connect(null, {logout})(BottomNav)
+export default connect(null, {logout, fetchUserActions})(BottomNav)

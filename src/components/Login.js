@@ -14,8 +14,8 @@ class Login extends Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault()
-    console.log('submitting form with data:')
-    console.log(this.state)
+    // console.log('submitting form with data:')
+    // console.log(this.state)
     this.props.submitCredentials(this.state)
   }
 

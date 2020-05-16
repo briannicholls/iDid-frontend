@@ -8,7 +8,7 @@ import {fetchUserActions} from '../../actions/actions.js'
 class ActionsContainer extends Component {
 
   componentDidMount() {
-    fetchUserActions(this.props.currentUser.id)
+    this.props.fetchUserActions(this.props.currentUser.id)
   }
 
   render() {

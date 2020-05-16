@@ -4,12 +4,14 @@ import usersReducer from './reducers/users.js'
 import currentUser from './reducers/currentUser.js'
 import loginFormReducer from './reducers/loginForm.js'
 import actionsReducer from './reducers/actionsReducer.js'
+import value from './reducers/value.js'
 
 const reducer = combineReducers({
   usersReducer,
   currentUser,
   loginFormReducer,
-  actionsReducer
+  actionsReducer,
+  value
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

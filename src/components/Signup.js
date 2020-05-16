@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 
 import {createUser} from '../actions/users.js'
@@ -42,7 +42,7 @@ export const Signup = props => {
 
   const classes = useStyles()
 
-  const [formData, setFormData] = useState({})
+  const [formData] = useState({})
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
@@ -50,7 +50,7 @@ export const Signup = props => {
   }
 
   const handleOnChange = (e) => {
-    formData[e.target.name] = e.target.value 
+    formData[e.target.name] = e.target.value
   }
 
     return (
