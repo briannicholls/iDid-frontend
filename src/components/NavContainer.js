@@ -12,7 +12,7 @@ import {changeAppState} from '../actions/value.js'
 class NavContainer extends Component {
 
   componentDidMount() {
-    this.props.getCurrentState()
+    // this.props.getCurrentState()
   }
 
   handleChangeState = (val) => {

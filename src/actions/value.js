@@ -1,18 +1,27 @@
+import {fetchUserActions} from './actions'
+
 export const changeAppState = (val) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({type: 'SET_VALUE', payload: val})
-    fetch('http://localhost:3001/state', {
+    const configObject = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       credentials: 'include',
-      body: JSON.stringify({value: val})
-    })
+      body: JSON.stringify(val)
+    }
+
+    fetch('http://localhost:3001/state', configObject)
+      // .then(resp => resp.json())
+      // .then(json => /* store changed in line 3 */)
+      // .catch(console.log('something\'s \'appened.'))
   }
+
 }
 
-export const getCurrentState = () => {
+
+export const getCurrentState = (userId) => {
   return dispatch => {
     dispatch({type: 'LOADING'})
     fetch('http://localhost:3001/state', {
@@ -26,7 +35,10 @@ export const getCurrentState = () => {
     .then(json => {
 
       if (json) {
-        dispatch({type: 'SET_VALUE', payload: json.value})
+        dispatch({type: 'SET_VALUE', payload: json})
+        if (json == 2) {
+          fetchUserActions(userId)
+        }
       }
     })
   }

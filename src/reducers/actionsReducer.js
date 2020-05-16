@@ -1,7 +1,7 @@
 export default function(state = [], action) {
   switch (action.type) {
-    case 'ADD_ACTIONS':
-      return state.concat(action.payload)
+    case 'SET_USER_ACTIONS':
+      return action.payload
       break;
     default:
       return state

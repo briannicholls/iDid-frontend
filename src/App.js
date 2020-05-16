@@ -4,16 +4,29 @@ import Login from './components/Login'
 import Signup from './components/Signup.js'
 import {getCurrentUser} from './actions/currentUser.js'
 import {getCurrentState} from './actions/value.js'
+import {fetchUserActions} from './actions/actions.js'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import NavContainer from './components/NavContainer'
 
 import ActionsContainer from './components/actions/actionsContainer.js'
 
+import CssBaseline from '@material-ui/core/CssBaseline'
+
 class App extends Component {
 
   componentDidMount = () => {
     this.props.getCurrentUser()
+    this.props.getCurrentState()
+  }
+
+  componentDidUpdate() {
+    console.log('App update. state = ' + this.props.currentState)
+    if (this.props.currentState == 2) {
+      console.log('state is two, fetching user actions')
+      //console.log(this.props.currentUser)
+      this.props.fetchUserActions(this.props.currentUser.id)
+    }
   }
 
   renderContext = () => {
@@ -42,6 +55,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <CssBaseline />
 
           {this.renderMainScreen()}
 
@@ -60,4 +74,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getCurrentUser})(App);
+export default connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions})(App);

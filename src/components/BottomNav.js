@@ -22,16 +22,14 @@ const useStyles = makeStyles({
 const BottomNav = (props) => {
 
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
 
   const handleNavChange = (newValue) => {
     props.changeAppState(newValue)
-    setValue(newValue);
   }
 
   return (
     <BottomNavigation
-      value={props.value.value}
+      value={props.value}
       onChange={(event, newValue) => {
         handleNavChange(newValue)
       }}
@@ -46,4 +44,8 @@ const BottomNav = (props) => {
   );
 }
 
-export default connect(null, {logout, fetchUserActions})(BottomNav)
+const mapStateToProps = state => {
+  return {value: state.value}
+}
+
+export default connect(mapStateToProps, {logout, fetchUserActions})(BottomNav)

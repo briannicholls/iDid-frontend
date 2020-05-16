@@ -1,14 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux'
-// import Action from './action.js'
+import Action from './action.js'
 
 export const ActionsList = (props) => {
 
   const renderActions = () => {
-    // 
-    // return props.actions.map(action => {
-    //   return <li>{action.counterId}</li>
-    // })
+
+
+
+    return props.actions.map(action => {
+      return <li><Action key={action.id} action={action} /></li>
+    })
   }
 
   return (
@@ -21,7 +23,7 @@ export const ActionsList = (props) => {
 
 const mapStateToProps = state => {
   return {
-    actions: state.actions
+    actions: state.actionsReducer
   }
 }
 
