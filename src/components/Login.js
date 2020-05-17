@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+
 import {submitCredentials} from '../actions/loginForm.js'
 import {setCurrentUser} from '../actions/currentUser.js'
-import {Link} from 'react-router-dom'
 
 class Login extends Component {
 
@@ -14,13 +15,10 @@ class Login extends Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault()
-    // console.log('submitting form with data:')
-    // console.log(this.state)
     this.props.submitCredentials(this.state)
   }
 
   logInStatus = () => {
-    // console.log(this.state)
     return this.props.requesting === true ? <p>LOGGING IN</p> : null
   }
 

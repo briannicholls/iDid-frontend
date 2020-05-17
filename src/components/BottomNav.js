@@ -1,17 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux'
+
+import {logout} from '../actions/currentUser.js'
+import {fetchUserActions} from '../actions/actions.js'
+
+// Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import OfflinePinIcon from '@material-ui/icons/OfflinePin';
 import HistoryIcon from '@material-ui/icons/History';
-import {BrowserRouter, Route} from 'react-router-dom'
 
-
-// import Logout from './Logout'
-import {logout} from '../actions/currentUser.js'
-import {fetchUserActions} from '../actions/actions.js'
-import {connect} from 'react-redux'
 
 const useStyles = makeStyles({
   root: {

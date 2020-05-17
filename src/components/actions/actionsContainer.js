@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import ActionsList from './actionsList.js'
-
 import {connect} from 'react-redux'
 
 import {fetchUserActions} from '../../actions/actions.js'
+import ActionsList from './actionsList.js'
 
 class ActionsContainer extends Component {
 
   componentDidMount() {
     console.log('actionsContainerMounted')
-    
+
   }
 
   render() {

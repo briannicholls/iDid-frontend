@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 
 import {createUser} from '../actions/users.js'
 
+// Material UI
 import { makeStyles } from '@material-ui/core/styles';
-
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';

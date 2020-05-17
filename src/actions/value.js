@@ -34,7 +34,7 @@ export const getCurrentState = (userId) => {
 
       if (json) {
         dispatch({type: 'SET_VALUE', payload: json})
-        if (json == 2) {
+        if (json === 2) {
           fetchUserActions(userId)
         }
       }

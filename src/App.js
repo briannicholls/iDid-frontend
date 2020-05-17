@@ -30,7 +30,7 @@ class App extends Component {
 
   componentDidUpdate() {
     console.log('App update. state = ' + this.props.currentState)
-    if (this.props.currentState == 2) {
+    if (this.props.currentState === 2) {
       console.log('state is two, fetching user actions')
       //console.log(this.props.currentUser)
       this.props.fetchUserActions(this.props.currentUser.id)

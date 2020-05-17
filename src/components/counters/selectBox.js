@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 export default function SelectBox(props) {
@@ -14,7 +13,7 @@ export default function SelectBox(props) {
         value: e.target.innerHTML},
         persist: function() {}
     }
-    
+
     props.onInputChange(forgedEvent)
   }
 
