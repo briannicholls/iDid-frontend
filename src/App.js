@@ -10,6 +10,11 @@ import NavContainer from './components/NavContainer'
 import {BrowserRouter as Router, Route, withRouter} from 'react-router-dom'
 import ActionForm from './components/actions/actionForm.js'
 import {fetchCounters} from './actions/counters.js'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import Box from '@material-ui/core/Box';
+// import { positions } from '@material-ui/system';
+import ActionFab from './components/ActionFab.js'
 
 
 import ActionsContainer from './components/actions/actionsContainer.js'
@@ -34,15 +39,19 @@ class App extends Component {
   }
 
   renderMainScreen = () => {
-    if (this.props.currentUser.id > 0) {
+    if (this.props.currentUser.id > 0) { //if logged in
       return (
         <>
-        <Route exact path="/actions" component={ActionsContainer} />
-        <Route exact path="/actions/new" component={ActionForm} />
-        <Route path='/' component={NavContainer}  />
+      <Route exact path="/actions" component={ActionsContainer} />
+      <Route exact path="/actions/new" component={ActionForm} />
+
+      <ActionFab />
+
+      <Route path='/' component={NavContainer}  />
+
         </>
       )
-    } else {
+    } else { // if not logged in
       return (
         <>
         <Route path='/' component={Login} />

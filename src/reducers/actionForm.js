@@ -1,6 +1,7 @@
 export default function (state = {
   name: '',
-  reps: ''
+  reps: '',
+  user_id: ''
 }, action) {
   switch (action.type) {
     case 'UPDATE_ACTION_FORM':
@@ -8,6 +9,7 @@ export default function (state = {
         ...state,
         [action.payload.target.name]: action.payload.target.value
       }
+
     default:
       return state
   }

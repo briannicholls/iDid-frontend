@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import Input from '@material-ui/core/Input';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CounterSelectBox from '../counters/selectBox.js'
-import {updateActionForm} from '../../actions/actionForm.js'
+import {updateActionForm, addAction} from '../../actions/actionForm.js'
 
 import {connect} from 'react-redux'
 
@@ -43,7 +43,16 @@ export function ActionForm(props) {
   const classes = useStyles();
 
   const handleOnChange = (event) => {
+    event.persist()
     props.updateActionForm(event)
+    if (props.formData.user_id === '') {
+      props.updateActionForm({target: {name: 'user_id', value: props.currentUser.id }})
+    }
+  }
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault()
+    props.addAction(props.formData)
   }
 
   return (
@@ -52,7 +61,7 @@ export function ActionForm(props) {
         <Typography component="h1" variant="h5">
           I did...
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={handleOnSubmit} className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -67,6 +76,8 @@ export function ActionForm(props) {
           />
 
           <CounterSelectBox onInputChange={handleOnChange} options={props.counters}/>
+
+
 
           <Button
             type="submit"
@@ -86,13 +97,16 @@ export function ActionForm(props) {
 
 const mapStateToProps = (state) => {
   return {
-    counters: state.countersReducer
+    counters: state.countersReducer,
+    formData: state.actionFormReducer,
+    currentUser: state.currentUser
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateActionForm: data => dispatch(updateActionForm(data))
+    updateActionForm: data => dispatch(updateActionForm(data)),
+    addAction: (actionData) => dispatch(addAction(actionData))
   }
 }
 
