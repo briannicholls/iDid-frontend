@@ -1,57 +1,63 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 import {submitCredentials} from '../actions/loginForm.js'
 import {setCurrentUser} from '../actions/currentUser.js'
 
-class Login extends Component {
+export const Login = (props) => {
 
-  handleOnChange = (e) => {
-    this.setState({
+  const [loginFormData, setLoginFormData] = useState({
+    email: '', password: ''
+  })
+
+  const handleOnChange = (e) => {
+    setLoginFormData({
+      ...loginFormData,
       [e.target.name]: e.target.value
     })
   }
 
-  handleOnSubmit = (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault()
-    this.props.submitCredentials(this.state)
+    props.submitCredentials(loginFormData)
   }
 
-  logInStatus = () => {
-    return this.props.requesting === true ? <p>LOGGING IN</p> : null
+  const logInStatus = () => {
+    return props.requesting === true ? <p>LOGGING IN</p> : null
   }
 
-  listErrors = () => {
-    return (this.props.errors) ? <p>{this.props.errors}</p> : null
+  const listErrors = () => {
+    return (props.errors) ? <p>{props.errors}</p> : null
   }
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleOnSubmit}>
-          <label name="email">Email</label>
-          <input type="email" name="email" value={this.props.email} onChange={this.handleOnChange}/>
-          <br></br>
-          <label name="password">Password</label>
-          <input type="password" name="password" value={this.props.password} onChange={this.handleOnChange}/>
-          <br></br>
-          <input type="submit" value="Log In" />
-        </form>
+  return (
+    <div>
+      <p>{props.currentUser.server_message}</p>
+      <form onSubmit={handleOnSubmit}>
+        <label name="email">Email</label>
+        <input type="email" name="email" value={loginFormData.email} onChange={handleOnChange}/>
+        <br></br>
+        <label name="password">Password</label>
+        <input type="password" name="password" value={loginFormData.password} onChange={handleOnChange}/>
+        <br></br>
+        <input type="submit" value="Log In" />
+      </form>
 
-        <Link to={'/signup'}>Register</Link>
+      <Link to={'/signup'}>Register</Link>
 
-        {this.logInStatus()}
-        {this.listErrors()}
-      </div>
-    )
-  }
+      {logInStatus()}
+      {listErrors()}
+    </div>
+  )
+
 }
 
 const mapStateToProps = state => {
   return {
     requesting: state.loginFormReducer.requesting,
-    error: state.loginFormReducer.error
+    error: state.loginFormReducer.error,
+    currentUser: state.currentUser
   }
 }
 
