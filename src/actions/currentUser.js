@@ -2,17 +2,13 @@
 // https://www.npmjs.com/package/redux-thunk
 // return function to delay dispatch
 // inner function receives the store methods dispatch and getState as parameters
+
+// ^^^ Leaving this comment here to remember how dumb I was when I started this project
+
 export const setCurrentUser = user => {
   return {
     type: 'SET_CURRENT_USER',
     payload: user
-  }
-}
-
-//clear current user from store (front end log out)
-export const clearCurrentUser = () => {
-  return {
-    type: 'CLEAR_CURRENT_USER'
   }
 }
 
@@ -24,12 +20,13 @@ export const logout = () => {
     dispatch({type: 'LOADING'})
     fetch('http://localhost:3001/api/v1/logout', {
       method: 'DELETE',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      credentials: 'include'
     })
-      .then(dispatch(clearCurrentUser()))
+      .then(resp => {
+        // debugger
+        dispatch({type: 'CLEAR_CURRENT_USER'})
+      })
+      .then(json => console.log('clearing session'))
   }
 }
 

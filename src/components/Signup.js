@@ -13,8 +13,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-
-
 import { Link } from '@material-ui/core';
 
 
@@ -101,7 +99,7 @@ export const Signup = props => {
 
         <Grid container justify="flex-end">
           <Grid item>
-            <Link href="/login" variant="body2">
+            <Link href="/" variant="body2">
               Already have an account? Sign in
             </Link>
           </Grid>

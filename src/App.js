@@ -1,23 +1,21 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
+
 import './App.css';
 import Login from './components/Login'
 import Signup from './components/Signup.js'
 import {getCurrentUser} from './actions/currentUser.js'
 import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
-import {connect} from 'react-redux'
 import NavContainer from './components/NavContainer'
 import {Route, withRouter} from 'react-router-dom'
 import ActionForm from './components/actions/actionForm.js'
 import {fetchCounters} from './actions/counters.js'
-import Container from '@material-ui/core/Container';
-
-// import { positions } from '@material-ui/system';
 import ActionFab from './components/ActionFab.js'
-
-
 import ActionsContainer from './components/actions/actionsContainer.js'
 
+//Material UI
+import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 class App extends Component {
@@ -26,45 +24,74 @@ class App extends Component {
     this.props.getCurrentUser()
     this.props.getCurrentState()
     this.props.fetchCounters()
+
+    // make sure user is still logged in
+    if (this.props.currentUser.id > 0) {
+      // if we're on Action history list, fetch the actions
+      if (this.props.currentState === 2) {
+        this.props.fetchUserActions(this.props.currentUser.id)
+      }
+    } else {
+      // // if user isn't logged in,
+      // this.props.history.push('/login')
+    }
+
   }
 
   componentDidUpdate() {
-    console.log('App update. state = ' + this.props.currentState)
-    if (this.props.currentState === 2) {
-      console.log('state is two, fetching user actions')
-      //console.log(this.props.currentUser)
-      this.props.fetchUserActions(this.props.currentUser.id)
+    // console.log('App update. state = ' + this.props.currentState)
+    // console.log('User logged in state = ' + this.props.currentUser.id)
+    // make sure user is still logged in
+
+    if (this.props.currentUser.id > 0) {
+      // if we're on Action history list, fetch the actions
+      if (this.props.currentState === 2) {
+        this.props.fetchUserActions(this.props.currentUser.id)
+      }
+    } else {
+      // if user isn't logged in,
+      console.log('Not logged in')
     }
   }
 
-  renderMainScreen = () => {
-    if (this.props.currentUser.id > 0) { //if logged in
-      return (
-        <>
-      <Route exact path="/actions" component={ActionsContainer} />
-      <Route exact path="/actions/new" component={ActionForm} />
+  loggedInState = () => {
+    return (
+      <React.Fragment>
+        <Route exact path="/actions" component={ActionsContainer} />
+        <Route exact path="/actions/new" component={ActionForm} />
 
-      <ActionFab />
+        <ActionFab />
 
-      <Route path='/' component={NavContainer}  />
+        <Route path='/' component={NavContainer}  />
 
-        </>
-      )
-    } else { // if not logged in
-      return (
-        <>
-        <Route exact path='/login' component={Login} />
+      </React.Fragment>
+    )
+  }
+
+  loggedOutState = () => {
+    return (
+      <React.Fragment >
+        <Route exact path='/' component={Login} />
         <Route exact path='/signup' component={Signup} />
-        </>
-      )
+      </React.Fragment>
+    )
+  }
+
+  renderMainScreen = () => {
+    //if logged in
+    if (this.props.currentUser.id > 0) {
+      return this.loggedInState()
+    } else { // if not logged in
+      return this.loggedOutState()
     }
   }
 
   render() {
     return (
       <div className="App">
+
         <CssBaseline />
-          <Container maxWidth="sm" >
+        <Container maxWidth="sm" >
 
           {this.renderMainScreen()}
 

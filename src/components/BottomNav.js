@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import {Route, withRouter} from 'react-router-dom'
 
 import {logout} from '../actions/currentUser.js'
 import {fetchUserActions} from '../actions/actions.js'
@@ -27,6 +28,11 @@ const BottomNav = (props) => {
     props.changeAppState(newValue)
   }
 
+  const handleOnClick = () => {
+    props.logout()
+    props.history.push('/')
+  }
+
   return (
     <BottomNavigation
       value={props.value}
@@ -39,7 +45,7 @@ const BottomNav = (props) => {
       <BottomNavigationAction name="home" label="Dashboard" icon={<DashboardIcon />}  />
       <BottomNavigationAction name="routines" label="My Routines" icon={<OfflinePinIcon />} />
       <BottomNavigationAction name="actions" label="History" icon={<HistoryIcon />} />
-      <BottomNavigationAction label="Log Out" onClick={props.logout} />
+      <BottomNavigationAction label="Log Out" onClick={handleOnClick} />
     </BottomNavigation>
   );
 }
@@ -48,4 +54,4 @@ const mapStateToProps = state => {
   return {value: state.value}
 }
 
-export default connect(mapStateToProps, {logout, fetchUserActions})(BottomNav)
+export default withRouter(connect(mapStateToProps, {logout, fetchUserActions})(BottomNav))
