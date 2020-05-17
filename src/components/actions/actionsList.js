@@ -18,7 +18,9 @@ export const ActionsList = (props) => {
 
   return (
     <>
+    <List component="p">
         {renderActions()}
+    </List>
     </>
   )
 }

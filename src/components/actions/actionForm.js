@@ -77,10 +77,20 @@ export function ActionForm(props) {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
           >
             Submit
+          </Button>
+
+          <Button
+            href="/counters/new"
+            fullWidth
+            variant="contained"
+            color="transparent"
+            className={classes.submit}
+          >
+            Count Something Else
           </Button>
 
         </form>
