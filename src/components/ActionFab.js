@@ -11,28 +11,15 @@ import { green } from '@material-ui/core/colors';
 import Box from '@material-ui/core/Box';
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-    width: 500,
-    position: 'relative',
-    minHeight: 200,
-  },
+const useStyles = makeStyles(theme => ({
   fab: {
     position: 'absolute',
     bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-  fabGreen: {
-    color: theme.palette.common.white,
-    backgroundColor: green[500],
-    '&:hover': {
-      backgroundColor: green[600],
-    },
-  },
-}));
+    right: theme.spacing(2)
+  }
+}))
 
-export default function FloatingActionButtonZoom() {
+export default function FloatingActionButton() {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -45,8 +32,7 @@ export default function FloatingActionButtonZoom() {
     }
 
   return (
-    <div className={classes.root}>
-
+    <div>
       <Fab href="/actions/new" aria-label={fab.label} className={fab.className} color={fab.color}>
         {fab.icon}
       </Fab>

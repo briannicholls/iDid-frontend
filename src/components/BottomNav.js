@@ -15,7 +15,7 @@ import {connect} from 'react-redux'
 
 const useStyles = makeStyles({
   root: {
-    width: 500,
+    width: 'sm',
   },
 });
 

@@ -8,7 +8,13 @@ export default function SelectBox(props) {
   const handleChange = (e) => {
     // console.log(e.target.innerHTML)
 
-    const forgedEvent = { target: {name: 'name' , value: e.target.innerHTML}, persist: function() {} }
+    const forgedEvent = {
+      target: {
+        name: 'name' ,
+        value: e.target.innerHTML},
+        persist: function() {}
+    }
+    
     props.onInputChange(forgedEvent)
   }
 

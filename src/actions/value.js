@@ -3,6 +3,7 @@ import {fetchUserActions} from './actions'
 export const changeAppState = (val) => {
   return (dispatch) => {
     dispatch({type: 'SET_VALUE', payload: val})
+
     const configObject = {
       method: 'POST',
       headers: {
@@ -11,11 +12,8 @@ export const changeAppState = (val) => {
       credentials: 'include',
       body: JSON.stringify(val)
     }
-
     fetch('http://localhost:3001/state', configObject)
-      // .then(resp => resp.json())
-      // .then(json => /* store changed in line 3 */)
-      // .catch(console.log('something\'s \'appened.'))
+
   }
 
 }

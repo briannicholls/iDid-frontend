@@ -7,12 +7,11 @@ import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
 import {connect} from 'react-redux'
 import NavContainer from './components/NavContainer'
-import {BrowserRouter as Router, Route, withRouter} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
 import ActionForm from './components/actions/actionForm.js'
 import {fetchCounters} from './actions/counters.js'
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+
 // import { positions } from '@material-ui/system';
 import ActionFab from './components/ActionFab.js'
 
@@ -54,8 +53,8 @@ class App extends Component {
     } else { // if not logged in
       return (
         <>
-        <Route path='/' component={Login} />
-        <Route path='/signup' component={Signup} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/signup' component={Signup} />
         </>
       )
     }
@@ -65,9 +64,11 @@ class App extends Component {
     return (
       <div className="App">
         <CssBaseline />
+          <Container maxWidth="sm" >
 
-        {this.renderMainScreen()}
+          {this.renderMainScreen()}
 
+        </Container>
       </div>
     )
   }

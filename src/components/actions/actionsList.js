@@ -2,21 +2,25 @@ import React from 'react';
 import {connect} from 'react-redux'
 import Action from './action.js'
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+
 export const ActionsList = (props) => {
 
   const renderActions = () => {
 
-
-
     return props.actions.map(action => {
-      return <li key={action.id}><Action action={action} /></li>
+      return <ListItem component={Action} key={action.id} action={action}></ListItem>
     })
   }
 
   return (
     <>
-      <p>I'm going to list all the Action elements.</p>
-      {renderActions()}
+
+
+        {renderActions()}
+
+
     </>
   )
 }
