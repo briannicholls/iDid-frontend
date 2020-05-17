@@ -25,6 +25,9 @@ export const logout = () => {
     fetch('http://localhost:3001/api/v1/logout', {
       method: 'DELETE',
       credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
       .then(dispatch(clearCurrentUser()))
   }

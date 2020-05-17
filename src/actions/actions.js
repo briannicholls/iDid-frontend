@@ -1,6 +1,5 @@
 export const fetchUserActions = (userId) => {
   return dispatch => {
-
     dispatch({type: 'LOADING'})
     fetch(`http://localhost:3001/api/v1/users/${userId}/actions`, {
       method: 'GET',

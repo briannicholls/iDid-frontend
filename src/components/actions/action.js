@@ -3,7 +3,7 @@ import React from 'react';
 export const Action = (props) => {
   return (
     <div>
-      Action
+      <strong>{props.name}</strong>
     </div>
   )
 }

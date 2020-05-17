@@ -9,7 +9,7 @@ export const ActionsList = (props) => {
 
 
     return props.actions.map(action => {
-      return <li><Action key={action.id} action={action} /></li>
+      return <li key={action.id}><Action action={action} /></li>
     })
   }
 

@@ -5,13 +5,17 @@ import currentUser from './reducers/currentUser.js'
 import loginFormReducer from './reducers/loginForm.js'
 import actionsReducer from './reducers/actionsReducer.js'
 import value from './reducers/value.js'
+import countersReducer from './reducers/countersReducer.js'
+import actionFormReducer from './reducers/actionForm.js'
 
 const reducer = combineReducers({
   usersReducer,
   currentUser,
   loginFormReducer,
   actionsReducer,
-  value
+  value,
+  countersReducer,
+  actionFormReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

@@ -5,9 +5,12 @@ import Signup from './components/Signup.js'
 import {getCurrentUser} from './actions/currentUser.js'
 import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import NavContainer from './components/NavContainer'
+import {BrowserRouter as Router, Route, withRouter} from 'react-router-dom'
+import ActionForm from './components/actions/actionForm.js'
+import {fetchCounters} from './actions/counters.js'
+
 
 import ActionsContainer from './components/actions/actionsContainer.js'
 
@@ -18,6 +21,7 @@ class App extends Component {
   componentDidMount = () => {
     this.props.getCurrentUser()
     this.props.getCurrentState()
+    this.props.fetchCounters()
   }
 
   componentDidUpdate() {
@@ -29,40 +33,33 @@ class App extends Component {
     }
   }
 
-  renderContext = () => {
-    //if logged in
-    if (Object.keys(this.props.currentUser).length > 1) {
-      return (
-        <Route path='/' component={NavContainer}  />
-      )
-    } else { //if not logged in, these routes become active
+  renderMainScreen = () => {
+    if (this.props.currentUser.id > 0) {
       return (
         <>
-        <Route exact path='/' component={Login} />
-        <Route exact path='/signup' component={Signup} />
+        <Route exact path="/actions" component={ActionsContainer} />
+        <Route exact path="/actions/new" component={ActionForm} />
+        <Route path='/' component={NavContainer}  />
+        </>
+      )
+    } else {
+      return (
+        <>
+        <Route path='/' component={Login} />
+        <Route path='/signup' component={Signup} />
         </>
       )
     }
   }
 
-  renderMainScreen = () => {
-    return (
-      <Route exact path="/actions" component={ActionsContainer} />
-    )
-  }
-
   render() {
     return (
-      <Router>
-        <div className="App">
-          <CssBaseline />
+      <div className="App">
+        <CssBaseline />
 
-          {this.renderMainScreen()}
+        {this.renderMainScreen()}
 
-          {this.renderContext()}
-
-        </div>
-      </Router>
+      </div>
     )
   }
 }
@@ -74,4 +71,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions})(App);
+export default withRouter(connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions, fetchCounters})(App));
