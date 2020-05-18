@@ -6,6 +6,7 @@
 // ^^^ Leaving this comment here to remember how dumb I was when I started this project
 
 import {fetchUserActions} from './actions'
+import {API} from '../Constants.js'
 
 export const setCurrentUser = user => {
   return dispatch => {
@@ -20,7 +21,7 @@ export const setCurrentUser = user => {
 export const logout = () => {
   return function (dispatch) {
     dispatch({type: 'LOADING'})
-    fetch('http://localhost:3001/api/v1/logout', {
+    fetch(API + '/logout', {
       method: 'DELETE',
       credentials: 'include'
     })
@@ -45,7 +46,7 @@ export const getCurrentUser = () => {
       }
     }
 
-    return fetch('http://localhost:3001/api/v1/current_user', configObject)
+    return fetch(API + '/current_user', configObject)
       .then(resp => resp.json())
       .then(json => {
         if (json.error) {

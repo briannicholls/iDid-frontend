@@ -1,3 +1,5 @@
+import {API} from '../Constants.js'
+
 export const changeAppState = (val) => {
   return (dispatch) => {
     dispatch({type: 'SET_VALUE', payload: val})
@@ -10,14 +12,14 @@ export const changeAppState = (val) => {
       credentials: 'include',
       body: JSON.stringify(val)
     }
-    fetch('http://localhost:3001/state', configObject)
+    fetch(API + '/state', configObject)
   }
 }
 
 export const getCurrentState = (userId) => {
   return dispatch => {
     dispatch({type: 'LOADING'})
-    fetch('http://localhost:3001/state', {
+    fetch(API + '/state', {
       method: 'GET',
       credentials: 'include',
       headers: {

@@ -1,7 +1,8 @@
+import {API} from '../Constants.js'
 export const fetchUserActions = (userId) => {
   return dispatch => {
     dispatch({type: 'LOADING'})
-    fetch(`http://localhost:3001/api/v1/users/${userId}/actions`, {
+    fetch(`${API}/users/${userId}/actions`, {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -19,7 +20,7 @@ export const fetchUserActions = (userId) => {
 
 export const addAction = (action) =>{
   return dispatch => {
-    fetch(`http://localhost:3001/api/v1/users/${action.userId}/actions`, {
+    fetch(`${API}/users/${action.userId}/actions`, {
       method: 'POST',
       credentials: 'include',
       headers: {

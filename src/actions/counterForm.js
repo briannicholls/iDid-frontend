@@ -1,6 +1,8 @@
+import {API} from '../Constants.js'
+
 export const submitCounterForm = (data) => {
   return dispatch => {
-    fetch('http://localhost:3001/api/v1/counters', {
+    fetch(API + '/counters', {
       method: 'POST',
       credentials: 'include',
       headers: {

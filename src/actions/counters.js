@@ -1,6 +1,8 @@
+import {API} from '../Constants.js'
+
 export const fetchCounters = () => {
   return dispatch => {
-    fetch('http://localhost:3001/api/v1/counters', {
+    fetch(API + '/counters', {
       method: 'GET',
       credentials: 'include',
       headers: {

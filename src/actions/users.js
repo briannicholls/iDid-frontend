@@ -1,7 +1,9 @@
+import {API} from '../Constants.js'
+
 export const createUser = (user) => {
   return dispatch => {
     dispatch({type: 'LOADING'})
-    fetch('http://localhost:3001/api/v1/users', {
+    fetch(API + '/users', {
       method: 'POST',
       credentials: 'include',
       headers: {

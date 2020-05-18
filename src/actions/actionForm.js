@@ -1,3 +1,5 @@
+import {API} from '../Constants.js'
+
 export const updateActionForm = event => {
   return dispatch => {
     dispatch({type: 'UPDATE_ACTION_FORM', payload: event})
@@ -7,7 +9,7 @@ export const updateActionForm = event => {
 export const addAction = actionData => {
   return dispatch => {
     dispatch({type: 'LOADING'})
-    fetch('http://localhost:3001/api/v1/actions', {
+    fetch(API + '/actions', {
       method: 'POST',
       credentials: 'include',
       headers: {
