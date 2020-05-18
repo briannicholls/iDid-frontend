@@ -13,6 +13,7 @@ import ActionForm from './components/actions/actionForm.js'
 import {fetchCounters} from './actions/counters.js'
 import ActionFab from './components/ActionFab.js'
 import ActionsContainer from './components/actions/actionsContainer.js'
+import CounterForm from './components/counters/counterForm.js'
 
 //Material UI
 import Container from '@material-ui/core/Container';
@@ -63,7 +64,7 @@ class App extends Component {
       <React.Fragment>
         <Route exact path="/actions" component={ActionsContainer} />
         <Route exact path="/actions/new" component={ActionForm} />
-
+        <Route exact path="/counters/new" component={CounterForm} />
         <ActionFab />
 
         <Route path='/' component={NavContainer}  />

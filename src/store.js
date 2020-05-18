@@ -7,6 +7,7 @@ import actionsReducer from './reducers/actionsReducer.js'
 import value from './reducers/value.js'
 import countersReducer from './reducers/countersReducer.js'
 import actionFormReducer from './reducers/actionForm.js'
+import counterFormReducer from './reducers/counterForm.js'
 
 const reducer = combineReducers({
   usersReducer,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   actionsReducer,
   value,
   countersReducer,
-  actionFormReducer
+  actionFormReducer,
+  counterFormReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
