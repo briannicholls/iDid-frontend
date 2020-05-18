@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-
-import {getCurrentState} from '../actions/value.js'
-
 import { withRouter } from 'react-router-dom';
 
+import {getCurrentState} from '../actions/value.js'
+import {changeAppState} from '../actions/value.js'
 import BottomNav from './BottomNav'
 
-import {changeAppState} from '../actions/value.js'
-
 class NavContainer extends Component {
-
-  componentDidMount() {
-    // this.props.getCurrentState()
-  }
 
   handleChangeState = (val) => {
     this.props.history.push(valueMap[val])
@@ -21,11 +14,8 @@ class NavContainer extends Component {
   }
 
   render() {
-    return (
-      <BottomNav value={this.props.value}
-                 changeAppState={this.handleChangeState}
-                 />
-    )
+    return ( <BottomNav value={this.props.value}
+                 changeAppState={this.handleChangeState} /> )
   }
 }
 

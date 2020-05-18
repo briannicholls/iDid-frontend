@@ -9,12 +9,10 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link } from '@material-ui/core';
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,16 +51,11 @@ export const Signup = props => {
 
     return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
 
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <Avatar className={classes.avatar}><LockOutlinedIcon /></Avatar>
 
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
+        <Typography component="h1" variant="h5">Sign up</Typography>
 
         <form className={classes.form} onSubmit={handleOnSubmit}>
           <Grid container spacing={2}>
@@ -110,20 +103,10 @@ export const Signup = props => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    fname: state.fname,
-    lname: state.lname,
-    email: state.email,
-    password: state.password,
-    password_confirmation: state.password_confirmation
-  }
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     createUser: userData => dispatch(createUser(userData))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup)
+export default connect(null, mapDispatchToProps)(Signup)

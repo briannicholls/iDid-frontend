@@ -5,10 +5,12 @@
 
 // ^^^ Leaving this comment here to remember how dumb I was when I started this project
 
+import {fetchUserActions} from './actions'
+
 export const setCurrentUser = user => {
-  return {
-    type: 'SET_CURRENT_USER',
-    payload: user
+  return dispatch => {
+    dispatch({type: 'SET_CURRENT_USER', payload: user})
+    fetchUserActions(user)
   }
 }
 

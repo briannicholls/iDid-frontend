@@ -14,7 +14,7 @@ import ActionForm from './components/actions/actionForm.js'
 import {getCurrentUser} from './actions/currentUser.js'
 import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
-import {Route, withRouter} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import {fetchCounters} from './actions/counters.js'
 
 //Material UI
@@ -27,17 +27,6 @@ class App extends Component {
     this.props.getCurrentUser()
     this.props.getCurrentState()
     this.props.fetchCounters()
-
-    // make sure user is still logged in
-    if (this.props.currentUser.id > 0) {
-      // if we're on Action history list, fetch the actions
-      if (this.props.currentState === 2) {
-        this.props.fetchUserActions(this.props.currentUser.id)
-      }
-    } else {
-      // // if user isn't logged in,
-      // this.props.history.push('/login')
-    }
   }
 
   componentDidUpdate() {
@@ -59,9 +48,8 @@ class App extends Component {
         <Route exact path="/actions" component={ActionsContainer} />
         <Route exact path="/actions/new" component={ActionForm} />
         <Route exact path="/counters/new" component={CounterForm} />
-        <ActionFab />
-
-        <Route path='/' component={NavContainer}  />
+        <Route path='/' component={ActionFab} />
+        <Route path='/' component={NavContainer} />
 
       </React.Fragment>
     )
@@ -88,7 +76,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
         <CssBaseline />
         <Container maxWidth="sm" >
 

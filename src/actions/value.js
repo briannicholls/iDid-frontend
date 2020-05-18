@@ -1,5 +1,3 @@
-import {fetchUserActions} from './actions'
-
 export const changeAppState = (val) => {
   return (dispatch) => {
     dispatch({type: 'SET_VALUE', payload: val})
@@ -29,9 +27,9 @@ export const getCurrentState = (userId) => {
     .then(resp => resp.json())
     .then(json => {
       dispatch({type: 'SET_VALUE', payload: json})
-      if (json === 2) {
-        fetchUserActions(userId)
-      }
+      // if (json === 2) {
+      //   fetchUserActions(userId)
+      // }
     })
   }
 }

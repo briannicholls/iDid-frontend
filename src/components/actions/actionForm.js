@@ -71,8 +71,6 @@ export function ActionForm(props) {
 
           <CounterSelectBox onInputChange={handleOnChange} options={props.counters}/>
 
-
-
           <Button
             type="submit"
             fullWidth
@@ -87,7 +85,7 @@ export function ActionForm(props) {
             href="/counters/new"
             fullWidth
             variant="contained"
-            color="transparent"
+            color="inherit"
             className={classes.submit}
           >
             Count Something Else
