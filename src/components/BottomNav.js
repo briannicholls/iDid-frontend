@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {Route, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 import {logout} from '../actions/currentUser.js'
 import {fetchUserActions} from '../actions/actions.js'

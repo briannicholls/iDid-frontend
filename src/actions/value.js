@@ -13,11 +13,8 @@ export const changeAppState = (val) => {
       body: JSON.stringify(val)
     }
     fetch('http://localhost:3001/state', configObject)
-
   }
-
 }
-
 
 export const getCurrentState = (userId) => {
   return dispatch => {
@@ -31,12 +28,9 @@ export const getCurrentState = (userId) => {
     })
     .then(resp => resp.json())
     .then(json => {
-
-      if (json) {
-        dispatch({type: 'SET_VALUE', payload: json})
-        if (json === 2) {
-          fetchUserActions(userId)
-        }
+      dispatch({type: 'SET_VALUE', payload: json})
+      if (json === 2) {
+        fetchUserActions(userId)
       }
     })
   }

@@ -2,26 +2,24 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
 import './App.css';
+//components
 import Login from './components/Login'
 import Signup from './components/Signup.js'
-import {getCurrentUser} from './actions/currentUser.js'
-import {getCurrentState} from './actions/value.js'
-import {fetchUserActions} from './actions/actions.js'
-import NavContainer from './components/NavContainer'
-import {Route, withRouter} from 'react-router-dom'
-import ActionForm from './components/actions/actionForm.js'
-import {fetchCounters} from './actions/counters.js'
 import ActionFab from './components/ActionFab.js'
 import ActionsContainer from './components/actions/actionsContainer.js'
 import CounterForm from './components/counters/counterForm.js'
+import NavContainer from './components/NavContainer'
+import ActionForm from './components/actions/actionForm.js'
+//actions
+import {getCurrentUser} from './actions/currentUser.js'
+import {getCurrentState} from './actions/value.js'
+import {fetchUserActions} from './actions/actions.js'
+import {Route, withRouter} from 'react-router-dom'
+import {fetchCounters} from './actions/counters.js'
 
 //Material UI
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline'
-
-const theme = {
-  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
-}
 
 class App extends Component {
 
@@ -40,13 +38,9 @@ class App extends Component {
       // // if user isn't logged in,
       // this.props.history.push('/login')
     }
-
   }
 
   componentDidUpdate() {
-    // console.log('App update. state = ' + this.props.currentState)
-    // console.log('User logged in state = ' + this.props.currentUser.id)
-    // make sure user is still logged in
 
     if (this.props.currentUser.id > 0) {
       // if we're on Action history list, fetch the actions
@@ -113,4 +107,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions, fetchCounters})(App));
+export default connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions, fetchCounters})(App);

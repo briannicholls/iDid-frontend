@@ -1,29 +1,16 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 
 // import {createUser} from '../actions/users.js'
-import {submitCounterForm, updateCounterForm} from '../../actions/counterForm.js'
+import {updateCounterForm} from '../../actions/counterForm.js'
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link } from '@material-ui/core';
-import CategoryIcon from '@material-ui/icons/Category';
 import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 // controlled checkboxes group
 export const CheckboxesGroup = (props) => {
   const classes = useStyles();
-
 
   const handleChange = (event) => {
     props.updateCounterForm({

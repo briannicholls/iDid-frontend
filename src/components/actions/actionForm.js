@@ -90,7 +90,7 @@ export function ActionForm(props) {
             color="transparent"
             className={classes.submit}
           >
-            Count Something Else (Broken... for now)
+            Count Something Else
           </Button>
 
         </form>
