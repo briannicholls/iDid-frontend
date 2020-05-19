@@ -20,7 +20,7 @@ class ActionsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    actions: state.actionsReducer,
+    actions: state.actionsReducer.actions,
     currentUser: state.currentUser,
     value: state.value
   }
