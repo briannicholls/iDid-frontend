@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function FloatingActionButton() {
+export const FloatingActionButton = (props) => {
   const classes = useStyles();
 
   const fab = {
@@ -22,12 +22,18 @@ export default function FloatingActionButton() {
       label: 'Add',
     }
 
+  const hndleOnClick = (e) => {
+    props.history.push('/actions/new')
+  }
+
   return (
     <div>
-      <Fab variant='extended' aria-label={fab.label} className={fab.className} color={fab.color}>
-        {fab.icon} I did...
+      <Fab variant='extended' aria-label={fab.label} className={fab.className} color='secondary' onClick={handleOnClick}>
+         I did... {fab.icon}
       </Fab>
 
     </div>
   );
 }
+
+export default withRouter(FloatingActionButton)
