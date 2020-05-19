@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import {withRouter} from 'react-router-dom'
 
+// Material UI
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -22,7 +24,7 @@ export const FloatingActionButton = (props) => {
       label: 'Add',
     }
 
-  const hndleOnClick = (e) => {
+  const handleOnClick = (e) => {
     props.history.push('/actions/new')
   }
 
