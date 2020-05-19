@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 import CounterSelectBox from '../counters/selectBox.js'
 import {updateActionForm, addAction} from '../../actions/actionForm.js'
@@ -49,6 +50,10 @@ export function ActionForm(props) {
     props.addAction(props.formData)
   }
 
+  const handleOnClick = () => {
+    props.history.push('/counters/new')
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -82,7 +87,7 @@ export function ActionForm(props) {
           </Button>
 
           <Button
-            href="/counters/new"
+            onClick={handleOnClick}
             fullWidth
             variant="contained"
             color="inherit"
@@ -112,4 +117,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActionForm)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ActionForm))
