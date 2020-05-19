@@ -6,7 +6,8 @@ export const submitCounterForm = (data) => {
       method: 'POST',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://silly-almeida-f17772.netlify.app',
       },
       body: JSON.stringify(data)
     })

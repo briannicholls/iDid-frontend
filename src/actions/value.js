@@ -32,6 +32,10 @@ export const getCurrentState = (userId) => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
+<<<<<<< HEAD
+=======
+        'Access-Control-Allow-Origin': 'https://silly-almeida-f17772.netlify.app',
+>>>>>>> master
       }
     })
     .then(resp => resp.json())
