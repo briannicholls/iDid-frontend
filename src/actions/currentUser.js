@@ -27,7 +27,6 @@ export const logout = () => {
       credentials: 'include'
     })
       .then(resp => {
-        // debugger
         dispatch({type: 'CLEAR_CURRENT_USER'})
       })
       .then(json => console.log('clearing session'))
@@ -44,10 +43,6 @@ export const getCurrentUser = () => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-<<<<<<< HEAD
-=======
-        'Access-Control-Allow-Origin': 'https://silly-almeida-f17772.netlify.app',
->>>>>>> master
       }
     })
       .then(resp => resp.json())
