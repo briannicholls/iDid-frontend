@@ -11,8 +11,11 @@ export const fetchUserActions = (userId) => {
     })
       .then(resp => resp.json())
       .then(json => {
-        if (json && typeof json === 'object') {
+        debugger
+        if (json.actions) {
           dispatch({type: 'SET_USER_ACTIONS', payload: json})
+        } else {
+          console.log(json)
         }
       })
   }

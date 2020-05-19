@@ -8,6 +8,7 @@
 import {fetchUserActions} from './actions'
 import {API} from '../Constants.js'
 
+// execute only with valid user
 export const setCurrentUser = user => {
   return dispatch => {
     dispatch({type: 'SET_CURRENT_USER', payload: user})
@@ -37,22 +38,23 @@ export const logout = () => {
 export const getCurrentUser = () => {
   return dispatch => {
     dispatch({type: 'LOADING'})
-    const configObject = {
+
+    return fetch(API + '/current_user', {
       method: 'GET',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-
       }
-    }
-
-    return fetch(API + '/current_user', configObject)
+    })
       .then(resp => resp.json())
       .then(json => {
-        if (json.error) {
-          dispatch({type: 'ERROR', payload: json.error})
-        } else {
+        console.log(json)
+        if (json && json.id) {
           dispatch(setCurrentUser(json))
+          fetchUserActions(json.id)
+          return ('valid')
+        } else {
+          dispatch({type: 'CLEAR_CURRENT_USER'})
         }
       })
       .catch(console.log)

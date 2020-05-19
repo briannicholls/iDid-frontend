@@ -3,14 +3,16 @@ import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom';
 
 import {getCurrentState} from '../actions/value.js'
+import {fetchUserActions} from '../actions/actions.js'
 import {changeAppState} from '../actions/value.js'
 import BottomNav from './BottomNav'
 
 class NavContainer extends Component {
 
   handleChangeState = (val) => {
+    if (val === 2) {fetchUserActions(this.props.currentUser)} // history tab
     this.props.history.push(valueMap[val])
-    this.props.changeAppState(val)
+    this.props.changeAppState(val) // server POST request
   }
 
   render() {
@@ -21,7 +23,8 @@ class NavContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    value: state.value
+    value: state.value,
+    currentUser: state.currentUser
   }
 }
 
@@ -34,7 +37,8 @@ const valueMap = [
 const mapDispatchToProps = dispatch => {
   return {
     changeAppState: (val) => dispatch(changeAppState(val)),
-    getCurrentState: () => dispatch(getCurrentState())
+    getCurrentState: () => dispatch(getCurrentState()),
+    fetchUserActions: (userId) => dispatch(fetchUserActions(userId))
   }
 }
 

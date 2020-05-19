@@ -40,7 +40,10 @@ const BottomNav = (props) => {
 }
 
 const mapStateToProps = state => {
-  return {value: state.value}
+  return {
+    currentUser: state.currentUser,
+    value: state.value
+  }
 }
 
 export default withRouter(connect(mapStateToProps, {logout, fetchUserActions})(BottomNav))

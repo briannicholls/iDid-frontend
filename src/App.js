@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
+import {Route, withRouter, Switch} from 'react-router-dom'
 
 import './App.css';
 //components
@@ -14,7 +15,6 @@ import ActionForm from './components/actions/actionForm.js'
 import {getCurrentUser} from './actions/currentUser.js'
 import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
-import {Route} from 'react-router-dom'
 import {fetchCounters} from './actions/counters.js'
 
 //Material UI
@@ -25,21 +25,12 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 class App extends Component {
 
   componentDidMount = () => {
-    this.props.getCurrentUser()
-    this.props.getCurrentState()
-    this.props.fetchCounters()
-  }
+    // if this returns false, not logged in, redirect
+    if (this.props.getCurrentUser() === 'valid') {
+      console.log('valid user')
 
-  componentDidUpdate() {
-
-    if (this.props.currentUser.id > 0) {
-      // if we're on Action history list, fetch the actions
-      if (this.props.currentState === 2) {
-        this.props.fetchUserActions(this.props.currentUser.id)
-      }
     } else {
-      // if user isn't logged in,
-      console.log('Not logged in')
+      console.log('no valid user')
     }
   }
 
@@ -51,7 +42,6 @@ class App extends Component {
         <Route exact path="/counters/new" component={CounterForm} />
         <Route path='/' component={ActionFab} />
         <Route path='/' component={NavContainer} />
-
       </React.Fragment>
     )
   }
@@ -59,19 +49,17 @@ class App extends Component {
   loggedOutState = () => {
     return (
       <React.Fragment >
-        <Route exact path='/' component={Login} />
-        <Route exact path='/signup' component={Signup} />
+        <Switch>
+          <Route exact path='/signup' component={Signup} />
+          <Route path='/' component={Login} />
+        </Switch>
       </React.Fragment>
     )
   }
 
   renderMainScreen = () => {
     //if logged in
-    if (this.props.currentUser.id > 0) {
-      return this.loggedInState()
-    } else { // if not logged in
-      return this.loggedOutState()
-    }
+    debugger
   }
 
   render() {
@@ -80,7 +68,7 @@ class App extends Component {
         <CssBaseline />
         <Container maxWidth="sm" >
 
-          {this.renderMainScreen()}
+          {this.props.currentUser.id ? this.loggedInState() : this.loggedOutState()}
 
         </Container>
       </div>
@@ -95,4 +83,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions, fetchCounters})(App);
+export default withRouter(connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions, fetchCounters})(App))

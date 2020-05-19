@@ -8,7 +8,7 @@ class ActionsContainer extends Component {
 
   componentDidMount() {
     console.log('actionsContainerMounted')
-
+    
   }
 
   render() {

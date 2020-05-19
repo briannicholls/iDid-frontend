@@ -10,9 +10,13 @@ import ListItem from '@material-ui/core/ListItem';
 export const ActionsList = (props) => {
 
   const renderActions = () => {
-    return props.actions.map(action => {
-      return <ListItem component={Action} key={action.id} action={action}></ListItem>
-    })
+    if (props.actions.server_message) {
+      return <p>{props.actions.server_message}</p>
+    } else {
+      return props.actions.map(action => {
+        return <ListItem component={Action} key={action.id} action={action}></ListItem>
+      })
+    }
   }
 
   return (
