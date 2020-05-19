@@ -24,8 +24,8 @@ export default function FloatingActionButton() {
 
   return (
     <div>
-      <Fab href="/actions/new" aria-label={fab.label} className={fab.className} color={fab.color}>
-        {fab.icon}
+      <Fab variant='extended' aria-label={fab.label} className={fab.className} color={fab.color}>
+        {fab.icon} I did...
       </Fab>
 
     </div>
