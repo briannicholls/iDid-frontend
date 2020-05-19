@@ -42,7 +42,7 @@ export const getCurrentUser = () => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-
+        'Access-Control-Allow-Origin': 'https://silly-almeida-f17772.netlify.app',
       }
     }
 

@@ -6,7 +6,8 @@ export const fetchUserActions = (userId) => {
       method: 'GET',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://silly-almeida-f17772.netlify.app',
       }
     })
       .then(resp => resp.json())
