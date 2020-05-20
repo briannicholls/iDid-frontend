@@ -1,4 +1,5 @@
 import {API} from '../Constants.js'
+
 export const fetchUserActions = (userId) => {
   return dispatch => {
     dispatch({type: 'LOADING'})
@@ -6,14 +7,13 @@ export const fetchUserActions = (userId) => {
       method: 'GET',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://silly-almeida-f17772.netlify.app',
+        'Content-Type': 'application/json'
       }
     })
       .then(resp => resp.json())
       .then(json => {
-        debugger
-        if (json.actions) {
+        
+        if (json && json.length >= 0) {
           dispatch({type: 'SET_USER_ACTIONS', payload: json})
         } else {
           console.log(json)
@@ -22,9 +22,10 @@ export const fetchUserActions = (userId) => {
   }
 }
 
+// Action POST request
 export const addAction = (action) =>{
   return dispatch => {
-    fetch(`${API}/users/${action.userId}/actions`, {
+    fetch(`${API}/users/${action.user_id}/actions`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -33,6 +34,14 @@ export const addAction = (action) =>{
       body: JSON.stringify(action)
     })
     .then(resp => resp.json())
-    .then(json => fetchUserActions(action.userId))
+    .then(json => {
+      if (json.id) {
+        dispatch({type: 'ADD_ACTION', payload: json})
+      } else {
+        console.log(json)
+      }
+
+
+    })
   }
 }
