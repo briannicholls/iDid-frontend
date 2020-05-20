@@ -9,7 +9,6 @@ export const submitCredentials = credentials => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://silly-almeida-f17772.netlify.app',
       },
       body: JSON.stringify({email: credentials.email, password: credentials.password})
     }

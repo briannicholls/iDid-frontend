@@ -12,7 +12,7 @@ import {API} from '../Constants.js'
 export const setCurrentUser = user => {
   return dispatch => {
     dispatch({type: 'SET_CURRENT_USER', payload: user})
-    fetchUserActions(user)
+    fetchUserActions(user.id)
   }
 }
 
