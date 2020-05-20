@@ -26,6 +26,7 @@ class App extends Component {
 
   componentDidMount = () => {
     // if this returns false, not logged in, redirect
+    this.props.fetchCounters()
     if (this.props.getCurrentUser() === 'valid') {
       console.log('valid user')
 
@@ -55,11 +56,6 @@ class App extends Component {
         </Switch>
       </React.Fragment>
     )
-  }
-
-  renderMainScreen = () => {
-    //if logged in
-    debugger
   }
 
   render() {
