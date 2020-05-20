@@ -1,8 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
+
+import {changeAppState} from '../actions/value'
 
 // Material UI
+import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -25,6 +28,7 @@ export const FloatingActionButton = (props) => {
     }
 
   const handleOnClick = (e) => {
+    props.changeAppState(2)
     props.history.push('/actions/new')
   }
 
@@ -38,4 +42,4 @@ export const FloatingActionButton = (props) => {
   );
 }
 
-export default withRouter(FloatingActionButton)
+export default withRouter(connect(null, {changeAppState})(FloatingActionButton))
