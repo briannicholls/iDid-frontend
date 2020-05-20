@@ -8,7 +8,7 @@ class ActionsContainer extends Component {
 
   componentDidMount() {
     console.log('actionsContainerMounted')
-    
+    // this.props.fetchUserActions(this.props.currentUser.id)
   }
 
   render() {
@@ -20,7 +20,7 @@ class ActionsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    actions: state.actionsReducer.actions,
+    actions: state.actionsReducer,
     currentUser: state.currentUser,
     value: state.value
   }

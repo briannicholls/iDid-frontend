@@ -48,10 +48,16 @@ export function ActionForm(props) {
   const handleOnSubmit = (e) => {
     e.preventDefault()
     props.addAction(props.formData)
+    props.history.push('/actions')
   }
 
   const handleOnClick = () => {
     props.history.push('/counters/new')
+  }
+
+  const handleSubmitClick = (e) => {
+    e.preventDefault()
+    props.history.push('/actions')
   }
 
   return (
@@ -74,7 +80,7 @@ export function ActionForm(props) {
             onChange={handleOnChange}
           />
 
-          <CounterSelectBox onInputChange={handleOnChange} options={props.counters}/>
+          <CounterSelectBox />
 
           <Button
             type="submit"
@@ -82,6 +88,7 @@ export function ActionForm(props) {
             variant="contained"
             color="secondary"
             className={classes.submit}
+
           >
             Submit
           </Button>

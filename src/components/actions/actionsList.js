@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux'
+// import {connect} from 'react-redux'
 
 import Action from './action.js'
 
@@ -14,7 +14,8 @@ export const ActionsList = (props) => {
       return <p>{props.actions.server_message}</p>
     } else {
       return props.actions.map(action => {
-        return <ListItem component={Action} key={action.id} action={action}></ListItem>
+        return <Action action={action} key={action.id} ></Action>
+        // return <ListItem component={Action} key={action.id} action={action}></ListItem>
       })
     }
   }
@@ -28,10 +29,10 @@ export const ActionsList = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    actions: state.actionsReducer
-  }
-}
+// const mapStateToProps = state => {
+//   return {
+//     actions: state.actionsReducer
+//   }
+// }
 
-export default connect(mapStateToProps)(ActionsList)
+export default ActionsList
