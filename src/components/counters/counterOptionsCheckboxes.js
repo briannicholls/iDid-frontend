@@ -44,12 +44,12 @@ export const CheckboxesGroup = (props) => {
     });
   };
 
-  const error = [props.weighted, props.timed].filter((v) => v).length > 1;
+  // const error = [props.weighted, props.timed].filter((v) => v).length > 1;
 
   return (
     <div className={classes.root}>
 
-      <FormControl component="fieldset" error={error} className={classes.formControl}>
+      <FormControl component="fieldset" className={classes.formControl}>
 
         <FormLabel component="legend">Optional (Choose up to one):</FormLabel>
 
