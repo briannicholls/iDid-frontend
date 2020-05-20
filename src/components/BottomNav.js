@@ -23,6 +23,10 @@ const BottomNav = (props) => {
     props.history.push('/')
   }
 
+  const handleHistoryClick = () => {
+    props.fetchUserActions(props.currentUser.id)
+  }
+
   return (
     <BottomNavigation
       value={props.value}
@@ -33,7 +37,7 @@ const BottomNav = (props) => {
     >
       <BottomNavigationAction name="home" label="Dashboard" icon={<DashboardIcon />}  />
       <BottomNavigationAction name="routines" label="My Routines" icon={<OfflinePinIcon />} />
-      <BottomNavigationAction name="actions" label="History" icon={<HistoryIcon />} />
+      <BottomNavigationAction onClick={handleHistoryClick} name="actions" label="History" icon={<HistoryIcon />} />
       <BottomNavigationAction label="Log Out" onClick={handleLogout} />
     </BottomNavigation>
   );

@@ -1,30 +1,64 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import {connect} from 'react-redux'
 
-export default function SelectBox(props) {
+import {updateActionForm} from '../../actions/actionForm'
+
+// import TextField from '@material-ui/core/TextField';
+// import Autocomplete from '@material-ui/lab/Autocomplete';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+
+
+export const SelectBox = (props) => {
 
   const handleChange = (e) => {
     // console.log(e.target.innerHTML)
-
     const forgedEvent = {
       target: {
-        name: 'name' ,
-        value: e.target.innerHTML},
+        name: e.target.name ,
+        value: e.target.value},
         persist: function() {}
     }
+    props.updateActionForm(forgedEvent)
+  }
 
-    props.onInputChange(forgedEvent)
+  const menuOptions = () => {
+    return props.counters.map(counter => {
+      return <MenuItem key={counter.id} value={counter.id} >{counter.name}</MenuItem>
+    })
   }
 
   return (
-    <Autocomplete
-      onChange={handleChange}
-      id="counter_name"
-      options={props.options}
-      getOptionLabel={(option) => option.name}
-      style={{ width: 300 }}
-      renderInput={(props) => <TextField {...props}  margin="normal"      required fullWidth label="Of what?" variant="outlined" />}
-    />
+    <div>
+    <InputLabel id="demo-controlled-open-select-label">Of what?</InputLabel>
+
+    <Select
+          labelId="select-label"
+          variant='outlined'
+          id="counter_select_box"
+          name="counter_id"
+          fullWidth
+          onChange={handleChange}
+          value={props.formData.counter_id}
+        >
+          {menuOptions()}
+    </Select>
+    </div>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    counters: state.countersReducer,
+    formData: state.actionFormReducer
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateActionForm: event => dispatch(updateActionForm(event))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectBox)
