@@ -1,5 +1,5 @@
 export default function (state = {
-  name: '',
+  counter_id: '',
   reps: '',
   user_id: ''
 }, action) {
