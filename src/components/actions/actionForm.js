@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
 import CounterSelectBox from '../counters/selectBox.js'
-import {updateActionForm, addAction} from '../../actions/actionForm.js'
-
+import {addAction} from '../../actions/actionForm.js'
+import EzButton from './EzButton'
 // Material UI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -12,42 +12,45 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-//
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(12),
-    marginBottom: theme.spacing(12),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+const useStyles = makeStyles((theme) => (
+  {
+    paper: {
+      marginTop: theme.spacing(12),
+      marginBottom: theme.spacing(12),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+    buttons: {
+      display: 'flex',
+      flexDirection: 'row',
+      margin: 'auto',
+      padding: '2em',
+      alignItems: 'center',
+      textAlign: 'center',
+      alignSelf: 'center'
+    },
+  }));
 
 export function ActionForm(props) {
   const classes = useStyles();
 
-  const handleOnChange = (event) => {
-    event.persist()
-    props.updateActionForm(event)
-    if (props.formData.user_id === '') {
-      props.updateActionForm({target: {name: 'user_id', value: props.currentUser.id }})
-    }
+  const [reps, setReps] = useState(0)
+  const [counter, setCounter] = useState('')
+
+  const handleChangeReps = (event) => {
+    setReps(parseInt(event.target.value))
   }
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    props.addAction(props.formData)
+    props.addAction({reps, counter_id: counter.id, user_id: props.currentUser.id})
     props.history.push('/actions')
   }
 
@@ -55,32 +58,49 @@ export function ActionForm(props) {
     props.history.push('/counters/new')
   }
 
-  const handleSubmitClick = (e) => {
-    e.preventDefault()
-    props.history.push('/actions')
+  const handleEzButtonPress = (val) => {
+    const newVal = parseInt(reps) + parseInt(val)
+    setReps(newVal)
+  }
+
+  const handleUpdateCounter = (newValue) => {
+    const newCounter = props.counters.find(item => item.name === newValue)
+    if (newCounter) {
+      setCounter(newCounter)
+    }
   }
 
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          I did...
-        </Typography>
+
+        <Typography component="h1" variant="h5">I did...</Typography>
+
         <form onSubmit={handleOnSubmit} className={classes.form} noValidate>
           <TextField
-            variant="outlined"
-            margin="normal"
             required
             fullWidth
+            autoFocus
             id="reps"
+            variant="outlined"
+            margin="normal"
             label="This many"
             name="reps"
-            autoFocus
             type="number"
-            onChange={handleOnChange}
+            value={reps}
+            onChange={handleChangeReps}
           />
 
-          <CounterSelectBox />
+          <Container className={classes.buttons}>
+            <EzButton increment={handleEzButtonPress} numLabel={'-10'}></EzButton>
+            <EzButton increment={handleEzButtonPress} numLabel={'-5'}></EzButton>
+            <EzButton increment={handleEzButtonPress} numLabel={'-1'}></EzButton>
+            <EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton>
+            <EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton>
+            <EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton>
+          </Container>
+
+          <CounterSelectBox options={props.counters} updateCounter={handleUpdateCounter} />
 
           <Button
             type="submit"
@@ -88,10 +108,7 @@ export function ActionForm(props) {
             variant="contained"
             color="secondary"
             className={classes.submit}
-
-          >
-            Submit
-          </Button>
+          >Submit</Button>
 
           <Button
             onClick={handleOnClick}
@@ -99,9 +116,7 @@ export function ActionForm(props) {
             variant="contained"
             color="inherit"
             className={classes.submit}
-          >
-            Count Something Else
-          </Button>
+          >Count Something Else</Button>
 
         </form>
       </div>
@@ -111,15 +126,13 @@ export function ActionForm(props) {
 
 const mapStateToProps = (state) => {
   return {
-    counters: state.countersReducer,
-    formData: state.actionFormReducer,
+    counters: state.counters,
     currentUser: state.currentUser
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateActionForm: data => dispatch(updateActionForm(data)),
     addAction: (actionData) => dispatch(addAction(actionData))
   }
 }

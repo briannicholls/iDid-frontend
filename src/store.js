@@ -3,20 +3,18 @@ import thunk from 'redux-thunk'
 import usersReducer from './reducers/users.js'
 import currentUser from './reducers/currentUser.js'
 import loginFormReducer from './reducers/loginForm.js'
-import actionsReducer from './reducers/actionsReducer.js'
+import actions from './reducers/actionsReducer.js'
 import value from './reducers/value.js'
-import countersReducer from './reducers/countersReducer.js'
-import actionFormReducer from './reducers/actionForm.js'
+import counters from './reducers/countersReducer.js'
 import counterFormReducer from './reducers/counterForm.js'
 
 const reducer = combineReducers({
   usersReducer,
   currentUser,
   loginFormReducer,
-  actionsReducer,
+  actions,
   value,
-  countersReducer,
-  actionFormReducer,
+  counters,
   counterFormReducer
 })
 

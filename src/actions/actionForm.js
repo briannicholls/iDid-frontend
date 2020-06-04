@@ -1,12 +1,7 @@
 import {API} from '../Constants.js'
 
-export const updateActionForm = event => {
-  return dispatch => {
-    dispatch({type: 'UPDATE_ACTION_FORM', payload: event})
-  }
-}
-
 export const addAction = actionData => {
+
   return dispatch => {
     dispatch({type: 'LOADING'})
     fetch(API + '/actions', {
@@ -18,7 +13,14 @@ export const addAction = actionData => {
       },
       body: JSON.stringify(actionData)
     })
+
     .then(resp => resp.json())
-    .then(json => dispatch({type: 'ADD_ACTION', payload: json}))
+    .then(json => {
+      console.log(9)
+      dispatch({type: 'ADD_ACTION', payload: json}
+    )})
+    console.log(10)
+
   }
+
 }
