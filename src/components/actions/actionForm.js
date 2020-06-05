@@ -102,6 +102,8 @@ export function ActionForm(props) {
 
           <CounterSelectBox options={props.counters} updateCounter={handleUpdateCounter} />
 
+          {counter.kind === 'weighted' ? <TextField label={"Weight"} variant='outlined' /> : null}
+
           <Button
             type="submit"
             fullWidth

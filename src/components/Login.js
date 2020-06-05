@@ -35,76 +35,55 @@ export const Login = (props) => {
 
   const classes = useStyles()
 
-  const [loginFormData, setLoginFormData] = useState({
-    email: '', password: ''
-  })
-
-  const handleOnChange = (e) => {
-    setLoginFormData({
-      ...loginFormData,
-      [e.target.name]: e.target.value
-    })
-  }
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    props.submitCredentials(loginFormData)
-  }
-
-  const logInStatus = () => {
-    return props.requesting === true ? <p>LOGGING IN</p> : null
-  }
-
-  const listErrors = () => {
-    return (props.errors) ? <p>{props.errors}</p> : null
+    props.submitCredentials({email, password})
   }
 
   return (
       <Container component="main" maxWidth="xs" className={classes.paper}>
 
-      <Avatar className={classes.avatar} >
-
-      </Avatar>
+      <Avatar className={classes.avatar} ></Avatar>
 
       <p>{props.currentUser.server_message === 'Not logged in!' ? null : props.currentUser.server_message}</p>
-
-      <Grid container>
-        <Grid item><Link to={'/signup'}>Register</Link></Grid>
-      </Grid>
 
       <Typography component="h1" variant="h5">Log In</Typography>
 
       <form className={classes.form} onSubmit={handleOnSubmit}>
 
-      <Grid container spacing={4}>
+        <Grid container spacing={4}>
 
-        <Grid item xs={12} >
-        <TextField required fullWidth variant="outlined" label="e-mail" type="email" name="email" value={loginFormData.email} onChange={handleOnChange}/>
-        </Grid>
+          <Grid item xs={12} >
+          <TextField required fullWidth variant="outlined" label="e-mail" type="email" name="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          </Grid>
 
-        <Grid item xs={12}>
-          <TextField fullWidth variant="outlined" type="password" name="password" value={loginFormData.password} onChange={handleOnChange}/>
-        </Grid>
+          <Grid item xs={12}>
+            <TextField fullWidth variant="outlined" type="password" name="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          </Grid>
 
-        <Grid item xs={12}>
-          <Button type="submit" fullWidth value="Log In" variant="contained" color="primary">Log In</Button>
+          <Grid item xs={12}>
+            <Button type="submit" fullWidth value="Log In" variant="contained" color="primary">Log In</Button>
+          </Grid>
         </Grid>
-      </Grid>
 
       </form>
 
+      <Grid container>
+        <Grid item><Link to={'/signup'}>Register</Link></Grid>
+      </Grid>
 
-      {logInStatus()}
-      {listErrors()}
+      {props.requesting === true ? <p>Logging In</p> : null}
+
     </Container>
   )
-
 }
 
 const mapStateToProps = state => {
   return {
     requesting: state.loginFormReducer.requesting,
-    error: state.loginFormReducer.error,
     currentUser: state.currentUser
   }
 }

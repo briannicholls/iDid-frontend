@@ -1,5 +1,5 @@
 import {setCurrentUser} from './currentUser'
-import {API_S} from '../Constants.js'
+import {API} from '../Constants.js'
 
 export const submitCredentials = credentials => {
   return dispatch => {
@@ -13,9 +13,10 @@ export const submitCredentials = credentials => {
       body: JSON.stringify({email: credentials.email, password: credentials.password})
     }
 
-    return fetch(API_S + '/login', configObject)
+    return fetch(API + '/login', configObject)
       .then(resp => resp.json())
       .then(json => {
+        console.log(json)
         if (json.error) {
           dispatch({type: 'ERROR', payload: json.error})
         } else {
