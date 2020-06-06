@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
 import {Route, withRouter, Switch} from 'react-router-dom'
 
@@ -17,37 +17,60 @@ import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
 import {fetchCounters} from './actions/counters.js'
 
+import {withStyles, makeStyles, createStyles} from '@material-ui/core/styles'
+
 //Material UI
 import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline'
 
+const useStyles = theme => ({
+  // '@global': {
+  //   'html, body, #root': {
+  //     height: 'calc(100% - 10px)',
+  //     marginTop: '5px'
+  //   },
+  // }
+  app: {
 
-class App extends Component {
+  },
+  main: {
+  },
+  footer: {
+    position: 'static',
+  },
+})
 
-  componentDidMount = () => {
-    // if this returns false, not logged in, redirect
-    this.props.fetchCounters()
-    if (this.props.getCurrentUser() === 'valid') {
-      console.log('valid user')
+export function App({classes, currentUser, fetchCounters}) {
 
-    } else {
-      console.log('no valid user')
-    }
-  }
+  useEffect(() => {
+      fetchCounters()
+      if (getCurrentUser() === 'valid') {
+        console.log('valid user')
+      } else {
+        console.log('no valid user')
+      }
+    }, [])
 
-  loggedInState = () => {
+  const loggedInState = () => {
     return (
       <React.Fragment>
-        <Route exact path="/actions" component={ActionsContainer} />
-        <Route exact path="/actions/new" component={ActionForm} />
-        <Route exact path="/counters/new" component={CounterForm} />
-        <Route path='/' component={ActionFab} />
-        <Route path='/' component={NavContainer} />
+
+        <Container className={classes.main}>
+          <Route exact path="/actions" component={ActionsContainer} />
+          <Route exact path="/actions/new" component={ActionForm} />
+          <Route exact path="/counters/new" component={CounterForm} />
+          <Route path='/' component={ActionFab} />
+        </Container>
+
+        <footer className={classes.footer}>
+          <Route path='/' component={NavContainer} />
+        </footer>
       </React.Fragment>
     )
   }
 
-  loggedOutState = () => {
+  const loggedOutState = () => {
     return (
       <React.Fragment >
         <Switch>
@@ -58,19 +81,17 @@ class App extends Component {
     )
   }
 
-  render() {
-    console.log(1)
     return (
-      <div className="App">
+      <Container className="app"  >
         <CssBaseline />
-        <Container maxWidth="sm" >
+        <Container className={classes.app} maxWidth="sm" >
 
-          {this.props.currentUser.id ? this.loggedInState() : this.loggedOutState()}
+          {currentUser.id ? loggedInState() : loggedOutState()}
 
         </Container>
-      </div>
+      </Container>
     )
-  }
+
 }
 
 const mapStateToProps = state => {
@@ -80,4 +101,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions, fetchCounters})(App))
+export default withStyles(useStyles)(withRouter(connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions, fetchCounters})(App)))
