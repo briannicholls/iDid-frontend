@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 // import {createUser} from '../actions/users.js'
 import {submitCounterForm, updateCounterForm} from '../../actions/counterForm.js'
@@ -44,6 +45,7 @@ export const CounterForm = props => {
   const handleOnSubmit = (e) => {
     e.preventDefault()
     props.submitCounterForm(props)
+    props.history.push('/actions/new')
   }
 
   const handleOnChange = (e) => {
@@ -76,7 +78,9 @@ export const CounterForm = props => {
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}>Add Thing!</Button>
+              className={classes.submit}
+
+              >Add Thing!</Button>
           </Grid>
 
         </form>
@@ -99,4 +103,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CounterForm)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CounterForm))

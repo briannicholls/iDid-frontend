@@ -17,11 +17,10 @@ import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
 import {fetchCounters} from './actions/counters.js'
 
-import {withStyles, makeStyles, createStyles} from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles'
 
 //Material UI
 import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 const useStyles = theme => ({
@@ -45,11 +44,7 @@ export function App({classes, currentUser, fetchCounters}) {
 
   useEffect(() => {
       fetchCounters()
-      if (getCurrentUser() === 'valid') {
-        console.log('valid user')
-      } else {
-        console.log('no valid user')
-      }
+      getCurrentUser()
     }, [])
 
   const loggedInState = () => {
