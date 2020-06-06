@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import WeightInput from './WeightInput'
 
 import CounterSelectBox from '../counters/selectBox.js'
 import {addAction} from '../../actions/actionForm.js'
@@ -11,6 +12,9 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+
+import {theme} from '../../theme'
 
 const useStyles = makeStyles((theme) => (
   {
@@ -27,15 +31,9 @@ const useStyles = makeStyles((theme) => (
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
-    buttons: {
-      display: 'flex',
-      flexDirection: 'row',
-      margin: 'auto',
-      padding: '2em',
-      alignItems: 'center',
-      textAlign: 'center',
-      alignSelf: 'center'
-    },
+    gridItem: {
+      margin: '10px',
+    }
   }));
 
 export function ActionForm(props) {
@@ -71,58 +69,77 @@ export function ActionForm(props) {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
+    <Grid container  wrap="nowrap" alignItems="stretch" alignContent='stretch'  direction='column'>
 
+      <Grid item className={classes.gridItem}>
         <Typography component="h1" variant="h5">I did...</Typography>
+      </Grid>
 
-        <form onSubmit={handleOnSubmit} className={classes.form} noValidate>
-          <TextField
-            required
-            fullWidth
-            autoFocus
-            id="reps"
-            variant="outlined"
-            margin="normal"
-            label="This many"
-            name="reps"
-            type="number"
-            value={reps}
-            onChange={handleChangeReps}
+      <form onSubmit={handleOnSubmit} className={classes.form} noValidate>
+      <Grid item className={classes.gridItem}>
+        <TextField
+          required
+          fullWidth
+          autoFocus
+          id="reps"
+          variant="outlined"
+          margin="normal"
+          label="This many"
+          name="reps"
+          type="number"
+          value={reps}
+          onChange={handleChangeReps}
           />
+      </Grid>
 
-          <Container className={classes.buttons}>
-            <EzButton increment={handleEzButtonPress} numLabel={'-10'}></EzButton>
-            <EzButton increment={handleEzButtonPress} numLabel={'-5'}></EzButton>
-            <EzButton increment={handleEzButtonPress} numLabel={'-1'}></EzButton>
-            <EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton>
-            <EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton>
-            <EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton>
-          </Container>
+      <Grid item xs={12}>
 
-          <CounterSelectBox options={props.counters} updateCounter={handleUpdateCounter} />
+        <Grid container direction="row" alignContent="center" alignItems="center" justify="center">
 
-          {counter.kind === 'weighted' ? <TextField label={"Weight"} variant='outlined' /> : null}
+          <Grid item xs={4} s={4}>
+            <EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton></Grid>
+          <Grid item xs={4} s={4}>
+            <EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton></Grid>
+          <Grid item xs={4} s={4}>
+            <EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton></Grid>
+          <Grid item xs={4} s={4}>
+            <EzButton increment={handleEzButtonPress} numLabel={'-1'}></EzButton></Grid>
+          <Grid item xs={4} s={4}>
+            <EzButton increment={handleEzButtonPress} numLabel={'-5'}></EzButton></Grid>
+          <Grid item xs={4} s={4}>
+            <EzButton increment={handleEzButtonPress} numLabel={'-10'}></EzButton></Grid>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="secondary"
-            className={classes.submit}
+        </Grid>
+
+      </Grid>
+
+      <Grid item className={classes.gridItem}>
+        <CounterSelectBox options={props.counters} updateCounter={handleUpdateCounter} />
+      </Grid>
+
+      {counter.kind === 'weighted' ? <Grid item className={classes.gridItem}><WeightInput /></Grid> : null}
+
+      <Grid item className={classes.gridItem}>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="secondary"
+          className={classes.submit}
           >Submit</Button>
+      </Grid>
 
-          <Button
-            onClick={handleOnClick}
-            fullWidth
-            variant="contained"
-            color="inherit"
-            className={classes.submit}
+      <Grid item className={classes.gridItem}>
+        <Button
+          onClick={handleOnClick}
+          fullWidth
+          variant="contained"
+          color="inherit"
+          className={classes.submit}
           >Count Something Else</Button>
-
-        </form>
-      </div>
-    </Container>
+      </Grid>
+      </form>
+    </Grid>
   );
 }
 
