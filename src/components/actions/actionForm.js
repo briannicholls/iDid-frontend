@@ -40,6 +40,16 @@ export function ActionForm(props) {
 
   const [reps, setReps] = useState(0)
   const [counter, setCounter] = useState('')
+  const [weight, setWeight] = useState(0)
+  const [weightUnit, setWeightUnit] = useState('lb')
+
+  const handleWeightChange = (e) => {
+    setWeight(e.target.value)
+  }
+
+  const handleUnitChange = (e) => {
+    setWeightUnit(e.target.value)
+  }
 
   const handleChangeReps = (event) => {
     setReps(parseInt(event.target.value))
@@ -47,7 +57,7 @@ export function ActionForm(props) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    props.addAction({reps, counter_id: counter.id, user_id: props.currentUser.id})
+    props.addAction({reps, weight, weight_unit: weightUnit, counter_id: counter.id, user_id: props.currentUser.id})
     props.history.push('/actions')
   }
 
@@ -116,7 +126,7 @@ export function ActionForm(props) {
         <CounterSelectBox options={props.counters} updateCounter={handleUpdateCounter} />
       </Grid>
 
-      {counter.kind === 'weighted' ? <Grid item className={classes.gridItem}><WeightInput /></Grid> : null}
+      {counter.kind === 'weighted' ? <Grid item className={classes.gridItem}><WeightInput weightUnit={weightUnit} weight={weight} handleUnitChange={handleUnitChange} handleWeightChange={handleWeightChange} /></Grid> : null}
 
       <Grid item className={classes.gridItem}>
         <Button
