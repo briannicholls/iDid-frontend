@@ -6,17 +6,17 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import store from './store.js'
 
-import {ThemeProvider} from '@material-ui/core/styles'
+import {MuiThemeProvider} from '@material-ui/core/styles'
 
 import theme from './theme'
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={theme} >
+    <MuiThemeProvider theme={theme} >
       <Router>
-        <App />
+        <App  />
       </Router>
-    </ThemeProvider>
+    </MuiThemeProvider>
   </Provider>
 ,
   document.getElementById('root')
