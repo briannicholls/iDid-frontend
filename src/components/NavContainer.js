@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom';
 
@@ -7,18 +7,17 @@ import {fetchUserActions} from '../actions/actions.js'
 import {changeAppState} from '../actions/value.js'
 import BottomNav from './BottomNav'
 
-class NavContainer extends Component {
+function NavContainer(props) {
 
-  handleChangeState = (val) => {
-    if (val === 2) {fetchUserActions(this.props.currentUser)} // history tab
-    this.props.history.push(valueMap[val])
-    this.props.changeAppState(val) // server POST request
+  const handleChangeState = (val) => {
+    if (val === 2) {fetchUserActions(props.currentUser)} // history tab
+    props.history.push(valueMap[val])
+    props.changeAppState(val) // server POST request
   }
 
-  render() {
-    return ( <BottomNav value={this.props.value}
-                 changeAppState={this.handleChangeState} /> )
-  }
+  return (
+      <BottomNav value={props.value} changeAppState={handleChangeState} position='static' />
+  )
 }
 
 const mapStateToProps = (state) => {
