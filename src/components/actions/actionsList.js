@@ -13,7 +13,7 @@ export const ActionsList = (props) => {
     if (props.actions.server_message) {
       return <p>{props.actions.server_message}</p>
     } else {
-      return props.actions.map(action => {
+      return props.actions.reverse().map(action => {
         return <Action action={action} key={action.id} ></Action>
         // return <ListItem component={Action} key={action.id} action={action}></ListItem>
       })
