@@ -21,22 +21,14 @@ import {withStyles} from '@material-ui/core/styles'
 
 //Material UI
 import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 const useStyles = theme => ({
-  // '@global': {
-  //   'html, body, #root': {
-  //     height: 'calc(100% - 10px)',
-  //     marginTop: '5px'
-  //   },
-  // }
-  app: {
-
-  },
-  main: {
-  },
-  footer: {
-    position: 'static',
+  stickyBottom: {
+    width: '100%',
+    position: 'fixed',
+    bottom: '0px'
   },
 })
 
@@ -49,19 +41,20 @@ export function App({classes, currentUser, fetchCounters}) {
 
   const loggedInState = () => {
     return (
-      <React.Fragment>
+      <Container >
 
         <Container className={classes.main}>
           <Route exact path="/actions" component={ActionsContainer} />
           <Route exact path="/actions/new" component={ActionForm} />
           <Route exact path="/counters/new" component={CounterForm} />
           <Route path='/' component={ActionFab} />
-        </Container>
+      </Container>
 
-        <footer className={classes.footer}>
-          <Route path='/' component={NavContainer} />
-        </footer>
-      </React.Fragment>
+      <Container className={classes.stickyBottom}>
+        <Route path='/' component={NavContainer} />
+      </Container>
+
+      </Container>
     )
   }
 
@@ -77,9 +70,9 @@ export function App({classes, currentUser, fetchCounters}) {
   }
 
     return (
-      <Container className="app"  >
+      <Container   >
         <CssBaseline />
-        <Container className={classes.app} maxWidth="sm" >
+        <Container >
 
           {currentUser.id ? loggedInState() : loggedOutState()}
 
