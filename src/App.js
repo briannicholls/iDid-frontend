@@ -17,22 +17,39 @@ import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
 import {fetchCounters} from './actions/counters.js'
 
-import {withStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles'
 
 //Material UI
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline'
 
-const useStyles = theme => ({
-  stickyBottom: {
-    width: '100%',
-    position: 'fixed',
-    bottom: '0px'
-  },
-})
+// const useStyles = theme => ({
+//   stickyBottom: {
+//     // width: '100%',
+//     position: 'fixed',
+//     bottom: '0px',
+//     // margin: 'auto'
+//   },
+// })
 
-export function App({classes, currentUser, fetchCounters}) {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    padding: '0px'
+  },
+  stickyBottom: {
+    // width: '100%',
+    position: 'fixed',
+    bottom: '0px',
+    // paddingLeft: '0px'
+    // margin: 'auto'
+  },
+}));
+
+export function App({currentUser, fetchCounters}) {
+  const classes = useStyles();
 
   useEffect(() => {
       fetchCounters()
@@ -41,20 +58,20 @@ export function App({classes, currentUser, fetchCounters}) {
 
   const loggedInState = () => {
     return (
-      <Container >
+      <React.Fragment>
 
-        <Container className={classes.main}>
+        <Container>
           <Route exact path="/actions" component={ActionsContainer} />
           <Route exact path="/actions/new" component={ActionForm} />
           <Route exact path="/counters/new" component={CounterForm} />
           <Route path='/' component={ActionFab} />
-      </Container>
+        </Container>
 
       <Container className={classes.stickyBottom}>
         <Route path='/' component={NavContainer} />
       </Container>
 
-      </Container>
+    </React.Fragment>
     )
   }
 
@@ -70,14 +87,16 @@ export function App({classes, currentUser, fetchCounters}) {
   }
 
     return (
-      <Container   >
-        <CssBaseline />
-        <Container >
+      <Grid container maxWidth={'xs'} className={classes.root} >
+        <Grid item>
+          <CssBaseline />
 
-          {currentUser.id ? loggedInState() : loggedOutState()}
 
-        </Container>
-      </Container>
+            {currentUser.id ? loggedInState() : loggedOutState()}
+
+
+        </Grid>
+      </Grid>
     )
 
 }
@@ -89,4 +108,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default withStyles(useStyles)(withRouter(connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions, fetchCounters})(App)))
+export default withRouter(connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions, fetchCounters})(App))

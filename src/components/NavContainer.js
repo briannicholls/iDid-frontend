@@ -7,19 +7,7 @@ import {getCurrentState} from '../actions/value.js'
 import {fetchUserActions} from '../actions/actions.js'
 import {changeAppState} from '../actions/value.js'
 
-import {withStyles} from '@material-ui/core/styles'
-
-const useStyles = theme => ({
-  // bottomNav: {
-  //   width: '100vw',
-  //   display: 'flex',
-  //   bottom: '0px',
-  //   top: 'auto',
-  //   margin: 'auto',
-  // },
-})
-
-function NavContainer({value, currentUser, changeAppState, getCurrentState, fetchUserActions, classes, history}) {
+function NavContainer({value, currentUser, changeAppState, getCurrentState, fetchUserActions, history}) {
 
   const handleChangeState = (val) => {
     if (val === 2) {fetchUserActions(currentUser)} // history tab
@@ -28,7 +16,7 @@ function NavContainer({value, currentUser, changeAppState, getCurrentState, fetc
   }
 
   return (
-      <BottomNav className={classes.bottomNav} value={value} changeAppState={handleChangeState} position='static' />
+      <BottomNav value={value} changeAppState={handleChangeState} position='static' />
   )
 }
 
@@ -53,4 +41,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withStyles(useStyles)(withRouter(connect(mapStateToProps, mapDispatchToProps)(NavContainer)))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavContainer))
