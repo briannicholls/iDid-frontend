@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import WeightInput from './WeightInput'
+import TimeInput from './TimeInput'
 
 import CounterSelectBox from '../counters/selectBox.js'
 import {addAction} from '../../actions/actionForm.js'
@@ -12,8 +13,6 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
-// import {theme} from '../../theme'
 
 const useStyles = makeStyles((theme) => (
   {
@@ -42,6 +41,15 @@ export function ActionForm(props) {
   const [counter, setCounter] = useState('')
   const [weight, setWeight] = useState(0)
   const [weightUnit, setWeightUnit] = useState('lb')
+  const [timeUnit, setTimeUnit] = useState('minutes')
+
+  const handleTimeUnitChange = (e) => {
+    setTimeUnit(e.target.value)
+  }
+
+  const handleTimeDurationChange = (e) => {
+    setReps(e.target.value)
+  }
 
   const handleWeightChange = (e) => {
     setWeight(e.target.value)
@@ -57,7 +65,7 @@ export function ActionForm(props) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    props.addAction({reps, weight, weight_unit: weightUnit, counter_id: counter.id, user_id: props.currentUser.id})
+    props.addAction({reps, weight, weight_unit: weightUnit, counter_id: counter.id, user_id: props.currentUser.id, time_unit: timeUnit})
     props.history.push('/actions')
   }
 
@@ -101,6 +109,8 @@ export function ActionForm(props) {
           />
       </Grid>
 
+      {counter.kind === 'timed' ? <Grid item className={classes.gridItem}><TimeInput timeUnit={timeUnit}  handleTimeUnitChange={handleTimeUnitChange} /></Grid> : null}
+
       <Grid item xs={12}>
 
         <Grid container direction="row" alignContent="center" alignItems="center" justify="center">
@@ -127,6 +137,8 @@ export function ActionForm(props) {
       </Grid>
 
       {counter.kind === 'weighted' ? <Grid item className={classes.gridItem}><WeightInput weightUnit={weightUnit} weight={weight} handleUnitChange={handleUnitChange} handleWeightChange={handleWeightChange} /></Grid> : null}
+
+
 
       <Grid item className={classes.gridItem}>
         <Button
