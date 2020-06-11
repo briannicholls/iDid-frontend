@@ -6,11 +6,11 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
 
 export default function LeadersList(props) {
 
   return (
-    <Paper>
     <Table size='small'>
       <TableHead>
         <TableRow>
@@ -32,6 +32,5 @@ export default function LeadersList(props) {
         })}
       </TableBody>
     </Table>
-    </Paper>
   )
 }
