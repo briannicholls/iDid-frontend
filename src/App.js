@@ -11,6 +11,7 @@ import ActionsContainer from './components/actions/actionsContainer.js'
 import CounterForm from './components/counters/counterForm.js'
 import NavContainer from './components/NavContainer'
 import ActionForm from './components/actions/actionForm.js'
+import Dashboard from './components/dashboard/Dashboard'
 //actions
 import {getCurrentUser} from './actions/currentUser.js'
 import {getCurrentState} from './actions/value.js'
@@ -25,26 +26,14 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline'
 
-// const useStyles = theme => ({
-//   stickyBottom: {
-//     // width: '100%',
-//     position: 'fixed',
-//     bottom: '0px',
-//     // margin: 'auto'
-//   },
-// })
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     padding: '0px'
   },
   stickyBottom: {
-    // width: '100%',
     position: 'fixed',
     bottom: '0px',
-    // paddingLeft: '0px'
-    // margin: 'auto'
   },
 }));
 
@@ -65,6 +54,7 @@ export function App({currentUser, fetchCounters}) {
           <Route exact path="/actions/new" component={ActionForm} />
           <Route exact path="/counters/new" component={CounterForm} />
           <Route path='/' component={ActionFab} />
+          <Route exact path='/' component={Dashboard} />
         </Container>
 
       <Container className={classes.stickyBottom}>
@@ -87,7 +77,7 @@ export function App({currentUser, fetchCounters}) {
   }
 
     return (
-      <Grid container maxWidth={'xs'} className={classes.root} >
+      <Grid container className={classes.root} >
         <Grid item>
           <CssBaseline />
 
