@@ -21,9 +21,9 @@ export default function LeadersList(props) {
       </TableHead>
 
       <TableBody>
-        {props.leaders.map(data => {
+        {props.leaders.map((data, i) => {
           return (
-            <TableRow>
+            <TableRow key={i}>
               <TableCell>{data.counter}</TableCell>
               <TableCell>{data.allTimeLeader}</TableCell>
               <TableCell>{data.sum}</TableCell>
