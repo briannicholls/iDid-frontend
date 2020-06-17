@@ -1,21 +1,18 @@
 import {API} from '../Constants.js'
+import {REQUEST_ORIGIN} from '../Constants.js'
 
-export const submitCounterForm = (data) => {
+export const addCounter = counterData => {
   return dispatch => {
     fetch(API + '/counters', {
       method: 'POST',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://silly-almeida-f17772.netlify.app',
+        'Access-Control-Allow-Origin': REQUEST_ORIGIN,
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(counterData)
     })
     .then(resp => resp.json())
     .then(json => dispatch({type: 'SET_COUNTERS', payload: json}))
   }
-}
-
-export const updateCounterForm = (data) => {
-  return {type: 'UPDATE_COUNTER_FORM', payload: data}
 }
