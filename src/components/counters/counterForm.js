@@ -1,13 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
 
 // import {createUser} from '../actions/users.js'
-import {submitCounterForm, updateCounterForm} from '../../actions/counterForm.js'
-import CheckboxesGroup from './counterOptionsCheckboxes.js'
+import {addCounter} from '../../actions/counterForm.js'
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormLabel from '@material-ui/core/FormLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -16,6 +23,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import CategoryIcon from '@material-ui/icons/Category';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,69 +46,109 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const CounterForm = props => {
+// controlled checkboxes group
+export const CounterForm = (props) => {
+  const classes = useStyles();
 
-  const classes = useStyles()
+  const [name, setName] = useState('')
+  const [measurementUnit, setMeasurementUnit] = useState('default')
+
+  const [kind, setKind] = React.useState({
+    weighted: false,
+    timed: false,
+  });
+
+  const handleChange = (event) => {
+    setKind({ ...kind, [event.target.name]: event.target.checked });
+  };
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    props.submitCounterForm(props)
+    let counterData = {name, measurement_unit: measurementUnit}
+    if (kind.weighted) {
+      counterData.kind = 'weighted'
+    } else if (kind.timed) {
+      counterData.kind = 'timed'
+    }
+    console.log(counterData)
+    props.addCounter({counter: counterData})
     props.history.push('/actions/new')
   }
 
-  const handleOnChange = (e) => {
-    props.updateCounterForm({name: 'name', value: e.target.value})
+  const error = kind.timed && kind.weighted
+
+  const UnitSelect = () => {
+    return (
+
+        <FormControl>
+          <InputLabel>How Will You Measure It?</InputLabel>
+          <NativeSelect
+            value={measurementUnit}
+            onChange={(e) => setMeasurementUnit(e.target.value)}
+            name='measurement_unit'
+          >
+            <option aria-label="None" value="" />
+            {kind.timed ? <><option value={'minutes'}>Minutes</option><option value={'seconds'}>Seconds</option></> : null}
+            {kind.weighted ? <><option value={'lb'}>Pounds (lb)</option><option value={'kg'}>Kilograms (kg)</option></> : null}
+          </NativeSelect>
+        </FormControl>
+
+    )
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
+    <Container className={classes.root}>
 
-        <Avatar className={classes.avatar}>
-          <CategoryIcon />
-        </Avatar>
+      <Avatar className={classes.avatar}><CategoryIcon /></Avatar>
 
-        <Typography component="h1" variant="h5">
-          I want to count...
-        </Typography>
+      <Typography component="h1" variant="h5">I want to count...</Typography>
 
-        <form className={classes.form} onSubmit={handleOnSubmit}>
-          <Grid container spacing={2}>
+      <form className={classes.form} onSubmit={handleOnSubmit}>
 
-            <Grid item xs={12}>
-            <TextField required fullWidth variant="outlined" label="Thing to count" name="counter_name" onChange={handleOnChange} />
-            </Grid>
+        <Grid container spacing={2}>
 
-            <CheckboxesGroup />
-
-            <Button type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-
-              >Add Thing!</Button>
+          <Grid item xs={12}>
+            <TextField required fullWidth variant="outlined" label="Thing to count" name="name" value={name} onChange={(e) => setName(e.target.value)} />
           </Grid>
 
-        </form>
+          <Grid item xs={12}>
+            <FormControl component="fieldset" error={error} className={classes.formControl}>
 
-      </div>
+              <FormLabel component="legend">Optional (Choose one):</FormLabel>
+
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox checked={props.weighted} onChange={handleChange} name="weighted" checked={kind.weighted} />}
+                    label="Track weight with this counter"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox checked={props.timed} onChange={handleChange} name="timed" checked={kind.timed} />}
+                    label="This is a timed activity"
+                  />
+                </FormGroup>
+
+                  {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
+
+                  {kind.timed || kind.weighted ? <UnitSelect /> : null}
+
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>Add Thing!</Button>
+          </Grid>
+
+        </Grid>
+
+      </form>
     </Container>
-  )
+  );
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    submitCounterForm: data => dispatch(submitCounterForm(data)),
-    updateCounterForm: data => dispatch(updateCounterForm(data))
+    addCounter: counterData => dispatch(addCounter(counterData))
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    counterFormData: state.counterFormReducer
-  }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CounterForm))
+export default connect(null, mapDispatchToProps)(CounterForm)
