@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 
 // import {createUser} from '../actions/users.js'
@@ -11,6 +11,20 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Paper from '@material-ui/core/Paper';
+
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import CategoryIcon from '@material-ui/icons/Category';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,51 +51,102 @@ const useStyles = makeStyles((theme) => ({
 export const CheckboxesGroup = (props) => {
   const classes = useStyles();
 
+  const [measurementUnit, setMeasurementUnit] = useState('default')
+
+  const [kind, setKind] = React.useState({
+    default: true,
+    weighted: false,
+    timed: false,
+  });
+
   const handleChange = (event) => {
-    props.updateCounterForm({
-      name: [event.target.name],
-      value: event.target.checked
-    });
+    setKind({ ...kind, [event.target.name]: event.target.checked });
   };
 
-  const error = [props.weighted, props.timed].filter((v) => v).length > 1;
+  const handleOnSubmit = (e) => {
+    e.preventDefault()
+    // props.submitCounterForm(props)
+    // props.history.push('/actions/new')
+  }
+
+  const handleOnChange = (e) => {
+    // props.updateCounterForm({name: 'name', value: e.target.value})
+  }
+
+  const error = kind.timed && kind.weighted
+
+  const UnitSelect = () => {
+    return (
+
+        <FormControl>
+          <InputLabel>How Will You Measure It?</InputLabel>
+          <NativeSelect
+            value={measurementUnit}
+            onChange={(e) => setMeasurementUnit(e.target.value)}
+            name='measurement_unit'
+          >
+            <option aria-label="None" value="" />
+            {kind.timed ? <><option value={'minutes'}>Minutes</option><option value={'seconds'}>Seconds</option></> : null}
+            {kind.weighted ? <><option value={'lb'}>Pounds (lb)</option><option value={'kg'}>Kilograms (kg)</option></> : null}
+          </NativeSelect>
+        </FormControl>
+
+    )
+  }
 
   return (
     <div className={classes.root}>
 
+      <Avatar className={classes.avatar}>
+        <CategoryIcon />
+      </Avatar>
+
+      <Typography component="h1" variant="h5">
+        I want to count...
+      </Typography>
+
+      <form className={classes.form} onSubmit={handleOnSubmit}>
+        <Grid container spacing={2}>
+
+          <Grid item xs={12}>
+          <TextField required fullWidth variant="outlined" label="Thing to count" name="counter_name" onChange={handleOnChange} />
+          </Grid>
+
+          <CheckboxesGroup />
+
+          <Button type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+
+            >Add Thing!</Button>
+        </Grid>
+
+
       <FormControl component="fieldset" error={error} className={classes.formControl}>
 
-        <FormLabel component="legend">Optional (Choose up to one):</FormLabel>
+        <FormLabel component="legend">Optional (Choose one):</FormLabel>
 
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox checked={props.weighted} onChange={handleChange} name="weighted" />}
+              control={<Checkbox checked={props.weighted} onChange={handleChange} name="weighted" checked={kind.weighted} />}
               label="Track weight with this counter"
             />
             <FormControlLabel
-              control={<Checkbox checked={props.timed} onChange={handleChange} name="timed" />}
+              control={<Checkbox checked={props.timed} onChange={handleChange} name="timed" checked={kind.timed} />}
               label="This is a timed activity"
             />
           </FormGroup>
 
+          {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
+
+          {kind.timed || kind.weighted ? <UnitSelect /> : null}
       </FormControl>
 
+      </form>
     </div>
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateCounterForm: data => dispatch(updateCounterForm(data))
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    weighted: state.counterFormReducer.weighted,
-    timed: state.counterFormReducer.timed
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(CheckboxesGroup)
+export default CheckboxesGroup
