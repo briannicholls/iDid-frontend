@@ -118,11 +118,11 @@ export const CounterForm = (props) => {
 
                 <FormGroup>
                   <FormControlLabel
-                    control={<Checkbox checked={props.weighted} onChange={handleChange} name="weighted" checked={kind.weighted} />}
+                    control={<Checkbox onChange={handleChange} name="weighted" checked={kind.weighted} />}
                     label="Track weight with this counter"
                   />
                   <FormControlLabel
-                    control={<Checkbox checked={props.timed} onChange={handleChange} name="timed" checked={kind.timed} />}
+                    control={<Checkbox onChange={handleChange} name="timed" checked={kind.timed} />}
                     label="This is a timed activity"
                   />
                 </FormGroup>
