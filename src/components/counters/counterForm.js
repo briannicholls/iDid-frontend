@@ -120,6 +120,7 @@ export const CounterForm = (props) => {
               <FormLabel component="legend">Optional (Choose one):</FormLabel>
 
                 <FormGroup>
+
                   <FormControlLabel
                     control={<Checkbox onChange={handleChange} name="weighted" checked={kind.weighted} />}
                     label="Track weight with this counter"
@@ -128,11 +129,13 @@ export const CounterForm = (props) => {
                     control={<Checkbox onChange={handleChange} name="timed" checked={kind.timed} />}
                     label="This is a timed activity"
                   />
+
+                  <UnitSelect />
+
                 </FormGroup>
 
                   {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
 
-                  <UnitSelect />
 
             </FormControl>
           </Grid>
