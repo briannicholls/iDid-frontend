@@ -7,8 +7,8 @@ import {Provider} from 'react-redux'
 import store from './store.js'
 
 import {MuiThemeProvider} from '@material-ui/core/styles'
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
+// import Container from '@material-ui/core/Container'
+// import Grid from '@material-ui/core/Grid'
 
 import theme from './theme'
 

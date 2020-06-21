@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import LeadersList from './LeadersList'
 
-import Box from '@material-ui/core/Box'
+// import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 

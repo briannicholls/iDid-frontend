@@ -47,9 +47,9 @@ export function ActionForm(props) {
     setTimeUnit(e.target.value)
   }
 
-  const handleTimeDurationChange = (e) => {
-    setReps(e.target.value)
-  }
+  // const handleTimeDurationChange = (e) => {
+  //   setReps(e.target.value)
+  // }
 
   const handleWeightChange = (e) => {
     setWeight(e.target.value)
