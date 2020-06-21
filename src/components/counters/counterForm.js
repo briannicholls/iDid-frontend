@@ -13,6 +13,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -49,7 +50,7 @@ export const CounterForm = (props) => {
   const classes = useStyles();
 
   const [name, setName] = useState('')
-  const [measurementUnit, setMeasurementUnit] = useState('default')
+  const [measurementUnit, setMeasurementUnit] = useState('')
 
   const [kind, setKind] = React.useState({
     weighted: false,
@@ -80,15 +81,18 @@ export const CounterForm = (props) => {
 
         <FormControl>
           <InputLabel>How Will You Measure It?</InputLabel>
-          <NativeSelect
+          <Select
             value={measurementUnit}
             onChange={(e) => setMeasurementUnit(e.target.value)}
             name='measurement_unit'
+            default={''}
           >
             <option aria-label="None" value="" />
-            {kind.timed ? <><option value={'minutes'}>Minutes</option><option value={'seconds'}>Seconds</option></> : null}
-            {kind.weighted ? <><option value={'lb'}>Pounds (lb)</option><option value={'kg'}>Kilograms (kg)</option></> : null}
-          </NativeSelect>
+            <option value={'minutes'}>Minutes</option><option value={'seconds'}>Seconds</option>
+            <option value={'lb'}>Pounds (lb)</option><option value={'kg'}>Kilograms (kg)</option>
+
+
+          </Select>
         </FormControl>
 
     )
