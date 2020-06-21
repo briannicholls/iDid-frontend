@@ -80,13 +80,12 @@ export const CounterForm = (props) => {
   const UnitSelect = () => {
     return (
 
-        <FormControl>
-          <InputLabel>How Will You Measure It?</InputLabel>
+        <>
+          <FormLabel>How Will You Measure It?</FormLabel>
           <Select
+            name='measurement_unit'
             value={measurementUnit}
             onChange={(e) => setMeasurementUnit(e.target.value)}
-            name='measurement_unit'
-            
           >
             <option aria-label="None" value="" />
             <option value={'minutes'}>Minutes</option>
@@ -95,7 +94,7 @@ export const CounterForm = (props) => {
             <option value={'kg'}>Kilograms (kg)</option>
 
           </Select>
-        </FormControl>
+        </>
 
     )
   }
