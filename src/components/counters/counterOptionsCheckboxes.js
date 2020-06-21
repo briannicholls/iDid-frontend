@@ -54,7 +54,6 @@ export const CheckboxesGroup = (props) => {
   const [measurementUnit, setMeasurementUnit] = useState('default')
 
   const [kind, setKind] = React.useState({
-    default: true,
     weighted: false,
     timed: false,
   });
