@@ -97,7 +97,7 @@ export function ActionForm(props) {
         <TextField
           required
           fullWidth
-          autoFocus
+          autoFocus={false}
           id="reps"
           variant="outlined"
           margin="normal"
