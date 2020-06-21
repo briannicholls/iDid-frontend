@@ -59,6 +59,7 @@ export const CounterForm = (props) => {
 
   const handleChange = (event) => {
     setKind({ ...kind, [event.target.name]: event.target.checked });
+
   };
 
   const handleOnSubmit = (e) => {
@@ -85,12 +86,13 @@ export const CounterForm = (props) => {
             value={measurementUnit}
             onChange={(e) => setMeasurementUnit(e.target.value)}
             name='measurement_unit'
-            default={''}
+            
           >
             <option aria-label="None" value="" />
-            <option value={'minutes'}>Minutes</option><option value={'seconds'}>Seconds</option>
-            <option value={'lb'}>Pounds (lb)</option><option value={'kg'}>Kilograms (kg)</option>
-
+            <option value={'minutes'}>Minutes</option>
+            <option value={'seconds'}>Seconds</option>
+            <option value={'lb'}>Pounds (lb)</option>
+            <option value={'kg'}>Kilograms (kg)</option>
 
           </Select>
         </FormControl>
@@ -131,7 +133,7 @@ export const CounterForm = (props) => {
 
                   {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
 
-                  {kind.timed || kind.weighted ? <UnitSelect /> : null}
+                  <UnitSelect />
 
             </FormControl>
           </Grid>
