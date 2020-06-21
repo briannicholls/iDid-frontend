@@ -43,7 +43,7 @@ export function App({currentUser, fetchCounters}) {
   useEffect(() => {
       fetchCounters()
       getCurrentUser()
-    }, [])
+    })
 
   const loggedInState = () => {
     return (
