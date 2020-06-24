@@ -57,11 +57,11 @@ export function App({currentUser, fetchCounters}) {
           <Route exact path='/' component={Dashboard} />
         </Container>
 
-      <Container className={classes.stickyBottom}>
-        <Route path='/' component={NavContainer} />
-      </Container>
+        <Container className={classes.stickyBottom}>
+          <Route path='/' component={NavContainer} />
+        </Container>
 
-    </React.Fragment>
+      </React.Fragment>
     )
   }
 

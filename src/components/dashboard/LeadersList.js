@@ -6,7 +6,6 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 // import Paper from '@material-ui/core/Paper'
-// import Typography from '@material-ui/core/Typography'
 
 export default function LeadersList(props) {
 
@@ -15,7 +14,7 @@ export default function LeadersList(props) {
       <TableHead>
         <TableRow>
           <TableCell>Thing</TableCell>
-          <TableCell align="right">All-Time</TableCell>
+          <TableCell align="right">Name</TableCell>
           <TableCell align="left">Reps</TableCell>
         </TableRow>
       </TableHead>

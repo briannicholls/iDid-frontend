@@ -9,18 +9,24 @@ import Typography from '@material-ui/core/Typography'
 import {fetchLeadersAllTime} from '../../actions/leaderboardActions'
 
 export default function Leaderboard(props) {
-  const [leaders, setLeaders] = useState([])
+  const [allTimeLeaders, setAllTimeLeaders] = useState([])
+  const [monthLeaders, setMonthLeaders] = useState([])
+  const [weekLeaders, setWeekLeaders] = useState([])
 
   useEffect(() => {
-    // debugger
-    fetchLeadersAllTime(setLeaders)
+    fetchLeadersAllTime(setAllTimeLeaders)
   }, [])
 
   return (
     <Paper square variant='outlined'>
-      <Typography variant='h2'>Leaders</Typography>
+      <Typography variant='h2'>All-Time</Typography>
+      <LeadersList leaders={allTimeLeaders} />
 
-      <LeadersList leaders={leaders} />
+      <Typography variant='h2'>This Month</Typography>
+      <LeadersList leaders={monthLeaders} />
+
+      <Typography variant='h2'>This Week</Typography>
+      <LeadersList leaders={weekLeaders} />
     </Paper>
   )
 }
