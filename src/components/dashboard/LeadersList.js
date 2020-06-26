@@ -29,6 +29,8 @@ export default function LeadersList(props) {
               <TableCell>{data.reps}</TableCell>
               </TableRow>
             )
+          } else {
+            return null
           }
         })}
       </TableBody>
