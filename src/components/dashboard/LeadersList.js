@@ -24,8 +24,8 @@ export default function LeadersList(props) {
           return (
             <TableRow key={i}>
               <TableCell>{data.counter}</TableCell>
-              <TableCell>{data.allTimeLeader}</TableCell>
-              <TableCell>{data.sum}</TableCell>
+              <TableCell>{data.user ? data.user.name : null}</TableCell>
+              <TableCell>{data.reps}</TableCell>
             </TableRow>
           )
         })}
