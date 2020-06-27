@@ -12,11 +12,9 @@ import {API} from '../Constants.js'
 export const setCurrentUser = user => {
   return dispatch => {
     dispatch({type: 'SET_CURRENT_USER', payload: user})
-    fetchUserActions(user.id)
+    // fetchUserActions(user.id)
   }
 }
-
-//async actions
 
 //logout
 export const logout = () => {
@@ -47,15 +45,12 @@ export const getCurrentUser = () => {
     })
       .then(resp => resp.json())
       .then(json => {
-        console.log(json)
         if (json && json.id) {
-          dispatch(setCurrentUser(json))
-          fetchUserActions(json.id)
-          return ('valid')
+          dispatch({type: 'SET_CURRENT_USER', payload: json})
         } else {
           dispatch({type: 'CLEAR_CURRENT_USER'})
         }
       })
-      .catch(console.log)
+      // .catch(console.log)
   }
 }
