@@ -1,0 +1,3 @@
+- use hooks for BottomNav appState
+- refactor TimeInput/WeightInput to a single component
+- use native select for action form?
