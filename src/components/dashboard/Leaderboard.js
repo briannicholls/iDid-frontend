@@ -25,14 +25,14 @@ export default function Leaderboard(props) {
 
   return (
     <Paper square variant='outlined'>
-      <Typography variant='h2'>All-Time</Typography>
-      <LeadersList leaders={allTimeLeaders} />
+      <Typography variant='h2'>This Week</Typography>
+      <LeadersList leaders={weekLeaders} />
 
       <Typography variant='h2'>This Month</Typography>
       <LeadersList leaders={monthLeaders} />
 
-      <Typography variant='h2'>This Week</Typography>
-      <LeadersList leaders={weekLeaders} />
+      <Typography variant='h2'>All-Time</Typography>
+      <LeadersList leaders={allTimeLeaders} />
     </Paper>
   )
 }
