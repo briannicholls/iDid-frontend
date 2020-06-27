@@ -5,14 +5,13 @@
 
 // ^^^ Leaving this comment here to remember how dumb I was when I started this project
 
-import {fetchUserActions} from './actions'
+// import {fetchUserActions} from './actions'
 import {API} from '../Constants.js'
 
 // execute only with valid user
 export const setCurrentUser = user => {
   return dispatch => {
     dispatch({type: 'SET_CURRENT_USER', payload: user})
-    // fetchUserActions(user.id)
   }
 }
 

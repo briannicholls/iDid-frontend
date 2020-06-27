@@ -9,6 +9,8 @@ import {changeAppState} from '../actions/value.js'
 
 function NavContainer({value, currentUser, changeAppState, getCurrentState, fetchUserActions, history}) {
 
+  // const [appState, setAppState] = useState('0')
+
   const handleChangeState = (val) => {
     if (val === 2) {fetchUserActions(currentUser)} // history tab
     history.push(valueMap[val])

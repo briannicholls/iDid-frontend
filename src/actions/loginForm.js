@@ -1,4 +1,4 @@
-import {setCurrentUser} from './currentUser'
+// import {setCurrentUser} from './currentUser'
 import {API} from '../Constants.js'
 
 export const submitCredentials = (credentials) => {
