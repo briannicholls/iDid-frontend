@@ -11,6 +11,7 @@ import EzButton from './EzButton'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
@@ -40,32 +41,18 @@ export function ActionForm(props) {
   const [reps, setReps] = useState(0)
   const [counter, setCounter] = useState('')
   const [weight, setWeight] = useState(0)
-  const [weightUnit, setWeightUnit] = useState('lb')
-  const [timeUnit, setTimeUnit] = useState('minutes')
-
-  const handleTimeUnitChange = (e) => {
-    setTimeUnit(e.target.value)
-  }
-
-  // const handleTimeDurationChange = (e) => {
-  //   setReps(e.target.value)
-  // }
-
-  const handleWeightChange = (e) => {
-    setWeight(e.target.value)
-  }
-
-  const handleUnitChange = (e) => {
-    setWeightUnit(e.target.value)
-  }
 
   const handleChangeReps = (event) => {
     setReps(parseInt(event.target.value))
   }
 
+  const handleWeightChange = (e) => {
+    setWeight(parseInt(e.target.value))
+  }
+
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    props.addAction({reps, weight, weight_unit: weightUnit, counter_id: counter.id, user_id: props.currentUser.id, time_unit: timeUnit})
+    props.addAction({reps, weight, counter_id: counter.id, user_id: props.currentUser.id})
     props.history.push('/actions')
   }
 
@@ -109,36 +96,25 @@ export function ActionForm(props) {
           />
       </Grid>
 
-      {counter.kind === 'timed' ? <Grid item className={classes.gridItem}><TimeInput timeUnit={timeUnit}  handleTimeUnitChange={handleTimeUnitChange} /></Grid> : null}
 
       <Grid item xs={12}>
-
         <Grid container direction="row" alignContent="center" alignItems="center" justify="center">
-
-          <Grid item xs={4} s={4}>
-            <EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton></Grid>
-          <Grid item xs={4} s={4}>
-            <EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton></Grid>
-          <Grid item xs={4} s={4}>
-            <EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton></Grid>
-          <Grid item xs={4} s={4}>
-            <EzButton increment={handleEzButtonPress} numLabel={'-1'}></EzButton></Grid>
-          <Grid item xs={4} s={4}>
-            <EzButton increment={handleEzButtonPress} numLabel={'-5'}></EzButton></Grid>
-          <Grid item xs={4} s={4}>
-            <EzButton increment={handleEzButtonPress} numLabel={'-10'}></EzButton></Grid>
-
+          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton></Grid>
+          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton></Grid>
+          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton></Grid>
+          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'-1'}></EzButton></Grid>
+          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'-5'}></EzButton></Grid>
+          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'-10'}></EzButton></Grid>
         </Grid>
-
       </Grid>
+
+      {counter.kind === 'timed' ? <Container><Typography variant="h3">{counter.measurement_unit}</Typography></Container> : null}
 
       <Grid item className={classes.gridItem}>
         <CounterSelectBox options={props.counters} updateCounter={handleUpdateCounter} />
       </Grid>
 
-      {counter.kind === 'weighted' ? <Grid item className={classes.gridItem}><WeightInput weightUnit={weightUnit} weight={weight} handleUnitChange={handleUnitChange} handleWeightChange={handleWeightChange} /></Grid> : null}
-
-
+      {counter.kind === 'weighted' ? <Grid item className={classes.gridItem}><WeightInput unit={counter.measurement_unit} weight={weight} handleWeightChange={handleWeightChange} /></Grid> : null}
 
       <Grid item className={classes.gridItem}>
         <Button
