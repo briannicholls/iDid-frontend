@@ -1,3 +1,6 @@
+- add cookies for auto login!!
 - use hooks for BottomNav appState
-- refactor TimeInput/WeightInput to a single component
+- refactor TimeInput/WeightInput to a single component?
 - use native select for action form?
+- create settings page for changing password and setting time zone
+- add time zone select to sign up
