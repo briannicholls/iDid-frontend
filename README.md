@@ -1,26 +1,34 @@
 
 ## iDid - an app to count things you do
 
-See below for installation instructions.
+iDid is a mobile-forward web application that lets you keep track of anything you do. It also allows for friendly competition, via a leaderboard, showing who else is doing the same things and how much!
 
+### Usage Instructions
+
+To count something you did, simply click the "I DID..." Floating Action Button:
+
+![Floating Action Button](github.com/nichol88/iDid-frontend/blob/public/fab.png?raw=true)
+
+And you'll be taken to the form:
+
+![Action Form](github.com/nichol88/iDid-frontend/blob/public/actionform.png)
+
+Select or type something to count, then add the number of repetitions using the buttons, or type a number in manually. 
+
+If you want to count something else, tap "Count Something Else"! This will allow you to add a new thing to count:
+
+![Counter Form](github.com/nichol88/iDid-frontend/blob/public/counterform.png)
+
+If you'd like to track weight, for example if the activity you'd like to count involves lifting weights, check the box and select the unit of measurement you would like to use.
+
+If you would like to track a duration of time instead of repetitions, for example, time spent running or meditating, check the appropriate box.
+
+Note: An activity can not be both weighted *and* timed, so choose only one!
 
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-NOTE: you will need to direct the app
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
 ## License
 
