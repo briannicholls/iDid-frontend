@@ -14,8 +14,8 @@ import {fetchMonthLeaders} from '../../actions/leaderboardActions'
 
 export default function Leaderboard(props) {
   const [allTimeLeaders, setAllTimeLeaders] = useState([])
-  const [monthLeaders, setMonthLeaders] = useState([])
-  const [weekLeaders, setWeekLeaders] = useState([])
+  const [monthLeaders] = useState([])
+  const [weekLeaders] = useState([])
 
   useEffect(() => {
     fetchAllLeaders(setAllTimeLeaders)
