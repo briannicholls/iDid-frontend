@@ -73,13 +73,17 @@ export const Login = (props) => {
       </form>
 
       <Grid container>
-        <Grid item><Button fullWidth color='secondary' onClick={props.history.push("/signup")}>Register</Button></Grid>
+        <Grid item><Button fullWidth color='secondary' onClick={handleRegisterClick}>Register</Button></Grid>
       </Grid>
 
       {props.requesting === true ? <p>Logging In</p> : null}
 
     </Container>
   )
+}
+
+const handleRegisterClick = () => {
+  this.props.history.push("/signup")
 }
 
 const mapStateToProps = state => {
