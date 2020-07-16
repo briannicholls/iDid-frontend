@@ -44,6 +44,10 @@ export const Login = (props) => {
     props.submitCredentials({email, password})
   }
 
+  const handleRegisterClick = () => {
+    props.history.push("/signup")
+  }
+
   return (
       <Container component="main" maxWidth="xs" className={classes.paper}>
 
@@ -82,9 +86,7 @@ export const Login = (props) => {
   )
 }
 
-const handleRegisterClick = () => {
-  this.props.history.push("/signup")
-}
+
 
 const mapStateToProps = state => {
   return {
