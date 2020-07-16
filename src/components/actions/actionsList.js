@@ -14,7 +14,7 @@ export const ActionsList = (props) => {
       return <p>{props.actions.server_message}</p>
     } else {
       return props.actions.reverse().map(action => {
-        return <Action action={action} key={action.id} ></Action>
+        return <Action action={action} key={action.id} kind={action.counter.kind} unit={action.counter.unit} ></Action>
         // return <ListItem component={Action} key={action.id} action={action}></ListItem>
       })
     }

@@ -1,5 +1,6 @@
 import {API} from '../Constants.js'
 
+// user sign up form submit
 export const createUser = (user) => {
   return dispatch => {
     dispatch({type: 'LOADING'})
@@ -12,6 +13,9 @@ export const createUser = (user) => {
       body: JSON.stringify({user})
     })
       .then(resp => resp.json())
-      .then(json => dispatch({type: 'SET_CURRENT_USER', payload: json }))
+      .then(json => {
+        dispatch({type: 'SET_CURRENT_USER', payload: json })
+        dispatch({type: 'SET_VALUE', payload: 0})
+      })
   }
 }

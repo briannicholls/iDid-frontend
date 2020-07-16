@@ -21,13 +21,17 @@ export default function LeadersList(props) {
 
       <TableBody>
         {props.leaders.map((data, i) => {
-          return (
-            <TableRow key={i}>
+          if (data.user) {
+            return (
+              <TableRow key={i}>
               <TableCell>{data.counter}</TableCell>
-              <TableCell>{data.allTimeLeader}</TableCell>
-              <TableCell>{data.sum}</TableCell>
-            </TableRow>
-          )
+              <TableCell>{data.user.name}</TableCell>
+              <TableCell>{data.reps}</TableCell>
+              </TableRow>
+            )
+          } else {
+            return null
+          }
         })}
       </TableBody>
     </Table>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 
 import {submitCredentials} from '../actions/loginForm.js'
 import {setCurrentUser} from '../actions/currentUser.js'
@@ -72,7 +72,7 @@ export const Login = (props) => {
       </form>
 
       <Grid container>
-        <Grid item><Link to={'/signup'}>Register</Link></Grid>
+        <Grid item><Button fullWidth color='secondary' href='/signup'>Register</Button></Grid>
       </Grid>
 
       {props.requesting === true ? <p>Logging In</p> : null}

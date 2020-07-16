@@ -5,18 +5,15 @@
 
 // ^^^ Leaving this comment here to remember how dumb I was when I started this project
 
-import {fetchUserActions} from './actions'
+// import {fetchUserActions} from './actions'
 import {API} from '../Constants.js'
 
 // execute only with valid user
 export const setCurrentUser = user => {
   return dispatch => {
     dispatch({type: 'SET_CURRENT_USER', payload: user})
-    fetchUserActions(user.id)
   }
 }
-
-//async actions
 
 //logout
 export const logout = () => {
@@ -47,15 +44,12 @@ export const getCurrentUser = () => {
     })
       .then(resp => resp.json())
       .then(json => {
-        console.log(json)
         if (json && json.id) {
-          dispatch(setCurrentUser(json))
-          fetchUserActions(json.id)
-          return ('valid')
+          dispatch({type: 'SET_CURRENT_USER', payload: json})
         } else {
           dispatch({type: 'CLEAR_CURRENT_USER'})
         }
       })
-      .catch(console.log)
+      // .catch(console.log)
   }
 }
