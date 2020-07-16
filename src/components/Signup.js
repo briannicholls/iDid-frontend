@@ -86,8 +86,8 @@ export const Signup = props => {
 
             <Grid item xs={12}>
             <NativeSelect name="time_zone" value={formData.time_zone} onChange={handleOnChange}>
-              {timezones.map(timezone => {
-                return <option value={timezone.value}>{timezone.value}</option>
+              {timezones.map((timezone, index) => {
+                return <option value={timezone.value} key={index}>{timezone.value}</option>
               })}
 
             </NativeSelect>
