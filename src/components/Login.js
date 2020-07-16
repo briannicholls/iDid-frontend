@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux'
-// import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
+
 
 import {submitCredentials} from '../actions/loginForm.js'
 import {setCurrentUser} from '../actions/currentUser.js'
@@ -72,7 +73,7 @@ export const Login = (props) => {
       </form>
 
       <Grid container>
-        <Grid item><Button fullWidth color='secondary' href='/signup'>Register</Button></Grid>
+        <Grid item><Button fullWidth color='secondary' onClick={props.history.push("/signup")}>Register</Button></Grid>
       </Grid>
 
       {props.requesting === true ? <p>Logging In</p> : null}
@@ -95,4 +96,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
