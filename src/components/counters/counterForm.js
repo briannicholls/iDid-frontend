@@ -11,8 +11,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import NativeSelect from '@material-ui/core/NativeSelect';
 import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
@@ -59,7 +57,6 @@ export const CounterForm = (props) => {
 
   const handleChange = (event) => {
     setKind({ ...kind, [event.target.name]: event.target.checked });
-
   };
 
   const handleOnSubmit = (e) => {
@@ -69,6 +66,8 @@ export const CounterForm = (props) => {
       counterData.kind = 'weighted'
     } else if (kind.timed) {
       counterData.kind = 'timed'
+    } else {
+      counterData.kind = 'default'
     }
     console.log(counterData)
     props.addCounter({counter: counterData})
