@@ -98,4 +98,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions, fetchCounters})(App))
+export default withRouter(connect(mapStateToProps, {getCurrentUser, getCurrentState, fetchUserActions})(App))

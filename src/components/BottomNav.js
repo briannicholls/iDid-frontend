@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-
 import {logout} from '../actions/currentUser.js'
 import {fetchUserActions} from '../actions/actions.js'
-import {fetchCounters} from './actions/counters.js'
+import {fetchCounters} from '../actions/counters.js'
 
 
 // Material UI
