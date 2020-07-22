@@ -1,5 +1,7 @@
 // import {setCurrentUser} from './currentUser'
 import {API} from '../Constants.js'
+import {REQUEST_ORIGIN} from '../Constants.js'
+
 
 export const submitCredentials = (credentials) => {
   return dispatch => {
@@ -9,7 +11,7 @@ export const submitCredentials = (credentials) => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://idid.netlify.app',
+        'Access-Control-Allow-Origin': REQUEST_ORIGIN,
       },
       body: JSON.stringify({email: credentials.email, password: credentials.password})
     }
