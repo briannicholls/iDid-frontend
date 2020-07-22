@@ -1,43 +1,24 @@
 import React from 'react'
 
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+// import Select from '@material-ui/core/Select';
+// import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+// import Typography from '@material-ui/core/Typography';
 
 import theme from '../../theme'
 
-
-
 export default function WeightInput(props) {
-  // const [unit, setUnit] = useState('')
-  // const [weight, setWeight] = useState(0)
-  //
-  // const handleWeightChange = (e) => {
-  //   setWeight(e.target.value)
-  // }
-  //
-  // const handleUnitChange = (e) => {
-  //   setUnit(e.target.value)
-  // }
 
   return (
     <div className={theme.formInput}>
       <TextField
-        label={"Weight"}
+        label={`Weight (${props.unit})`}
         variant='outlined'
         type="number"
         onChange={props.handleWeightChange}
         value={props.weight}
+        name="weight"
         />
-      <Select
-        label={'Units'}
-        variant="outlined"
-        onChange={props.handleUnitChange}
-        value={props.weightUnit}>
-        <MenuItem value='lb'>lb</MenuItem>
-        <MenuItem value='kg'>kg</MenuItem>
-      </Select>
     </div>
   )
-
 }

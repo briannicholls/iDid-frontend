@@ -1,7 +1,7 @@
-import {setCurrentUser} from './currentUser'
+// import {setCurrentUser} from './currentUser'
 import {API} from '../Constants.js'
 
-export const submitCredentials = credentials => {
+export const submitCredentials = (credentials) => {
   return dispatch => {
     dispatch({type: 'LOADING'})
     const configObject = {
@@ -16,11 +16,10 @@ export const submitCredentials = credentials => {
     return fetch(API + '/login', configObject)
       .then(resp => resp.json())
       .then(json => {
-        console.log(json)
         if (json.error) {
           dispatch({type: 'ERROR', payload: json.error})
         } else {
-          dispatch(setCurrentUser(json))
+          dispatch({type: 'SET_CURRENT_USER', payload: json})
         }
       })
       .catch(console.log)

@@ -11,7 +11,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
-import Select from '@material-ui/core/Select';
+// import MenuItem from '@material-ui/core/MenuItem';
+import NativeSelect from '@material-ui/core/NativeSelect';
+// import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -20,7 +22,6 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import CategoryIcon from '@material-ui/icons/Category';
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -78,21 +79,19 @@ export const CounterForm = (props) => {
 
   const UnitSelect = () => {
     return (
-
         <>
           <FormLabel>How Will You Measure It?</FormLabel>
-          <Select
+          <NativeSelect
             name='measurement_unit'
             value={measurementUnit}
             onChange={(e) => setMeasurementUnit(e.target.value)}
           >
-            <option aria-label="None" value="" />
+            <option aria-label="None" value={''}></option>
             <option value={'minutes'}>Minutes</option>
             <option value={'seconds'}>Seconds</option>
             <option value={'lb'}>Pounds (lb)</option>
             <option value={'kg'}>Kilograms (kg)</option>
-
-          </Select>
+          </NativeSelect>
         </>
 
     )
@@ -134,7 +133,6 @@ export const CounterForm = (props) => {
                 </FormGroup>
 
                   {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
-
 
             </FormControl>
           </Grid>

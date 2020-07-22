@@ -1,6 +1,5 @@
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux'
 import thunk from 'redux-thunk'
-import usersReducer from './reducers/users.js'
 import currentUser from './reducers/currentUser.js'
 import loginFormReducer from './reducers/loginForm.js'
 import actions from './reducers/actionsReducer.js'
@@ -9,7 +8,6 @@ import counters from './reducers/countersReducer.js'
 import counterFormReducer from './reducers/counterForm.js'
 
 const reducer = combineReducers({
-  usersReducer,
   currentUser,
   loginFormReducer,
   actions,
