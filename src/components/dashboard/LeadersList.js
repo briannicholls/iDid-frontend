@@ -20,15 +20,14 @@ export default function LeadersList(props) {
 
       <TableBody>
         {props.leaders.map((data, i) => {
-          if (data.user) {
             return (
               <TableRow key={i}>
-              <TableCell>{data.counter}</TableCell>
-              <TableCell>{data.name}</TableCell>
-              <TableCell>{data.reps}</TableCell>
-            </TableRow>
-          )
-        })}
+                <TableCell>{data.counter}</TableCell>
+                <TableCell>{data.name}</TableCell>
+                <TableCell>{data.reps}</TableCell>
+              </TableRow>
+            )
+          })}
       </TableBody>
     </Table>
   )
