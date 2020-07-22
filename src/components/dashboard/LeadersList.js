@@ -8,6 +8,15 @@ import TableCell from '@material-ui/core/TableCell'
 
 export default function LeadersList(props) {
 
+  const row = (data, i) => {
+    return (
+    <TableRow key={i}>
+      <TableCell>{data.counter_name}</TableCell>
+      <TableCell>{data.name}</TableCell>
+      <TableCell>{data.reps}</TableCell>
+    </TableRow>)
+  }
+
   return (
     <Table size='small'>
       <TableHead>
@@ -19,15 +28,7 @@ export default function LeadersList(props) {
       </TableHead>
 
       <TableBody>
-        {props.leaders.map((data, i) => {
-            return (
-              <TableRow key={i}>
-                <TableCell>{data.counter_name}</TableCell>
-                <TableCell>{data.name}</TableCell>
-                <TableCell>{data.reps}</TableCell>
-              </TableRow>
-            )
-          })}
+        {props.leaders.map((data, i) => (data ? row(data, i) : null))}
       </TableBody>
     </Table>
   )
