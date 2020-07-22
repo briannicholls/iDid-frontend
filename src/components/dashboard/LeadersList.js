@@ -5,7 +5,6 @@ import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
-// import Paper from '@material-ui/core/Paper'
 
 export default function LeadersList(props) {
 
@@ -14,7 +13,7 @@ export default function LeadersList(props) {
       <TableHead>
         <TableRow>
           <TableCell>Thing</TableCell>
-          <TableCell align="right">Name</TableCell>
+          <TableCell align="left">Name</TableCell>
           <TableCell align="left">Reps</TableCell>
         </TableRow>
       </TableHead>
@@ -24,8 +23,8 @@ export default function LeadersList(props) {
           return (
             <TableRow key={i}>
               <TableCell>{data.counter}</TableCell>
-              <TableCell>{data.allTimeLeader}</TableCell>
-              <TableCell>{data.sum}</TableCell>
+              <TableCell>{data.name}</TableCell>
+              <TableCell>{data.reps}</TableCell>
             </TableRow>
           )
         })}
