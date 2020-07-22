@@ -16,7 +16,7 @@ import Dashboard from './components/dashboard/Dashboard'
 import {getCurrentUser} from './actions/currentUser.js'
 import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
-import {fetchCounters} from './actions/counters.js'
+// import {fetchCounters} from './actions/counters.js'
 
 import {makeStyles} from '@material-ui/core/styles'
 
@@ -38,11 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function App({currentUser, fetchCounters}) {
+export function App({currentUser}) {
   const classes = useStyles();
 
   useEffect(() => {
-      fetchCounters()
       getCurrentUser()
     })
 
