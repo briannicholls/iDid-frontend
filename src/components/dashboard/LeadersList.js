@@ -22,7 +22,7 @@ export default function LeadersList(props) {
         {props.leaders.map((data, i) => {
             return (
               <TableRow key={i}>
-                <TableCell>{data.counter}</TableCell>
+                <TableCell>{data.counter_name}</TableCell>
                 <TableCell>{data.name}</TableCell>
                 <TableCell>{data.reps}</TableCell>
               </TableRow>
