@@ -28,7 +28,7 @@ export default function LeadersList(props) {
       </TableHead>
 
       <TableBody>
-        {props.leaders.map((data, i) => (data ? row(data, i) : null))}
+        {props.leaders.map((data, i) => (data && data.reps ? row(data, i) : null))}
       </TableBody>
     </Table>
   )
