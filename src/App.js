@@ -43,6 +43,7 @@ export function App({currentUser}) {
 
   useEffect(() => {
       getCurrentUser()
+      // fetchCounters()
     })
 
   const loggedInState = () => {
@@ -80,15 +81,10 @@ export function App({currentUser}) {
       <Grid container className={classes.root} >
         <Grid item>
           <CssBaseline />
-
-
             {currentUser.id ? loggedInState() : loggedOutState()}
-
-
         </Grid>
       </Grid>
     )
-
 }
 
 const mapStateToProps = state => {

@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import WeightInput from './WeightInput'
 // import TimeInput from './TimeInput'
+import {fetchCounters} from '../../actions/counters.js'
 
 import CounterSelectBox from '../counters/selectBox.js'
 import {addAction} from '../../actions/actionForm.js'
@@ -37,6 +38,10 @@ const useStyles = makeStyles((theme) => (
 
 export function ActionForm(props) {
   const classes = useStyles();
+
+  useEffect(() => {
+    props.fetchCounters()
+  } )
 
   const [reps, setReps] = useState(0)
   const [counter, setCounter] = useState('')
@@ -149,7 +154,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addAction: (actionData) => dispatch(addAction(actionData))
+    addAction: (actionData) => dispatch(addAction(actionData)),
+    fetchCounters: () => dispatch(fetchCounters())
   }
 }
 

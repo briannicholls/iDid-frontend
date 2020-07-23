@@ -13,6 +13,6 @@ export const fetchCounters = () => {
       }
     })
       .then(resp => resp.json())
-      .then(json => dispatch({type: 'SET_COUNTERS', payload: json}))
+      .then(json => dispatch({type: 'SET_COUNTERS', payload: json}) )
   }
 }

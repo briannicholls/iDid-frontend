@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {logout} from '../actions/currentUser.js'
 import {fetchUserActions} from '../actions/actions.js'
-import {fetchCounters} from '../actions/counters.js'
+// import {fetchCounters} from '../actions/counters.js'
 
 
 // Material UI
@@ -14,10 +14,9 @@ import OfflinePinIcon from '@material-ui/icons/OfflinePin';
 import HistoryIcon from '@material-ui/icons/History';
 
 const BottomNav = (props) => {
-
-  useEffect(() => {
-    fetchCounters()
-  })
+  //
+  // useEffect(() => {
+  // })
 
   const handleNavChange = (newValue) => {
     props.changeAppState(newValue)

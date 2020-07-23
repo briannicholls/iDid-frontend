@@ -17,9 +17,7 @@ function NavContainer({value, currentUser, changeAppState, getCurrentState, fetc
     changeAppState(val) // server POST request
   }
 
-  return (
-      <BottomNav value={value} changeAppState={handleChangeState} position='static' />
-  )
+  return ( <BottomNav value={value} changeAppState={handleChangeState} position='static' /> )
 }
 
 const mapStateToProps = (state) => {
