@@ -6,7 +6,8 @@ export const changeAppState = (val) => {
     fetch(API + '/state', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Same-Site': 'None; Secure;',
       },
       credentials: 'include',
       body: JSON.stringify(val)
@@ -32,6 +33,7 @@ export const getCurrentState = (userId) => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
+        'Same-Site': 'None; Secure;',
       }
     })
     .then(resp => resp.json())

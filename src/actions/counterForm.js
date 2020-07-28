@@ -9,6 +9,7 @@ export const addCounter = counterData => {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': REQUEST_ORIGIN,
+        'Same-Site': 'None; Secure;',
       },
       body: JSON.stringify(counterData)
     })

@@ -12,6 +12,7 @@ export const submitCredentials = (credentials) => {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': REQUEST_ORIGIN,
+        'Same-Site': 'None; Secure;',
       },
       body: JSON.stringify({email: credentials.email, password: credentials.password})
     }

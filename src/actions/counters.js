@@ -10,6 +10,7 @@ export const fetchCounters = () => {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': REQUEST_ORIGIN,
+        'Same-Site': 'None; Secure;',
       }
     })
       .then(resp => resp.json())

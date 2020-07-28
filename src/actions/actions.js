@@ -7,12 +7,13 @@ export const fetchUserActions = (userId) => {
       method: 'GET',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Same-Site': 'None; Secure;',
       }
     })
       .then(resp => resp.json())
       .then(json => {
-        
+
         if (json && json.length >= 0) {
           dispatch({type: 'SET_USER_ACTIONS', payload: json})
         } else {
