@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import WeightInput from './WeightInput'
-// import TimeInput from './TimeInput'
-import {fetchCounters} from '../../actions/counters.js'
 
+import WeightInput from './WeightInput'
 import CounterSelectBox from '../counters/selectBox.js'
 import {addAction} from '../../actions/actionForm.js'
 import EzButton from './EzButton'
+
 // Material UI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -39,42 +38,20 @@ const useStyles = makeStyles((theme) => (
 export function ActionForm(props) {
   const classes = useStyles();
 
-  useEffect(() => {
-    props.fetchCounters()
-  } )
-
+  const [counter, setCounter] = useState({})
   const [reps, setReps] = useState(0)
-  const [counter, setCounter] = useState('')
   const [weight, setWeight] = useState(0)
 
-  const handleChangeReps = (event) => {
-    setReps(parseInt(event.target.value))
-  }
-
-  const handleWeightChange = (e) => {
-    setWeight(parseInt(e.target.value))
-  }
+  const handleChangeReps = (event) => setReps(parseInt(event.target.value))
+  const handleWeightChange = (e) => setWeight(parseInt(e.target.value))
+  const handleEzButtonPress = (val) => setReps(parseInt(reps) + parseInt(val))
+  const handleClickNewCounter = () => props.history.push('/counters/new')
+  const handleUpdateCounter = (newValue) => setCounter(newValue)
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
     props.addAction({reps, weight, counter_id: counter.id, user_id: props.currentUser.id})
     props.history.push('/actions')
-  }
-
-  const handleOnClick = () => {
-    props.history.push('/counters/new')
-  }
-
-  const handleEzButtonPress = (val) => {
-    const newVal = parseInt(reps) + parseInt(val)
-    setReps(newVal)
-  }
-
-  const handleUpdateCounter = (newValue) => {
-    const newCounter = props.counters.find(item => item.name === newValue)
-    if (newCounter) {
-      setCounter(newCounter)
-    }
   }
 
   return (
@@ -86,13 +63,9 @@ export function ActionForm(props) {
 
       <form onSubmit={handleOnSubmit} className={classes.form} noValidate>
       <Grid item className={classes.gridItem}>
-        <TextField
-          required
-          fullWidth
-          autoFocus={false}
-          id="reps"
-          variant="outlined"
+        <TextField required fullWidth autoFocus={false} variant="outlined"
           margin="normal"
+          id="reps"
           label="This many"
           name="reps"
           type="number"
@@ -100,7 +73,6 @@ export function ActionForm(props) {
           onChange={handleChangeReps}
           />
       </Grid>
-
 
       <Grid item xs={12}>
         <Grid container direction="row" alignContent="center" alignItems="center" justify="center">
@@ -113,13 +85,13 @@ export function ActionForm(props) {
         </Grid>
       </Grid>
 
-      {counter.kind === 'timed' ? <Container><Typography variant="h3">{counter.measurement_unit}</Typography></Container> : null}
+      {counter && counter.kind === 'timed' ? <Container><Typography variant="h3">{counter.measurement_unit}</Typography></Container> : null}
 
       <Grid item className={classes.gridItem}>
-        <CounterSelectBox options={props.counters} updateCounter={handleUpdateCounter} />
+        <CounterSelectBox updateCounter={handleUpdateCounter} />
       </Grid>
 
-      {counter.kind === 'weighted' ? <Grid item className={classes.gridItem}><WeightInput unit={counter.measurement_unit} weight={weight} handleWeightChange={handleWeightChange} /></Grid> : null}
+      {counter && counter.kind === 'weighted' ? <Grid item className={classes.gridItem}><WeightInput unit={counter.measurement_unit} weight={weight} handleWeightChange={handleWeightChange} /></Grid> : null}
 
       <Grid item className={classes.gridItem}>
         <Button
@@ -133,7 +105,7 @@ export function ActionForm(props) {
 
       <Grid item className={classes.gridItem}>
         <Button
-          onClick={handleOnClick}
+          onClick={handleClickNewCounter}
           fullWidth
           variant="contained"
           color="inherit"
@@ -146,17 +118,11 @@ export function ActionForm(props) {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    counters: state.counters,
-    currentUser: state.currentUser
-  }
+  return {  currentUser: state.currentUser  }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    addAction: (actionData) => dispatch(addAction(actionData)),
-    fetchCounters: () => dispatch(fetchCounters())
-  }
+  return {  addAction: (actionData) => dispatch(addAction(actionData))  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ActionForm))
