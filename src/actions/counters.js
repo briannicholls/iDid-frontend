@@ -9,7 +9,7 @@ export const setCounters = () => {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': REQUEST_ORIGIN,
-        'Same-Site': 'None; Secure;',
+        'SameSite': 'None; Secure;',
       }
     })
       .then(resp => resp.json())
@@ -24,7 +24,7 @@ export const getCounters = (callback) => {
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': REQUEST_ORIGIN,
-      'Same-Site': 'None; Secure;',
+      'SameSite': 'None; Secure;',
     }
   })
     .then(resp => resp.json())

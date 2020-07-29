@@ -9,7 +9,7 @@ export const createUser = (user) => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Same-Site': 'None; Secure;',
+        'SameSite': 'None; Secure;',
       },
       body: JSON.stringify({user})
     })
