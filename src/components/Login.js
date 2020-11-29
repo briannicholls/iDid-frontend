@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
-
 import {submitCredentials} from '../actions/loginForm.js'
 import {setCurrentUser} from '../actions/currentUser.js'
-
+import {loginSubmit} from '../actions'
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -41,7 +40,8 @@ export const Login = (props) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    props.submitCredentials({email, password})
+    // props.submitCredentials({email, password})
+    props.loginSubmit({email, password})
   }
 
   const handleRegisterClick = () => {
@@ -95,11 +95,11 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    submitCredentials: creds => dispatch(submitCredentials(creds)),
-    setCurrentUser: userData => dispatch(setCurrentUser(userData))
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     submitCredentials: creds => dispatch(submitCredentials(creds)),
+//     setCurrentUser: userData => dispatch(setCurrentUser(userData)),
+//   }
+// }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+export default withRouter(connect(mapStateToProps, { loginSubmit })(Login))
