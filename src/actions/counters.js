@@ -1,5 +1,4 @@
 import {API} from '../Constants.js'
-import {REQUEST_ORIGIN} from '../Constants.js'
 
 export const setCounters = () => {
   return dispatch => {
@@ -8,8 +7,6 @@ export const setCounters = () => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': REQUEST_ORIGIN,
-        'SameSite': 'None; Secure;',
       }
     })
       .then(resp => resp.json())
@@ -23,8 +20,6 @@ export const getCounters = (callback) => {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': REQUEST_ORIGIN,
-      'SameSite': 'None; Secure;',
     }
   })
     .then(resp => resp.json())

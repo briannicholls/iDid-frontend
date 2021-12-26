@@ -1,5 +1,5 @@
 import {API} from '../Constants.js'
-import {REQUEST_ORIGIN} from '../Constants.js'
+// import {REQUEST_ORIGIN} from '../Constants.js'
 
 export const addAction = actionData => {
   return dispatch => {
@@ -9,8 +9,6 @@ export const addAction = actionData => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': REQUEST_ORIGIN,
-        'SameSite': 'None; Secure;',
       },
       body: JSON.stringify(actionData)
     })

@@ -7,7 +7,6 @@ export const changeAppState = (val) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'SameSite': 'None; Secure;',
       },
       credentials: 'include',
       body: JSON.stringify(val)
@@ -33,7 +32,6 @@ export const getCurrentState = (userId) => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'SameSite': 'None; Secure;',
       }
     })
     .then(resp => resp.json())
