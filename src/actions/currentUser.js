@@ -40,7 +40,6 @@ export const getCurrentUser = () => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'SameSite': 'None; Secure;',
       }
     })
       .then(resp => resp.json())

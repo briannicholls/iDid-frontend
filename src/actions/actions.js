@@ -8,7 +8,6 @@ export const fetchUserActions = (userId) => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'SameSite': 'None; Secure;',
       }
     })
       .then(resp => resp.json())
