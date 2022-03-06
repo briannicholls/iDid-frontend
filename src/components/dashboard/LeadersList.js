@@ -1,10 +1,6 @@
 import React from 'react';
 
-import Table from '@material-ui/core/Table'
-import TableHead from '@material-ui/core/TableHead'
-import TableBody from '@material-ui/core/TableBody'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
+import {Table, TableHead, TableBody, TableRow, TableCell} from '@material-ui/core'
 
 export default function LeadersList(props) {
 
@@ -18,7 +14,7 @@ export default function LeadersList(props) {
   }
 
   return (
-    <Table size='small'>
+    <Table>
       <TableHead>
         <TableRow>
           <TableCell>Thing</TableCell>

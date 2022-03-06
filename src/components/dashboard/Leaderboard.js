@@ -1,13 +1,10 @@
 import React, {useState, useEffect} from 'react';
+import {fetchAllLeaders, fetchWeekLeaders, fetchMonthLeaders} from '../../actions/leaderboardActions'
 
 import LeadersList from './LeadersList'
 
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-
-import {fetchAllLeaders} from '../../actions/leaderboardActions'
-import {fetchWeekLeaders} from '../../actions/leaderboardActions'
-import {fetchMonthLeaders} from '../../actions/leaderboardActions'
 
 export default function Leaderboard(props) {
   const [allTimeLeaders, setAllTimeLeaders] = useState([])
@@ -20,15 +17,15 @@ export default function Leaderboard(props) {
     fetchMonthLeaders(setMonthLeaders)  }, [])
 
   return (
-    <Paper square variant='outlined'>
-      <Typography variant='h2'>This Week</Typography>
+    <>
+      <Typography variant="h2" style={{textAlign: 'center'}}>This Week</Typography>
       <LeadersList leaders={weekLeaders} />
-
-      <Typography variant='h2'>This Month</Typography>
+      <br />
+      <Typography variant="h2" style={{textAlign: 'center'}}>This Month</Typography>
       <LeadersList leaders={monthLeaders} />
-
-      <Typography variant='h2'>All-Time</Typography>
+      <br />
+      <Typography variant="h2" style={{textAlign: 'center'}}>All-Time</Typography>
       <LeadersList leaders={allTimeLeaders} />
-    </Paper>
+    </>
   )
 }
