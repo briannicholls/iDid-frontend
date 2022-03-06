@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {logout} from '../actions/currentUser.js'
 import {fetchUserActions} from '../actions/actions.js'
-// import {fetchCounters} from '../actions/counters.js'
-
 
 // Material UI
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -12,11 +10,9 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import OfflinePinIcon from '@material-ui/icons/OfflinePin';
 import HistoryIcon from '@material-ui/icons/History';
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 
 const BottomNav = (props) => {
-  //
-  // useEffect(() => {
-  // })
 
   const handleNavChange = (newValue) => {
     props.changeAppState(newValue)
@@ -39,7 +35,7 @@ const BottomNav = (props) => {
       }}
       showLabels
     >
-      <BottomNavigationAction name="home" label="Dashboard" icon={<DashboardIcon />}  />
+      <BottomNavigationAction name="home" label="Leaderboards" icon={<FormatListNumberedIcon />}  />
       <BottomNavigationAction name="routines" label="My Routines" icon={<OfflinePinIcon />} />
       <BottomNavigationAction onClick={handleHistoryClick} name="actions" label="History" icon={<HistoryIcon />} />
       <BottomNavigationAction label="Log Out" onClick={handleLogout} />
