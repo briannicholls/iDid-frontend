@@ -75,7 +75,7 @@ export function ActionForm(props) {
       </Grid>
 
       <Grid item xs={12}>
-        <Grid container direction="row" alignContent="center" alignItems="center" justify="center">
+        <Grid container direction="row" alignContent="center" alignItems="center" justifyContent="center">
           <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton></Grid>
           <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton></Grid>
           <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton></Grid>

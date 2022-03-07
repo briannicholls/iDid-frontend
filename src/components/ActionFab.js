@@ -1,7 +1,5 @@
-import React from 'react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-
 import {changeAppState} from '../actions/value'
 
 // Material UI
@@ -11,9 +9,9 @@ import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
   fab: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: theme.spacing(9),
-    right: theme.spacing(5)
+    right: theme.spacing(2)
   }
 }))
 

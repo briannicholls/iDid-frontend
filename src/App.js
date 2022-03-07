@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Route, withRouter, Switch} from 'react-router-dom'
 import './App.css';
 //components
+import Routines from './components/Routines.js';
 import Login from './components/Login'
 import Signup from './components/Signup.js'
 import ActionFab from './components/ActionFab.js'
@@ -45,8 +46,8 @@ export function App({currentUser}) {
   const loggedInState = () => {
     return (
       <>
-
         <Route exact path="/actions" component={ActionsContainer} />
+        <Route exact path="/routines" component={Routines} />
         <Route exact path="/actions/new" component={ActionForm} />
         <Route exact path="/counters/new" component={CounterForm} />
         <Route path='/' component={ActionFab} />
@@ -55,7 +56,6 @@ export function App({currentUser}) {
         <Container className={classes.stickyBottom}>
           <Route path='/' component={NavContainer} />
         </Container>
-
       </>
     )
   }
