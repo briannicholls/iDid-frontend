@@ -14,7 +14,7 @@ export default function LeadersList(props) {
   }
 
   return (
-    <Table>
+    <Table >
       <TableHead>
         <TableRow>
           <TableCell>Thing</TableCell>
