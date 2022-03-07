@@ -4,8 +4,6 @@ import {connect} from 'react-redux'
 import ActionsList from './actionsList.js'
 
 function ActionsContainer(props) {
-
-
   return (
     <ActionsList actions={props.actions} />
   )
