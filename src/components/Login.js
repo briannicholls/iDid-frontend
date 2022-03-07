@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8)
   },
   avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    // margin: theme.spacing(1),
+    // backgroundColor: theme.palette.secondary.main,
   }
 })
 )
@@ -51,7 +51,7 @@ export const Login = (props) => {
   return (
       <Container component="main" maxWidth="xs" className={classes.paper}>
 
-      <Avatar className={classes.avatar} ></Avatar>
+      <Avatar className={classes.avatar} src={'/logo512.png'} />
 
       <p>{props.currentUser.server_message === 'Not logged in!' ? null : props.currentUser.server_message}</p>
 
