@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {fetchAllLeaders, fetchWeekLeaders, fetchMonthLeaders} from '../../actions/leaderboardActions'
-
 import LeadersList from './LeadersList'
-
-import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
 export default function Leaderboard(props) {

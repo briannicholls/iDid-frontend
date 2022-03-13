@@ -14,7 +14,9 @@ export default function LeadersList(props) {
   }
 
   return (
-    <Table >
+    <Table size='small' 
+      // padding='none'
+    >
       <TableHead>
         <TableRow>
           <TableCell>Thing</TableCell>
