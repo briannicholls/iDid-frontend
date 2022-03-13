@@ -15,7 +15,8 @@ const useStyles = makeStyles(() => ({
   stickyBottom: {
     position: 'fixed',
     bottom: '0px',
-    margin: 'auto',
+    left: '0px',
+    // margin: 'auto',
     width: '100%'
   },
 }));
