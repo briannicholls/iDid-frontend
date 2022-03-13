@@ -1,9 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-
-// import {createUser} from '../actions/users.js'
 import {addCounter} from '../../actions/counterForm.js'
-
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -11,9 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
-// import MenuItem from '@material-ui/core/MenuItem';
 import NativeSelect from '@material-ui/core/NativeSelect';
-// import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -79,21 +74,20 @@ export const CounterForm = (props) => {
 
   const UnitSelect = () => {
     return (
-        <>
-          <FormLabel>How Will You Measure It?</FormLabel>
-          <NativeSelect
-            name='measurement_unit'
-            value={measurementUnit}
-            onChange={(e) => setMeasurementUnit(e.target.value)}
-          >
-            <option aria-label="None" value={''}></option>
-            <option value={'minutes'}>Minutes</option>
-            <option value={'seconds'}>Seconds</option>
-            <option value={'lb'}>Pounds (lb)</option>
-            <option value={'kg'}>Kilograms (kg)</option>
-          </NativeSelect>
-        </>
-
+      <>
+        <FormLabel>How Will You Measure It?</FormLabel>
+        <NativeSelect
+          name='measurement_unit'
+          value={measurementUnit}
+          onChange={(e) => setMeasurementUnit(e.target.value)}
+        >
+          <option aria-label="None" value={''}></option>
+          <option value={'minutes'}>Minutes</option>
+          <option value={'seconds'}>Seconds</option>
+          <option value={'lb'}>Pounds (lb)</option>
+          <option value={'kg'}>Kilograms (kg)</option>
+        </NativeSelect>
+      </>
     )
   }
 
@@ -117,22 +111,23 @@ export const CounterForm = (props) => {
 
               <FormLabel component="legend">Optional (Choose one):</FormLabel>
 
-                <FormGroup>
+              <FormGroup>
 
-                  <FormControlLabel
-                    control={<Checkbox onChange={handleChange} name="weighted" checked={kind.weighted} />}
-                    label="Track weight with this counter"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox onChange={handleChange} name="timed" checked={kind.timed} />}
-                    label="This is a timed activity"
-                  />
+                <FormControlLabel
+                  control={<Checkbox onChange={handleChange} name="weighted" checked={kind.weighted} />}
+                  label="Track weight with this counter"
+                />
+                
+                <FormControlLabel
+                  control={<Checkbox onChange={handleChange} name="timed" checked={kind.timed} />}
+                  label="This is a timed activity"
+                />
 
-                  <UnitSelect />
+                <UnitSelect />
 
-                </FormGroup>
+              </FormGroup>
 
-                  {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
+              {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
 
             </FormControl>
           </Grid>

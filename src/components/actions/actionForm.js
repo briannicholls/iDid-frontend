@@ -5,7 +5,6 @@ import WeightInput from './WeightInput'
 import CounterSelectBox from '../counters/selectBox.js'
 import {addAction} from '../../actions/actionForm.js'
 import EzButton from './EzButton'
-
 // Material UI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -13,13 +12,13 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import GridItem from '../mui_branded/GridItem';
 
-const useStyles = makeStyles((theme) => (
-  {
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  }));
+const useStyles = makeStyles( theme => ({
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 export function ActionForm(props) {
   const classes = useStyles();
@@ -33,7 +32,6 @@ export function ActionForm(props) {
   const handleEzButtonPress = (val) => setReps(parseInt(reps) + parseInt(val))
   const handleClickNewCounter = () => props.history.push('/counters/new')
   const handleUpdateCounter = (newValue) => setCounter(newValue)
-
   const handleOnSubmit = (e) => {
     e.preventDefault()
     props.addAction({reps, weight, counter_id: counter.id, user_id: props.currentUser.id})
@@ -48,9 +46,7 @@ export function ActionForm(props) {
       <form onSubmit={handleOnSubmit} className={classes.form} noValidate>
       <Grid item>
         <Grid container item spacing="2" 
-          // style={{alignItems: 'center'}}
           alignItems="center"
-          justifyContent='center'
           style={{textAlign: 'center', paddingBottom: 10}}
         >
           <Grid item xs={4}>
@@ -77,16 +73,16 @@ export function ActionForm(props) {
         <Grid container direction="row"
           spacing={3}
         >
-          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton></Grid>
-          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton></Grid>
-          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton></Grid>
-          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'-1'}></EzButton></Grid>
-          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'-5'}></EzButton></Grid>
-          <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'-10'}></EzButton></Grid>
+          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton>} />
+          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton>} />
+          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton>} />
+          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'-1'}></EzButton>} />
+          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'-5'}></EzButton>} />
+          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'-10'}></EzButton>} />
         </Grid>
       </Grid>
 
-      {counter && counter.kind === 'timed' ? <Container><Typography variant="h3">{counter.measurement_unit}</Typography></Container> : null}
+      {counter && counter.kind === 'timed' ? <Typography variant="h3">{counter.measurement_unit}</Typography> : null}
 
       <Grid item>
         <CounterSelectBox updateCounter={handleUpdateCounter} />

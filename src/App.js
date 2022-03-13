@@ -17,11 +17,12 @@ import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
 //Material UI
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from './theme';
 
 import './App.css';
+import { CheckBoxOutlineBlank } from '@material-ui/icons';
 
 export function App({currentUser}) {
   useEffect(() => {
@@ -30,7 +31,7 @@ export function App({currentUser}) {
 
   const loggedInState = () => {
     return (
-      <Container style={{padding: 20}}>
+      <Box m={2}>
         <Route exact path="/actions" component={ActionsList} />
         <Route exact path="/routines" component={Routines} />
         <Route exact path="/actions/new" component={ActionForm} />
@@ -38,7 +39,7 @@ export function App({currentUser}) {
         <Route path='/' component={ActionFab} />
         <Route exact path='/' component={Dashboard} />
         <Route path='/' component={NavContainer} />
-      </Container>
+      </Box>
     )
   }
 

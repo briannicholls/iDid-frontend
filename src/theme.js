@@ -21,4 +21,10 @@ const theme = responsiveFontSizes(
   })
 )
 
+theme.props = {
+  MuiGridItem: {
+    textAlign: 'center'
+  }
+}
+
 export default theme
