@@ -5,7 +5,6 @@
 
 // ^^^ Leaving this comment here to remember how dumb I was when I started this project
 
-// import {fetchUserActions} from './actions'
 import { API_URL } from '../Constants.js'
 
 // execute only with valid user
@@ -50,6 +49,5 @@ export const getCurrentUser = () => {
                     dispatch({ type: 'CLEAR_CURRENT_USER' })
                 }
             })
-            // .catch(console.log)
     }
 }

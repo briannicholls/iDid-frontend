@@ -19,8 +19,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import CategoryIcon from '@material-ui/icons/Category';
@@ -52,7 +50,6 @@ export const CheckboxesGroup = (props) => {
   const classes = useStyles();
 
   const [measurementUnit, setMeasurementUnit] = useState('default')
-
   const [kind, setKind] = React.useState({
     weighted: false,
     timed: false,
@@ -64,19 +61,12 @@ export const CheckboxesGroup = (props) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    // props.submitCounterForm(props)
-    // props.history.push('/actions/new')
-  }
-
-  const handleOnChange = (e) => {
-    // props.updateCounterForm({name: 'name', value: e.target.value})
   }
 
   const error = kind.timed && kind.weighted
 
   const UnitSelect = () => {
     return (
-
         <FormControl>
           <InputLabel>How Will You Measure It?</InputLabel>
           <NativeSelect
@@ -89,7 +79,6 @@ export const CheckboxesGroup = (props) => {
             {kind.weighted ? <><option value={'lb'}>Pounds (lb)</option><option value={'kg'}>Kilograms (kg)</option></> : null}
           </NativeSelect>
         </FormControl>
-
     )
   }
 
@@ -108,7 +97,7 @@ export const CheckboxesGroup = (props) => {
         <Grid container spacing={2}>
 
           <Grid item xs={12}>
-          <TextField required fullWidth variant="outlined" label="Thing to count" name="counter_name" onChange={handleOnChange} />
+          <TextField required fullWidth variant="outlined" label="Thing to count" name="counter_name" />
           </Grid>
 
           <CheckboxesGroup />
