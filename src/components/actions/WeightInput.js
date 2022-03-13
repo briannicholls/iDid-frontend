@@ -1,17 +1,27 @@
 import TextField from '@material-ui/core/TextField';
-// import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/styles';
 
-export default function WeightInput(props) {
+const useStyles = makeStyles( theme => ({
+  root: {
+    marginTop: 20
+  },
+}));
+
+const WeightInput = props => {
+  const classes = useStyles();
 
   return (
     <TextField
+      required
       label={`Weight (${props.unit})`}
       variant='outlined'
+      name="weight"
       type="number"
       onChange={props.handleWeightChange}
       value={props.weight}
-      name="weight"
-      gutterBottom
+      className={classes.root}
     />
   )
 }
+
+export default WeightInput

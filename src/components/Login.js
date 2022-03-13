@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {submitCredentials} from '../actions/loginForm.js'
 import {setCurrentUser} from '../actions/currentUser.js'
-
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -13,7 +12,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles( theme => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -24,10 +23,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginTop: theme.spacing(8)
   },
-})
-)
-export const Login = (props) => {
+}))
 
+export const Login = (props) => {
   const classes = useStyles()
 
   const [email, setEmail] = useState('')
@@ -43,7 +41,7 @@ export const Login = (props) => {
   }
 
   return (
-      <Container component="main" maxWidth="xs" className={classes.paper}>
+    <Container component="main" maxWidth="xs" className={classes.paper}>
 
       <Avatar src={'/logo512.png'} />
 

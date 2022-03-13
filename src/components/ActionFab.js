@@ -30,7 +30,7 @@ export const FloatingActionButton = (props) => {
     props.history.push('/actions/new')
   }
 
-  if (location.pathname.includes('actions') || location.pathname.includes('new') ) {
+  if ( location.pathname.includes('new') ) {
     return null
   }
 

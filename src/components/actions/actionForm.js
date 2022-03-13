@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import GridItem from '../mui_branded/GridItem';
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles( theme => ({
   submit: {
@@ -25,6 +26,7 @@ export function ActionForm(props) {
   const [counter, setCounter] = useState({})
   const [reps, setReps] = useState(0)
   const [weight, setWeight] = useState(0)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChangeReps = (event) => setReps(parseInt(event.target.value))
   const handleWeightChange = (e) => setWeight(parseInt(e.target.value))
@@ -33,8 +35,22 @@ export function ActionForm(props) {
   const handleUpdateCounter = (newValue) => setCounter(newValue)
   const handleOnSubmit = (e) => {
     e.preventDefault()
+    // validate form
+    if (!validate()) {
+      return
+    }
     props.addAction({reps, weight, counter_id: counter.id, user_id: props.currentUser.id})
     props.history.push('/actions')
+  }
+
+  const validate = () => {
+    if (!counter.id) {
+      setErrorMessage('You must pick something to count!')
+      return false
+    } else {
+      setErrorMessage('')
+      return true
+    }
   }
 
   return (
@@ -42,9 +58,18 @@ export function ActionForm(props) {
       wrap="nowrap"
       direction='column'
     >
+      {errorMessage ? 
+        <GridItem children={
+          <Alert variant="filled" severity="error">
+            {errorMessage}
+          </Alert>
+        
+        } />
+      : null}
+
       <form onSubmit={handleOnSubmit} className={classes.form} noValidate>
         <GridItem children={
-          <GridItem container spacing="2" 
+          <GridItem container
             alignItems="center"
             children={
               <>
@@ -84,9 +109,7 @@ export function ActionForm(props) {
           <GridItem children={<Typography gutterBottom variant="h3">{counter.measurement_unit}</Typography>} />
         : null}
 
-        <Grid item>
-          <CounterSelectBox updateCounter={handleUpdateCounter} />
-        </Grid>
+        <GridItem children={<CounterSelectBox updateCounter={handleUpdateCounter} />} />
 
         {counter && counter.kind === 'weighted' ? 
           <GridItem children={
