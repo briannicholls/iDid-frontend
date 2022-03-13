@@ -47,7 +47,6 @@ const BottomNav = (props) => {
       <BottomNavigationAction name="home" label="Leaderboards" icon={<FormatListNumberedIcon />}  />
       <BottomNavigationAction name="routines" label="My Routines" icon={<OfflinePinIcon />} />
       <BottomNavigationAction onClick={handleHistoryClick} name="actions" label="History" icon={<HistoryIcon />} />
-      {/* <BottomNavigationAction label="Log Out" onClick={handleLogout} /> */}
     </BottomNavigation>
   );
 }

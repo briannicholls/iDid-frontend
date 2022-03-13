@@ -13,7 +13,6 @@ function NavContainer({value, currentUser, changeAppState, getCurrentState, fetc
   }
 
   return  <BottomNav
-            value={value}
             changeAppState={handleChangeState}
             position='static' 
           />
@@ -21,7 +20,6 @@ function NavContainer({value, currentUser, changeAppState, getCurrentState, fetc
 
 const mapStateToProps = (state) => {
   return {
-    value: state.value,
     currentUser: state.currentUser
   }
 }

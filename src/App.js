@@ -16,29 +16,14 @@ import {getCurrentUser} from './actions/currentUser.js'
 import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
 //Material UI
-import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline'
-import {makeStyles} from '@material-ui/core/styles'
 import theme from './theme';
 
 import './App.css';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    padding: '0px',
-    paddingBottom: '50px'
-  },
-  stickyBottom: {
-    position: 'fixed',
-    bottom: '0px',
-  },
-}));
-
 export function App({currentUser}) {
-  const classes = useStyles();
-
   useEffect(() => {
     getCurrentUser()
   })
@@ -52,7 +37,6 @@ export function App({currentUser}) {
         <Route exact path="/counters/new" component={CounterForm} />
         <Route path='/' component={ActionFab} />
         <Route exact path='/' component={Dashboard} />
-
         <Route path='/' component={NavContainer} />
       </>
     )
@@ -70,9 +54,7 @@ export function App({currentUser}) {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <div className={classes.root} >
-        {currentUser.id ? loggedInState() : loggedOutState()}
-      </div>
+      {currentUser.id ? loggedInState() : loggedOutState()}
     </MuiThemeProvider>
   )
 }
