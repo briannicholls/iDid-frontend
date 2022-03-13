@@ -62,11 +62,11 @@ export const Login = (props) => {
         <Grid container spacing={4}>
 
           <Grid item xs={12} >
-          <TextField required fullWidth variant="outlined" label="e-mail" type="email" name="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <TextField fullWidth variant="outlined" label="e-mail" type="email" name="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
           </Grid>
 
           <Grid item xs={12}>
-            <TextField fullWidth variant="outlined" type="password" name="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <TextField fullWidth variant="outlined" label="password" type="password" name="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
           </Grid>
 
           <Grid item xs={12}>
@@ -77,8 +77,17 @@ export const Login = (props) => {
       </form>
 
       <Grid container>
-        <Grid item><Button fullWidth color='secondary' onClick={handleRegisterClick}>Register</Button></Grid>
+        <Grid item style={{margin: 'auto', textAlign: 'center'}}>
+          <Button style={{margin: 'auto', textAlign: 'center'}} 
+            fullWidth color='secondary'
+            onClick={handleRegisterClick}>Create an Account</Button></Grid>
       </Grid>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <sub>Copyright 2022 Brian Nicholls</sub>
 
       {props.requesting === true ? <p>Logging In</p> : null}
 
