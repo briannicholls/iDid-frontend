@@ -9,13 +9,11 @@ import {MuiThemeProvider} from '@material-ui/core/styles'
 import theme from './theme'
 
 ReactDOM.render(
-  <MuiThemeProvider theme={theme} >
-    <Provider store={store}>
-        <Router>
-          <App  />
-        </Router>
-    </Provider>
-  </MuiThemeProvider>
+  <Provider store={store}>
+      <Router>
+        <App  />
+      </Router>
+  </Provider>
 ,
   document.getElementById('root')
 );

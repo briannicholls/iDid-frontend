@@ -1,13 +1,15 @@
-import React from 'react';
-// import {connect} from 'react-redux'
-
+import {useEffect} from 'react';
 import Action from './action.js'
 
 // Material UI
 import List from '@material-ui/core/List';
-// import ListItem from '@material-ui/core/ListItem';
+import { fetchUserActions } from '../../actions/actions.js';
 
 export const ActionsList = (props) => {
+
+  useEffect(() => {
+    props.fetchUserActions(props.currentUser.id)
+  }, [])
 
   const renderActions = () => {
     if (props.actions.server_message) {
@@ -15,7 +17,6 @@ export const ActionsList = (props) => {
     } else {
       return props.actions.reverse().map(action => {
         return <Action action={action} key={action.id} kind={action.counter.kind} unit={action.counter.unit} ></Action>
-        // return <ListItem component={Action} key={action.id} action={action}></ListItem>
       })
     }
   }
@@ -23,16 +24,17 @@ export const ActionsList = (props) => {
   return (
     <>
     <List component="ul">
-        {renderActions()}
+      {renderActions()}
     </List>
     </>
   )
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     actions: state.actionsReducer
-//   }
-// }
+const mapStateToProps = state => {
+  return {
+    actions: state.actions,
+    currentUser: state.currentUser
+  }
+}
 
 export default ActionsList

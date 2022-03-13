@@ -6,7 +6,7 @@ import { createTheme, responsiveFontSizes } from '@material-ui/core/styles'
 const theme = responsiveFontSizes(
   createTheme({
     palette: {
-      // type: 'dark'
+      type: 'dark'
     },
 
   })

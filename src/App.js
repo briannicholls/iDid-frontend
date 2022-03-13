@@ -18,6 +18,7 @@ import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
 
 import {makeStyles} from '@material-ui/core/styles'
+import theme from './theme';
 
 //Material UI
 import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
@@ -26,7 +27,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     padding: '0px',
@@ -37,26 +38,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: '0px',
   },
 }));
-
-const themeLight = createTheme({
-  palette: {
-    background: {
-      // default: "#34b0e2"
-    }
-  }
-});
-
-const themeDark = createTheme({
-  palette: {
-    background: {
-      default: "#222222"
-    },
-    text: {
-      primary: "#ffffff"
-    }
-  }
-});
-
 
 export function App({currentUser}) {
   const classes = useStyles();
@@ -94,7 +75,7 @@ export function App({currentUser}) {
   }
 
   return (
-    <MuiThemeProvider theme={true ? themeLight : themeDark}>
+    <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <div className={classes.root} >
         {currentUser.id ? loggedInState() : loggedOutState()}

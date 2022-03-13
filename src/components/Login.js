@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-
-
 import {submitCredentials} from '../actions/loginForm.js'
 import {setCurrentUser} from '../actions/currentUser.js'
 
@@ -94,8 +92,6 @@ export const Login = (props) => {
     </Container>
   )
 }
-
-
 
 const mapStateToProps = state => {
   return {
