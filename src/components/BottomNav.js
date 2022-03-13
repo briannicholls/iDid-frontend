@@ -11,15 +11,17 @@ import OfflinePinIcon from '@material-ui/icons/OfflinePin';
 import HistoryIcon from '@material-ui/icons/History';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
+const useStyles = makeStyles(() => ({
+  stickyBottom: {
+    position: 'fixed',
+    bottom: '0px',
+    margin: 'auto',
+    width: '100%'
   },
-});
+}));
 
 const BottomNav = (props) => {
   const classes = useStyles()
-
   const handleNavChange = (newValue) => {
     props.changeAppState(newValue)
   }
@@ -40,12 +42,12 @@ const BottomNav = (props) => {
         handleNavChange(newValue)
       }}
       showLabels
-      className={classes.root}
+      className={classes.stickyBottom}
     >
       <BottomNavigationAction name="home" label="Leaderboards" icon={<FormatListNumberedIcon />}  />
       <BottomNavigationAction name="routines" label="My Routines" icon={<OfflinePinIcon />} />
       <BottomNavigationAction onClick={handleHistoryClick} name="actions" label="History" icon={<HistoryIcon />} />
-      <BottomNavigationAction label="Log Out" onClick={handleLogout} />
+      {/* <BottomNavigationAction label="Log Out" onClick={handleLogout} /> */}
     </BottomNavigation>
   );
 }

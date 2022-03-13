@@ -52,9 +52,8 @@ export function App({currentUser}) {
         <Route exact path="/counters/new" component={CounterForm} />
         <Route path='/' component={ActionFab} />
         <Route exact path='/' component={Dashboard} />
-        <Container className={classes.stickyBottom}>
-          <Route path='/' component={NavContainer} />
-        </Container>
+
+        <Route path='/' component={NavContainer} />
       </>
     )
   }
