@@ -9,7 +9,6 @@ import EzButton from './EzButton'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import GridItem from '../mui_branded/GridItem';
@@ -44,71 +43,70 @@ export function ActionForm(props) {
       direction='column'
     >
       <form onSubmit={handleOnSubmit} className={classes.form} noValidate>
-      <Grid item>
-        <Grid container item spacing="2" 
-          alignItems="center"
-          style={{textAlign: 'center', paddingBottom: 10}}
-        >
-          <Grid item xs={4}>
-            <Typography display='inline' >I did...</Typography>
-          </Grid>
-          <Grid item xs={8}>
-            <TextField display='inline' required fullWidth autoFocus={false} variant="outlined"
-              margin="normal"
-              id="reps"
-              label="This many"
-              name="reps"
-              type="number"
-              value={reps}
-              onChange={handleChangeReps}
-              />
-          </Grid>
-          
+        <GridItem children={
+          <GridItem container spacing="2" 
+            alignItems="center"
+            children={
+              <>
+                <GridItem xs={4} children={<Typography display='inline' variant="h4" >I did...</Typography>} />
+                <GridItem xs={8} children={
+                  <TextField 
+                    display='inline' required fullWidth autoFocus={false} variant="outlined"
+                    margin="normal"
+                    id="reps"
+                    label="This many"
+                    name="reps"
+                    type="number"
+                    value={reps}
+                    onChange={handleChangeReps}
+                  />
+                } />
+              </>
+            }
+          />
+        } />
+
+        <GridItem xs={12} 
+          style={{paddingBottom: 20}}
+          children={
+            <Grid container direction="row" spacing={3}>
+              <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton>} />
+              <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton>} />
+              <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton>} />
+              <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'-1'}></EzButton>} />
+              <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'-5'}></EzButton>} />
+              <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'-10'}></EzButton>} />
+            </Grid>
+          }
+        />
+
+        {counter && counter.kind === 'timed' ? <Typography variant="h3">{counter.measurement_unit}</Typography> : null}
+
+        <Grid item>
+          <CounterSelectBox updateCounter={handleUpdateCounter} />
         </Grid>
-      </Grid>
 
-      <Grid item xs={12} 
-        style={{paddingBottom: 20}}
-      >
-        <Grid container direction="row"
-          spacing={3}
-        >
-          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton>} />
-          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton>} />
-          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton>} />
-          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'-1'}></EzButton>} />
-          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'-5'}></EzButton>} />
-          <GridItem xs={4} s={4} children={<EzButton increment={handleEzButtonPress} numLabel={'-10'}></EzButton>} />
+        {counter && counter.kind === 'weighted' ? <Grid item><WeightInput unit={counter.measurement_unit} weight={weight} handleWeightChange={handleWeightChange} /></Grid> : null}
+
+        <Grid item>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            >Submit</Button>
         </Grid>
-      </Grid>
 
-      {counter && counter.kind === 'timed' ? <Typography variant="h3">{counter.measurement_unit}</Typography> : null}
-
-      <Grid item>
-        <CounterSelectBox updateCounter={handleUpdateCounter} />
-      </Grid>
-
-      {counter && counter.kind === 'weighted' ? <Grid item><WeightInput unit={counter.measurement_unit} weight={weight} handleWeightChange={handleWeightChange} /></Grid> : null}
-
-      <Grid item>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          >Submit</Button>
-      </Grid>
-
-      <Grid item>
-        <Button
-          onClick={handleClickNewCounter}
-          fullWidth
-          variant="contained"
-          color="secondary"
-          className={classes.submit}
-          >Count Something Else</Button>
-      </Grid>
+        <Grid item>
+          <Button
+            onClick={handleClickNewCounter}
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submit}
+            >Count Something Else</Button>
+        </Grid>
       </form>
     </Grid>
   );

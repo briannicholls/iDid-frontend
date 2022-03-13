@@ -13,10 +13,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import CategoryIcon from '@material-ui/icons/Category';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,7 +42,6 @@ export const CounterForm = (props) => {
 
   const [name, setName] = useState('')
   const [measurementUnit, setMeasurementUnit] = useState('')
-
   const [kind, setKind] = React.useState({
     weighted: false,
     timed: false,
@@ -65,7 +61,6 @@ export const CounterForm = (props) => {
     } else {
       counterData.kind = 'default'
     }
-    console.log(counterData)
     props.addCounter({counter: counterData})
     props.history.push('/actions/new')
   }
@@ -92,54 +87,50 @@ export const CounterForm = (props) => {
   }
 
   return (
-    <Container className={classes.root}>
-
-      <Avatar className={classes.avatar}><CategoryIcon /></Avatar>
-
+    <form className={classes.form} onSubmit={handleOnSubmit}>
       <Typography component="h1" variant="h5">I want to count...</Typography>
 
-      <form className={classes.form} onSubmit={handleOnSubmit}>
+      <Grid container spacing={2}>
 
-        <Grid container spacing={2}>
-
-          <Grid item xs={12}>
-            <TextField required fullWidth variant="outlined" label="Thing to count" name="name" value={name} onChange={(e) => setName(e.target.value)} />
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormControl component="fieldset" error={error} className={classes.formControl}>
-
-              <FormLabel component="legend">Optional (Choose one):</FormLabel>
-
-              <FormGroup>
-
-                <FormControlLabel
-                  control={<Checkbox onChange={handleChange} name="weighted" checked={kind.weighted} />}
-                  label="Track weight with this counter"
-                />
-                
-                <FormControlLabel
-                  control={<Checkbox onChange={handleChange} name="timed" checked={kind.timed} />}
-                  label="This is a timed activity"
-                />
-
-                <UnitSelect />
-
-              </FormGroup>
-
-              {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
-
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>Add Thing!</Button>
-          </Grid>
-
+        <Grid item xs={12}>
+          <TextField required fullWidth variant="outlined" label="Thing to count" name="name" value={name} onChange={(e) => setName(e.target.value)} />
         </Grid>
 
-      </form>
-    </Container>
+        <Grid item xs={12}>
+          <FormControl component="fieldset" error={error} className={classes.formControl}>
+
+            <FormLabel component="legend">Optional (Choose one):</FormLabel>
+
+            <FormGroup>
+
+              <FormControlLabel
+                control={<Checkbox onChange={handleChange} name="weighted" checked={kind.weighted} />}
+                label="Track weight with this counter"
+              />
+              
+              <FormControlLabel
+                control={<Checkbox onChange={handleChange} name="timed" checked={kind.timed} />}
+                label="This is a timed activity"
+              />
+
+              { kind.weighted || kind.timed ? 
+                <UnitSelect /> : null
+              }
+
+            </FormGroup>
+
+            {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
+
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>Add Thing!</Button>
+        </Grid>
+
+      </Grid>
+
+    </form>
   );
 }
 

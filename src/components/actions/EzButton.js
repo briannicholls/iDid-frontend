@@ -1,15 +1,12 @@
-import React from 'react'
-
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   ezButton: {
     textAlign: 'center',
     opacity: '70%', 
-    height: '6rem',
-    width:  '6rem',
+    height: '100%',
+    width:  '100%',
     fontSize: '2rem',
   },
 }));
