@@ -1,31 +1,28 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
 import {Route, withRouter, Switch} from 'react-router-dom'
-import './App.css';
 //components
 import Routines from './components/Routines.js';
 import Login from './components/Login'
 import Signup from './components/Signup.js'
 import ActionFab from './components/ActionFab.js'
-import ActionsContainer from './components/actions/actionsContainer.js'
 import CounterForm from './components/counters/counterForm.js'
 import NavContainer from './components/NavContainer'
 import ActionForm from './components/actions/actionForm.js'
+import ActionsList from './components/actions/actionsList.js';
 import Dashboard from './components/dashboard/Dashboard'
 //actions
 import {getCurrentUser} from './actions/currentUser.js'
 import {getCurrentState} from './actions/value.js'
 import {fetchUserActions} from './actions/actions.js'
-
+//Material UI
+import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline'
 import {makeStyles} from '@material-ui/core/styles'
 import theme from './theme';
 
-//Material UI
-import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
-
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import CssBaseline from '@material-ui/core/CssBaseline'
+import './App.css';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -49,13 +46,12 @@ export function App({currentUser}) {
   const loggedInState = () => {
     return (
       <>
-        <Route exact path="/actions" component={ActionsContainer} />
+        <Route exact path="/actions" component={ActionsList} />
         <Route exact path="/routines" component={Routines} />
         <Route exact path="/actions/new" component={ActionForm} />
         <Route exact path="/counters/new" component={CounterForm} />
         <Route path='/' component={ActionFab} />
         <Route exact path='/' component={Dashboard} />
-
         <Container className={classes.stickyBottom}>
           <Route path='/' component={NavContainer} />
         </Container>
@@ -65,12 +61,10 @@ export function App({currentUser}) {
 
   const loggedOutState = () => {
     return (
-      < >
-        <Switch>
-          <Route exact path='/signup' component={Signup} />
-          <Route path='/' component={Login} />
-        </Switch>
-      </>
+      <Switch>
+        <Route exact path='/signup' component={Signup} />
+        <Route path='/' component={Login} />
+      </Switch>
     )
   }
 

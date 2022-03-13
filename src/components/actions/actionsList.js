@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import Action from './action.js'
-
+import {connect} from 'react-redux'
 // Material UI
 import List from '@material-ui/core/List';
 import { fetchUserActions } from '../../actions/actions.js';
@@ -37,4 +37,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default ActionsList
+export default connect(mapStateToProps, { fetchUserActions })(ActionsList)
