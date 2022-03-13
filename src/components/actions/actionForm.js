@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-
 import WeightInput from './WeightInput'
 import CounterSelectBox from '../counters/selectBox.js'
 import {addAction} from '../../actions/actionForm.js'

@@ -30,7 +30,7 @@ export function App({currentUser}) {
 
   const loggedInState = () => {
     return (
-      <>
+      <Container style={{padding: 20}}>
         <Route exact path="/actions" component={ActionsList} />
         <Route exact path="/routines" component={Routines} />
         <Route exact path="/actions/new" component={ActionForm} />
@@ -38,7 +38,7 @@ export function App({currentUser}) {
         <Route path='/' component={ActionFab} />
         <Route exact path='/' component={Dashboard} />
         <Route path='/' component={NavContainer} />
-      </>
+      </Container>
     )
   }
 
