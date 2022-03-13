@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: theme.spacing(1),
     textAlign: 'center',
   },
 }));
@@ -16,7 +15,19 @@ export function EzButton(props) {
 
   return (
     <Container className={classes.paper}>
-      <Button variant="contained"  onClick={() => props.increment(props.numLabel)}>{props.numLabel}</Button>
+      <Button 
+        color={parseInt(props.numLabel) > 0 ? 'primary' : 'secondary'}
+        style={{
+          opacity: '70%', 
+          height: '6rem',
+          width:  '6rem',
+          fontSize: '2rem'
+        }}
+        variant="contained"
+        onClick={() => props.increment(props.numLabel)}
+      >
+        {props.numLabel}
+      </Button>
     </Container>
 
   )

@@ -1,7 +1,6 @@
-import {withRouter} from 'react-router-dom'
+import {withRouter, useLocation} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {changeAppState} from '../actions/value'
-
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
@@ -17,6 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 export const FloatingActionButton = (props) => {
   const classes = useStyles();
+  const location = useLocation();
 
   const fab = {
       color: 'primary',
@@ -30,12 +30,16 @@ export const FloatingActionButton = (props) => {
     props.history.push('/actions/new')
   }
 
+  if (location.pathname.includes('actions') ) {
+    // debugger
+    return null
+  }
+
   return (
     <div>
       <Fab variant='extended' aria-label={fab.label} className={fab.className} color='secondary' onClick={handleOnClick}>
-         I did... {fab.icon}
+        I did... {fab.icon}
       </Fab>
-
     </div>
   );
 }

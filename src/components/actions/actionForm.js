@@ -16,22 +16,9 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => (
   {
-    paper: {
-      marginTop: theme.spacing(12),
-      marginBottom: theme.spacing(12),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    form: {
-      width: '100%', // Fix IE 11 issue.
-    },
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
-    gridItem: {
-      margin: '10px',
-    }
   }));
 
 export function ActionForm(props) {
@@ -54,27 +41,42 @@ export function ActionForm(props) {
   }
 
   return (
-    <Grid container  wrap="nowrap" alignItems="stretch" alignContent='stretch'  direction='column'>
-
-      <Grid item className={classes.gridItem}>
-        <Typography component="h1" variant="h5">I did...</Typography>
-      </Grid>
-
+    <Grid container
+      wrap="nowrap"
+      direction='column'
+    >
       <form onSubmit={handleOnSubmit} className={classes.form} noValidate>
-      <Grid item className={classes.gridItem}>
-        <TextField required fullWidth autoFocus={false} variant="outlined"
-          margin="normal"
-          id="reps"
-          label="This many"
-          name="reps"
-          type="number"
-          value={reps}
-          onChange={handleChangeReps}
-          />
+      <Grid item>
+        <Grid container item spacing="2" 
+          // style={{alignItems: 'center'}}
+          alignItems="center"
+          justifyContent='center'
+          style={{textAlign: 'center', paddingBottom: 10}}
+        >
+          <Grid item xs={4}>
+            <Typography display='inline' >I did...</Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <TextField display='inline' required fullWidth autoFocus={false} variant="outlined"
+              margin="normal"
+              id="reps"
+              label="This many"
+              name="reps"
+              type="number"
+              value={reps}
+              onChange={handleChangeReps}
+              />
+          </Grid>
+          
+        </Grid>
       </Grid>
 
-      <Grid item xs={12}>
-        <Grid container direction="row" alignContent="center" alignItems="center" justifyContent="center">
+      <Grid item xs={12} 
+        style={{paddingBottom: 20}}
+      >
+        <Grid container direction="row"
+          spacing={3}
+        >
           <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+1'}></EzButton></Grid>
           <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+5'}></EzButton></Grid>
           <Grid item xs={4} s={4}><EzButton increment={handleEzButtonPress} numLabel={'+10'}></EzButton></Grid>
@@ -86,28 +88,28 @@ export function ActionForm(props) {
 
       {counter && counter.kind === 'timed' ? <Container><Typography variant="h3">{counter.measurement_unit}</Typography></Container> : null}
 
-      <Grid item className={classes.gridItem}>
+      <Grid item>
         <CounterSelectBox updateCounter={handleUpdateCounter} />
       </Grid>
 
-      {counter && counter.kind === 'weighted' ? <Grid item className={classes.gridItem}><WeightInput unit={counter.measurement_unit} weight={weight} handleWeightChange={handleWeightChange} /></Grid> : null}
+      {counter && counter.kind === 'weighted' ? <Grid item><WeightInput unit={counter.measurement_unit} weight={weight} handleWeightChange={handleWeightChange} /></Grid> : null}
 
-      <Grid item className={classes.gridItem}>
+      <Grid item>
         <Button
           type="submit"
           fullWidth
           variant="contained"
-          color="secondary"
+          color="primary"
           className={classes.submit}
           >Submit</Button>
       </Grid>
 
-      <Grid item className={classes.gridItem}>
+      <Grid item>
         <Button
           onClick={handleClickNewCounter}
           fullWidth
           variant="contained"
-          color="inherit"
+          color="secondary"
           className={classes.submit}
           >Count Something Else</Button>
       </Grid>
