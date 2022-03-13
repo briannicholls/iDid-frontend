@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import {getCounters} from '../../actions/counters.js'
@@ -15,20 +15,19 @@ export const SelectBox = (props) => {
     props.updateCounter(newValue)
   }
 
-  return (
-    <div>
-      <Autocomplete
-        options={counters}
-        getOptionLabel={option => option.name}
-        id="counter_combo_box"
-        fullWidth
-        onChange={(event, newValue) => handleValueChange(event, newValue)}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => { setInputValue(newInputValue) } }
-        renderInput={params => <TextField {...params} label="Of what?" variant="outlined" />}
-      />
-    </div>
-  );
+  return <Autocomplete
+          options={counters}
+          getOptionLabel={option => option.name}
+          id="counter_combo_box"
+          fullWidth
+          onChange={(event, newValue) => handleValueChange(event, newValue)}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => { setInputValue(newInputValue) } }
+          renderInput={params => <TextField {...params} label="Of what?" variant="outlined" />}
+          forcePopupIcon={true}
+          openOnFocus
+          blurOnSelect
+        />
 }
 
 export default SelectBox

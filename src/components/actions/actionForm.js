@@ -80,13 +80,19 @@ export function ActionForm(props) {
           }
         />
 
-        {counter && counter.kind === 'timed' ? <Typography variant="h3">{counter.measurement_unit}</Typography> : null}
+        {counter && counter.kind === 'timed' ? 
+          <GridItem children={<Typography gutterBottom variant="h3">{counter.measurement_unit}</Typography>} />
+        : null}
 
         <Grid item>
           <CounterSelectBox updateCounter={handleUpdateCounter} />
         </Grid>
 
-        {counter && counter.kind === 'weighted' ? <Grid item><WeightInput unit={counter.measurement_unit} weight={weight} handleWeightChange={handleWeightChange} /></Grid> : null}
+        {counter && counter.kind === 'weighted' ? 
+          <GridItem children={
+            <WeightInput unit={counter.measurement_unit} weight={weight} handleWeightChange={handleWeightChange} />
+          } />
+        : null}
 
         <Grid item>
           <Button
