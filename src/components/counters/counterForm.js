@@ -98,15 +98,14 @@ export const CounterForm = (props) => {
 
         <Grid item xs={12}>
           <FormControl component="fieldset" error={error} className={classes.formControl}>
-
             <FormLabel component="legend">Optional (Choose one):</FormLabel>
 
             <FormGroup>
-
               <FormControlLabel
                 control={<Checkbox onChange={handleChange} name="weighted" checked={kind.weighted} />}
                 label="Track weight with this counter"
-              />
+                />
+              {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
               
               <FormControlLabel
                 control={<Checkbox onChange={handleChange} name="timed" checked={kind.timed} />}
@@ -118,14 +117,18 @@ export const CounterForm = (props) => {
               }
 
             </FormGroup>
-
-            {error ? <FormHelperText>Pick only one please!</FormHelperText> : null}
-
           </FormControl>
         </Grid>
 
         <Grid item xs={12}>
-          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>Add Thing!</Button>
+          <Button 
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            disabled={kind.weighted && kind.timed}
+          >Add Thing!</Button>
         </Grid>
 
       </Grid>
