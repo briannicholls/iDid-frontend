@@ -25,7 +25,7 @@ const useStyles = makeStyles( theme => ({
   },
   gridItemLogo: {
     margin: 55,
-    // padding: 15
+    padding: 0
   }
 }))
 
@@ -48,7 +48,7 @@ export const Login = (props) => {
   return (
     <Container component="main" maxWidth="xs" className={classes.paper}>
 
-      <p>{props.currentUser.server_message === 'Not logged in!' ? null : props.currentUser.server_message}</p>
+      {props.currentUser.server_message === 'Not logged in!' ? null : props.currentUser.server_message}
 
       <form className={classes.form} onSubmit={handleOnSubmit}>
 
