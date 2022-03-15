@@ -4,25 +4,30 @@ import {withRouter} from 'react-router-dom'
 import {submitCredentials} from '../actions/loginForm.js'
 import {setCurrentUser} from '../actions/currentUser.js'
 // Material UI
+import GridItem from './mui_branded/GridItem'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles( theme => ({
   paper: {
-    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    marginTop: 0,
+    paddingTop: 0
   },
   form: {
     width: '100%',
     marginTop: theme.spacing(8)
   },
+  gridItemLogo: {
+    margin: 55,
+    // padding: 15
+  }
 }))
 
 export const Login = (props) => {
@@ -36,25 +41,29 @@ export const Login = (props) => {
     props.submitCredentials({email, password})
   }
 
-  const handleRegisterClick = () => {
+  const handleRegisterClick = (e) => {
+    e.preventDefault()
     props.history.push("/signup")
   }
 
   return (
     <Container component="main" maxWidth="xs" className={classes.paper}>
 
-      <Avatar src={'/logo512.png'} />
-
       <p>{props.currentUser.server_message === 'Not logged in!' ? null : props.currentUser.server_message}</p>
-
-      <Typography component="h1" variant="h5">Log In</Typography>
 
       <form className={classes.form} onSubmit={handleOnSubmit}>
 
         <Grid container spacing={4}>
 
-          <Grid item xs={12} >
-          <TextField fullWidth variant="outlined" label="e-mail" type="email" name="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <GridItem className={classes.gridItemLogo} children={
+            <img src="/logo512.png"
+              style={{maxWidth: '100%',  margin: 0,  }} 
+            />
+
+          } />
+
+          <Grid item xs={12} className={classes.logo}>
+            <TextField fullWidth variant="outlined" label="e-mail" type="email" name="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
           </Grid>
 
           <Grid item xs={12}>
@@ -64,20 +73,23 @@ export const Login = (props) => {
           <Grid item xs={12}>
             <Button type="submit" fullWidth value="Log In" variant="contained" color="primary">Log In</Button>
           </Grid>
+          
+          <GridItem xs={12} children={
+            <Button style={{margin: 'auto', textAlign: 'center'}} 
+              fullWidth color='secondary' variant="contained"
+              onClick={handleRegisterClick}>Create an Account</Button>
+          }/>
+          
         </Grid>
+
+          
 
       </form>
 
-      <Grid container>
-        <Grid item style={{margin: 'auto', textAlign: 'center'}}>
-          <Button style={{margin: 'auto', textAlign: 'center'}} 
-            fullWidth color='secondary'
-            onClick={handleRegisterClick}>Create an Account</Button></Grid>
-      </Grid>
+      <br />
 
-      <br />
-      <br />
-      <br />
+
+
       <br />
       <sub>Copyright 2022 Brian Nicholls</sub>
 
