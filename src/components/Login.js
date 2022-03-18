@@ -81,15 +81,9 @@ export const Login = (props) => {
           }/>
           
         </Grid>
-
-          
-
       </form>
 
       <br />
-
-
-
       <br />
       <sub>Copyright 2022 Brian Nicholls</sub>
 
