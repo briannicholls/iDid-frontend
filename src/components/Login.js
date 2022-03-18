@@ -25,7 +25,9 @@ const useStyles = makeStyles( theme => ({
   },
   gridItemLogo: {
     margin: 55,
-    padding: 0
+    padding: 0,
+    marginBottom: 0,
+    marginTop: 45
   }
 }))
 
@@ -58,10 +60,9 @@ export const Login = (props) => {
             <img src="/logo512.png"
               style={{maxWidth: '100%',  margin: 0,  }} 
             />
-
           } />
 
-          <Grid item xs={12} className={classes.logo}>
+          <Grid item xs={12} >
             <TextField fullWidth variant="outlined" label="e-mail" type="email" name="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
           </Grid>
 
