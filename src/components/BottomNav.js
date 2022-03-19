@@ -7,6 +7,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import OfflinePinIcon from '@material-ui/icons/OfflinePin';
 import HistoryIcon from '@material-ui/icons/History';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import PeopleIcon from '@material-ui/icons/People';
 
 const useStyles = makeStyles(() => ({
   stickyBottom: {
@@ -27,9 +28,9 @@ const BottomNav = (props) => {
       showLabels
       className={classes.stickyBottom}
     >
-      <BottomNavigationAction name="home"     label="Leaderboards" icon={<FormatListNumberedIcon />} />
-      <BottomNavigationAction name="routines" label="My Routines"  icon={<OfflinePinIcon />} />
-      <BottomNavigationAction name="actions"  label="History"      icon={<HistoryIcon />}  />
+      <BottomNavigationAction name="home"    label="Leaderboards" icon={<FormatListNumberedIcon />} />
+      <BottomNavigationAction name="friends" label="Friends"      icon={<PeopleIcon />} />
+      <BottomNavigationAction name="actions" label="History"      icon={<HistoryIcon />}  />
     </BottomNavigation>
   );
 }
