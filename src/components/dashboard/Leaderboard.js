@@ -11,7 +11,8 @@ export default function Leaderboard(props) {
   useEffect(() => {
     fetchAllLeaders(setAllTimeLeaders)
     fetchWeekLeaders(setWeekLeaders)
-    fetchMonthLeaders(setMonthLeaders)  }, [])
+    fetchMonthLeaders(setMonthLeaders)
+  }, [])
 
   return (
     <>
