@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
 import {Route, withRouter, Switch} from 'react-router-dom'
 //components
+import UserShow from './components/users/UserShow.js';
 import Routines from './components/Routines.js';
 import Login from './components/Login'
 import Signup from './components/Signup.js'
@@ -22,7 +23,6 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from './theme';
 
 import './App.css';
-import { CheckBoxOutlineBlank } from '@material-ui/icons';
 
 export function App({currentUser}) {
   useEffect(() => {
@@ -36,6 +36,7 @@ export function App({currentUser}) {
         <Route exact path="/routines" component={Routines} />
         <Route exact path="/actions/new" component={ActionForm} />
         <Route exact path="/counters/new" component={CounterForm} />
+        <Route exact path="/user/:id" component={UserShow} />
         <Route path='/' component={ActionFab} />
         <Route exact path='/' component={Dashboard} />
         <Route path='/' component={NavContainer} />
