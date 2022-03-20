@@ -1,8 +1,8 @@
 import axios from 'axios';
-let apiUrl = process.env.REACT_APP_API_URL;
+import { API_URL } from './Constants';
 
 export default axios.create({
-  baseURL: apiUrl,
+  baseURL: API_URL,
   // headers: {
   //   'Access-Control-Allow-Origin':  '*',
   //   'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
