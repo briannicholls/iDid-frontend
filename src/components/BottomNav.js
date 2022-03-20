@@ -4,7 +4,6 @@ import {withRouter} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import OfflinePinIcon from '@material-ui/icons/OfflinePin';
 import HistoryIcon from '@material-ui/icons/History';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import PeopleIcon from '@material-ui/icons/People';
