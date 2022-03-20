@@ -28,7 +28,9 @@ const LeadersList = ({ leaders }) => {
       </TableHead>
 
       <TableBody>
-        { leaders.map((leader, i) => (leader && leader.reps ? <Row {...({ leader, i })} /> : null)) }
+        { leaders.map((leader, i) => (
+          leader && leader.reps ? <Row {...({ leader, i })} /> : null)
+        ) }
       </TableBody>
     </Table>
   )

@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import Action from './action.js'
 import {connect} from 'react-redux'
 // Material UI
@@ -7,32 +7,44 @@ import { fetchUserActions } from '../../actions/actions.js';
 
 export const ActionsList = (props) => {
 
+  const [loading, setLoading] = useState(false)
+  
   useEffect(() => {
+    setLoading(true)
     props.fetchUserActions(props.currentUser.id)
+    .then(() => setLoading(false))
   }, [])
 
   const renderActions = () => {
-    if (props.actions.server_message) {
-      return <p>{props.actions.server_message}</p>
+    if (props.myActions && props.myActions.server_message) {
+      return <p>{props.myActions.server_message}</p>
     } else {
-      return props.actions.reverse().map(action => {
-        return <Action action={action} key={action.id} kind={action.counter.kind} unit={action.counter.unit} ></Action>
-      })
+      return props.myActions.reverse().map(action => {
+        return <Action 
+          action={action}
+          key={action.id}
+          kind={action.counter.kind}
+          unit={action.counter.unit} 
+        />
+      }
+      )
     }
   }
 
+  if (loading) {
+    return null
+  }
+
   return (
-    <>
     <List component="ul">
-      {renderActions()}
+      { props.myActions ? renderActions() : null }
     </List>
-    </>
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    actions: state.actions,
+    myActions: state.actions[ownProps.match.params.user_id ],
     currentUser: state.currentUser
   }
 }

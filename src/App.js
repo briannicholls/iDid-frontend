@@ -32,7 +32,7 @@ export function App({currentUser}) {
   const loggedInState = () => {
     return (
       <Box m={2}>
-        <Route exact path="/actions" component={ActionsList} />
+        <Route exact path="/actions/:user_id" component={ActionsList} />
         <Route exact path="/routines" component={Routines} />
         <Route exact path="/actions/new" component={ActionForm} />
         <Route exact path="/counters/new" component={CounterForm} />
