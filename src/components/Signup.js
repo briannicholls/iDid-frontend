@@ -1,10 +1,7 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-
 import {createUser} from '../actions/users.js'
-
 import {timezones} from '../lib/timezones.js'
-
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
