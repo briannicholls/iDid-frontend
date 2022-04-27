@@ -1,21 +1,22 @@
-import { API_URL } from '../Constants.js'
+import api from '../api'
 
 // user sign up form submit
-export const createUser = (user) => {
-    return dispatch => {
-        dispatch({ type: 'LOADING' })
-        fetch(API_URL + '/users', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ user })
-            })
-            .then(resp => resp.json())
-            .then(json => {
-                dispatch({ type: 'SET_CURRENT_USER', payload: json })
-                dispatch({ type: 'SET_VALUE', payload: 0 })
-            })
+export const createUser = user => async dispatch => {
+  dispatch({ type: 'LOADING' })
+  return api.post('/users',  user )
+  .then(resp => {
+    if (resp.data.errors) {
+      const errorMessage = resp.data.errors
+      dispatch({ type: 'SET_LOGIN_ERROR', payload: errorMessage})
+      return false
+    } else {
+      dispatch({ type: 'SET_CURRENT_USER', payload: resp.data })
+      dispatch({ type: 'SET_VALUE', payload: 0 })
+      return true
     }
+  })
+  .catch((err) => {
+    console.error(err)
+    return false
+  })
 }

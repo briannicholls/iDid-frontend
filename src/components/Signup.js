@@ -1,10 +1,7 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-
 import {createUser} from '../actions/users.js'
-
 import {timezones} from '../lib/timezones.js'
-
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -16,6 +13,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -23,10 +21,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -38,87 +32,93 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Signup = props => {
-
   const classes = useStyles()
 
   const [formData] = useState({})
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = e => {
     e.preventDefault()
     props.createUser(formData)
+    .then(() => {
+      if (!props.loginError) {
+        props.history.push('/')
+      } 
+    }) 
   }
 
   const handleOnChange = (e) => {
     formData[e.target.name] = e.target.value
   }
 
-    return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
+  return (
+    <Container component="main" maxWidth="xs" className={classes.paper}>
+      <form className={classes.form} onSubmit={handleOnSubmit}>
+        <Grid container spacing={2}>
 
-        <Avatar className={classes.avatar}><LockOutlinedIcon /></Avatar>
+          <Grid item xs={12} sm={6}>
+            <TextField required fullWidth variant="outlined" label="First Name" name="fname" value={props.fname} onChange={handleOnChange} />
+          </Grid>
 
-        <Typography component="h1" variant="h5">Sign up</Typography>
-
-        <form className={classes.form} onSubmit={handleOnSubmit}>
-          <Grid container spacing={2}>
-
-            <Grid item xs={12} sm={6}>
-              <TextField required fullWidth variant="outlined" label="First Name" name="fname" value={props.fname} onChange={handleOnChange} />
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <TextField required fullWidth variant="outlined" label="Last Name" name="lname" value={props.lname} onChange={handleOnChange} />
-            </Grid>
+          </Grid>
 
-            <Grid item xs={12}>
+          <Grid item xs={12}>
             <TextField required fullWidth variant="outlined" label="E-mail" name="email" value={props.email} onChange={handleOnChange} />
-            </Grid>
+          </Grid>
 
-
-            <Grid item xs={12}>
+          <Grid item xs={12}>
             <TextField required fullWidth variant="outlined" label="Password" name="password" type="password" value={props.password} onChange={handleOnChange} />
-            </Grid>
+          </Grid>
 
-            <Grid item xs={12}>
+          <Grid item xs={12}>
             <TextField required fullWidth variant="outlined" label="Confirm Password" name="password_confirmation" type="password" value={props.password_confirmation} onChange={handleOnChange} />
-            </Grid>
+          </Grid>
 
-            <Grid item xs={12}>
+          <Grid item xs={12}>
             <NativeSelect name="time_zone" value={formData.time_zone} onChange={handleOnChange}>
               {timezones.map((timezone, index) => {
                 return <option value={timezone.value} key={index}>{timezone.value}</option>
               })}
-
             </NativeSelect>
-            </Grid>
-
-            <Button type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}>Sign Up</Button>
-        </Grid>
-
-        </form>
-
-        <Grid container justifyContent="flex-end">
-          <Grid item>
-            <Link href="/" variant="body2">
-              Already have an account? Sign in
-            </Link>
           </Grid>
-        </Grid>
 
-    </div>
+          {props.loginError ? (
+            <Alert severity="error">{props.loginError}</Alert>
+          )
+            : null
+          }
+
+          <Button type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}><LockOutlinedIcon /> &nbsp;Sign Up 
+          </Button>
+        </Grid>
+      </form>
+
+      <Grid container justifyContent="flex-end">
+        <Grid item>
+          <Link href="/" variant="body2">
+            Already have an account? Sign in
+          </Link>
+        </Grid>
+      </Grid>
     </Container>
   )
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    createUser: userData => dispatch(createUser(userData))
+    loginError: state.errors.login
   }
 }
 
-export default connect(null, mapDispatchToProps)(Signup)
+const mapDispatchToProps = dispatch => {
+  return {
+    createUser: userData => dispatch(createUser(userData)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)
